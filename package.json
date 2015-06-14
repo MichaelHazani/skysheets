@@ -1,0 +1,34 @@
+{
+  "name": "weatherviz",
+  "version": "1.0.0",
+  "description": "A Node-based weather visualizer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelHazani/weatherviz.git"
+  },
+  "keywords": [
+    "weather",
+    "threejs",
+    "visualizer",
+    "node",
+    "api"
+  ],
+  "author": "Michael Hazani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MichaelHazani/weatherviz/issues"
+  },
+  "homepage": "https://github.com/MichaelHazani/weatherviz#readme",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "jscs": "^1.13.1",
+    "jshint": "^2.8.0"
+  },
+  "dependencies": {
+    "node": "0.0.0"
+  }
+}
