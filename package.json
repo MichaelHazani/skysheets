@@ -25,10 +25,11 @@
   "homepage": "https://github.com/MichaelHazani/weatherviz#readme",
   "devDependencies": {
     "grunt": "^0.4.5",
-    "jscs": "^1.13.1",
-    "jshint": "^2.8.0"
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-jscs": "^1.8.0"
   },
   "dependencies": {
+    "express": "^4.12.4",
     "node": "0.0.0"
   }
 }
