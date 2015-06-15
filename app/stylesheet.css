@@ -1,0 +1,34 @@
+form {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    margin: auto;
+    color: blue;
+    text-align: left;
+    font-family: "courier new";
+    font-weight: "bold";
+    top: 100px;
+}
+
+input, input:focus {
+  border:none;
+  outline: 0;
+  top:0;
+  bottom:0;
+  left:30;
+  right:0;
+  margin: auto;
+  font-size: 130%;
+  font-family:"courier new";
+}
+
+#threeJSContainer {
+  height:100%;
+  width:100%;
+  overflow:hidden;
+  display:none;
+}

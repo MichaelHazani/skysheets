@@ -1,1 +1,87 @@
-Hello!
+<!-- 'http://api.forecast.io/forecast/f71f75cd9e99dbc211c6e48ceaae557c/47.705936,-122.320500?callback=?'
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<title> WEATHERVIZ BETA </title>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js">
+</script>
+<script src="libs/Three.min.js"></script>
+
+</head>
+
+<body>
+
+
+<form id="zipcode_form" class="form">
+<label for="zipcode">zipcode</label>
+<input type="text" id="zipcode" class=".blinking-cursor" style="width: 100px;">
+
+ </form>
+<div id="threeJSContainer"> </div>
+
+<script>
+var scene, camera, renderer, cube;
+function init(){
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+  renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+      renderer.setSize( window.innerWidth, window.innerHeight );
+      $('#threeJSContainer').append( renderer.domElement );
+
+    var geometry = new THREE.BoxGeometry( 3, 3, 3 );
+    var material = new THREE.MeshPhongMaterial( { color: 0x00ff00 } );
+    cube = new THREE.Mesh( geometry, material );
+    scene.add( cube );
+
+      camera.position.z = 5;
+}
+function render() {
+
+  requestAnimationFrame(render);
+  cube.rotation.x += 0.1;
+  cube.rotation.y += 0.1;
+  renderer.render(scene, camera);
+
+}
+
+
+//on startup
+$(function() {
+//threeJS setup
+init();
+render();
+$("#zipcode").focus();
+
+var weatherObj;
+
+//hide this somewhere!
+var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
+
+//get forecast based on user ZIP
+
+$('#zipcode_form').submit(function(e) {
+  e.preventDefault();
+  // var zip = $('#zipcode').val();
+  // $.getJSON('http://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
+  //  + zip + '.json', function(data){
+  //   console.log(data);
+  // });
+  //fade form
+  $('#zipcode_form').fadeOut(1000);
+  setTimeout(function(){
+  $('#threeJSContainer').fadeIn(3000);
+  }, 2000);
+});
+
+
+
+
+});
+
+</script>
+</body>
+</html>
