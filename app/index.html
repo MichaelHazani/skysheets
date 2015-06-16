@@ -24,16 +24,26 @@
 <div id="threeJSContainer"> </div>
 
 <script>
+
+//dynamic resize
 window.addEventListener('resize', function () {
   renderer.setSize(window.innerWidth, window.innerHeight);
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 });
+
+//weather global vars
+var planeText1, planeText2, planeText3, planeText4;
+var day1, day2, day3, day4;
+
+//threeJS init vars
 var scene, camera, renderer, cube, hemilight, plane1, plane2, plane3, plane4;
 var planeSpeed = 0.015;
 var gui, Timeline, controller, controller2, controller3;
 
 function init(){
+
+//standard vars
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
   camera.position.z = 10;
@@ -78,44 +88,40 @@ function init(){
   cube = new THREE.Mesh( geometry, material );
   scene.add( cube );
 
-//test text
-  var text1word = new THREE.TextGeometry( "one", {
+//plane texts
+  var text1word = new THREE.TextGeometry( planeText1, {
     size: 1,
     height: 0.1,
     curveSegments: 2,
     font: 'helvetiker',
-
   });
   var wrapper = new THREE.MeshNormalMaterial( {
     overdraw: 0.5,
     color: 0xFFFFFF} );
   var text1 = new THREE.Mesh(text1word, wrapper);
 
-  var text2word = new THREE.TextGeometry( "two", {
+  var text2word = new THREE.TextGeometry( planeText2, {
     size: 1,
     height: 0.1,
     curveSegments: 2,
     font: 'helvetiker',
-
   });
   var text2 = new THREE.Mesh(text2word, wrapper);
 
 
-  var text3word = new THREE.TextGeometry( "three", {
+  var text3word = new THREE.TextGeometry( planeText3, {
     size: 1,
     height: 0.1,
     curveSegments: 2,
     font: 'helvetiker',
-
   });
   var text3 = new THREE.Mesh(text3word, wrapper);
 
-  var text4word = new THREE.TextGeometry( "four", {
+  var text4word = new THREE.TextGeometry( planeText4, {
     size: 1,
     height: 0.1,
     curveSegments: 2,
     font: 'helvetiker',
-
   });
   var text4 = new THREE.Mesh(text4word, wrapper);
 
@@ -128,7 +134,6 @@ function init(){
 // var context = canvas.getContext('2d');
 // context.font = '48px Courier New';
 // context.fillText('testing testing', 0, size/2);
-
 // var newTexture = new THREE.Texture(canvas);
 // newTexture.needsUpdate = true;
 // var sprite = new THREE.Sprite({
@@ -138,7 +143,8 @@ function init(){
 // });
 // scene.add(sprite);
 
-//test transparent planes
+
+//transparent planes
   var geometry1 = new THREE.BoxGeometry(20,20,3);
   var material1 = new THREE.MeshPhongMaterial({color: 0xff00ff, transparent: true, wireframe: false, opacity: 0.2});
   plane1 = new THREE.Mesh(geometry1, material1);
@@ -214,12 +220,18 @@ var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
 
 $('#zipcode_form').submit(function(e) {
   e.preventDefault();
-  // var zip = $('#zipcode').val();
-  // $.getJSON('http://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
-  //  + zip + '.json', function(data){
-  //   console.log(data);
-  // });
-//   //fade form
+  var zip = $('#zipcode').val();
+  $.getJSON('http://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
+   + zip + '.json', function(data){
+    planeText1 = data['forecast']['txt_forecast']['forecastday'][0]['fcttext'];
+    planeText2 = data['forecast']['txt_forecast']['forecastday'][1]['fcttext'];
+    planeText3 = data['forecast']['txt_forecast']['forecastday'][2]['fcttext'];
+    planeText4 = data['forecast']['txt_forecast']['forecastday'][3]['fcttext'];
+    // console.log(data);
+
+  });
+
+  //fade in+out
   $('#zipcode_form').fadeOut(1000);
   setTimeout(function(){
   init();
