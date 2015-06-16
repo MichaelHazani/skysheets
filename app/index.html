@@ -18,7 +18,7 @@
 
 <form id="zipcode_form" class="form">
 <label for="zipcode">zipcode</label>
-<input type="text" id="zipcode" class=".blinking-cursor" style="width: 100px;">
+<input type="text" id="zipcode" class="blinker" style="width: 100px;">
 
  </form>
 <div id="threeJSContainer"> </div>
@@ -34,7 +34,11 @@ window.addEventListener('resize', function () {
 
 //weather global vars
 var planeText1, planeText2, planeText3, planeText4;
-var day1, day2, day3, day4;
+var pt = [];
+var days = [];
+var planeTexts = [];
+var textSize = 0.3;
+var textHeight = 0.1;
 
 //threeJS init vars
 var scene, camera, renderer, cube, hemilight, plane1, plane2, plane3, plane4;
@@ -53,11 +57,12 @@ function init(){
 
 //GUI
   gui = new dat.GUI();
+  //dat.GUI.toggleHide();
   function Params() {
     //camera speed
     this.Zoom = -10;
     this.CubeColor = "#ff00ff";
-    this.CubeOpacity = 1;
+    this.CubeOpacity = 0;
   }
   var params = new Params();
   controller = gui.add(params, 'Zoom', -50.0, 10.0).step(0.25);
@@ -84,14 +89,26 @@ function init(){
 
 //test cube
   var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-  var material = new THREE.MeshPhongMaterial( { color: 0xff00ff, transparent:true } );
+  var material = new THREE.MeshPhongMaterial( {
+                                              color: 0xff00ff,
+                                              transparent: true,
+                                              opacity: 0 } );
   cube = new THREE.Mesh( geometry, material );
   scene.add( cube );
 
-//plane texts
-  var text1word = new THREE.TextGeometry( planeText1, {
-    size: 1,
-    height: 0.1,
+//setup strings:
+for (var i = 0; i < days.length; i++) {
+  pt[i] = days[i] + ": " + planeTexts[i];
+}
+// pt1 = days[0] + ": " + planeTexts[0];
+// pt2 = days[1] + ": " + planeTexts[1];
+// pt3 = days[2] + ": " + planeTexts[2];
+// pt4 = days[3] + ": " + planeTexts[3];
+
+//append strings to planes:
+  var text1word = new THREE.TextGeometry( pt[0], {
+    size: textSize,
+    height: textHeight,
     curveSegments: 2,
     font: 'helvetiker',
   });
@@ -100,26 +117,26 @@ function init(){
     color: 0xFFFFFF} );
   var text1 = new THREE.Mesh(text1word, wrapper);
 
-  var text2word = new THREE.TextGeometry( planeText2, {
-    size: 1,
-    height: 0.1,
+  var text2word = new THREE.TextGeometry( pt[1], {
+    size: textSize,
+    height: textHeight,
     curveSegments: 2,
     font: 'helvetiker',
   });
   var text2 = new THREE.Mesh(text2word, wrapper);
 
 
-  var text3word = new THREE.TextGeometry( planeText3, {
-    size: 1,
-    height: 0.1,
+  var text3word = new THREE.TextGeometry( pt[2], {
+    size: textSize,
+    height: textHeight,
     curveSegments: 2,
     font: 'helvetiker',
   });
   var text3 = new THREE.Mesh(text3word, wrapper);
 
-  var text4word = new THREE.TextGeometry( planeText4, {
-    size: 1,
-    height: 0.1,
+  var text4word = new THREE.TextGeometry( pt[3], {
+    size: textSize,
+    height: textHeight,
     curveSegments: 2,
     font: 'helvetiker',
   });
@@ -145,8 +162,8 @@ function init(){
 
 
 //transparent planes
-  var geometry1 = new THREE.BoxGeometry(20,20,3);
-  var material1 = new THREE.MeshPhongMaterial({color: 0xff00ff, transparent: true, wireframe: false, opacity: 0.2});
+  var geometry1 = new THREE.BoxGeometry(20,20,2);
+  var material1 = new THREE.MeshPhongMaterial({color: 0xde64de, transparent: true, wireframe: false, opacity: 0.3});
   plane1 = new THREE.Mesh(geometry1, material1);
   plane1.position.set(0, 0, -10);
   scene.add(plane1);
@@ -156,10 +173,10 @@ function init(){
   plane1.add(text1);
 
 
-  var geometry2 = new THREE.BoxGeometry(20,20,3);
-  var material2 = new THREE.MeshPhongMaterial({color: 0x00ffff, transparent: true, wireframe: false, opacity: 0.2});
+  var geometry2 = new THREE.BoxGeometry(20,20,2);
+  var material2 = new THREE.MeshPhongMaterial({color: 0x9c6ce1, transparent: true, wireframe: false, opacity: 0.3});
   plane2 = new THREE.Mesh(geometry2, material2);
-  plane2.position.set(0, 0, -15);
+  plane2.position.set(0, 0, -20);
   scene.add(plane2);
   text2.position.y = plane2.position.y + 5;
   text2.position.x = plane1.position.x -10;
@@ -167,20 +184,20 @@ function init(){
   plane2.add(text2);
 
 
-  var geometry3 = new THREE.BoxGeometry(20,20,3);
-  var material3 = new THREE.MeshPhongMaterial({color: 0xff0000, transparent: true, wireframe: false, opacity: 0.2});
+  var geometry3 = new THREE.BoxGeometry(20,20,2);
+  var material3 = new THREE.MeshPhongMaterial({color: 0xa9e16c, transparent: true, wireframe: false, opacity: 0.3});
   plane3 = new THREE.Mesh(geometry3, material3);
-  plane3.position.set(0, 0, -20);
+  plane3.position.set(0, 0, -30);
   scene.add(plane3);
   text3.position.y = plane3.position.y;
   text3.position.x = plane1.position.x -10;
 
   plane3.add(text3);
 
-  var geometry4 = new THREE.BoxGeometry(20,20,3);
-  var material4 = new THREE.MeshPhongMaterial({color: 0x0000ff, transparent: true, wireframe: false, opacity: 0.2});
+  var geometry4 = new THREE.BoxGeometry(20,20,2);
+  var material4 = new THREE.MeshPhongMaterial({color: 0xfa5050, transparent: true, wireframe: false, opacity: 0.3});
   plane4 = new THREE.Mesh(geometry3, material4);
-  plane4.position.set(0, 0, -25);
+  plane4.position.set(0, 0, -40);
   scene.add(plane4);
   text4.position.y = plane4.position.y - 5;
   text4.position.x = plane1.position.x -10;
@@ -223,13 +240,19 @@ $('#zipcode_form').submit(function(e) {
   var zip = $('#zipcode').val();
   $.getJSON('http://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
    + zip + '.json', function(data){
-    planeText1 = data['forecast']['txt_forecast']['forecastday'][0]['fcttext'];
-    planeText2 = data['forecast']['txt_forecast']['forecastday'][1]['fcttext'];
-    planeText3 = data['forecast']['txt_forecast']['forecastday'][2]['fcttext'];
-    planeText4 = data['forecast']['txt_forecast']['forecastday'][3]['fcttext'];
-    // console.log(data);
 
-  });
+  //get literal description of forecast
+    for (var i = 0; i < data['forecast']['txt_forecast']['forecastday'].length; i+=2 ) {
+    planeTexts.push(data['forecast']['txt_forecast']['forecastday'][i]['fcttext']);
+    }
+
+
+
+  //  add days of the week
+    for (var i = 0; i < data['forecast']['txt_forecast']['forecastday'].length; i+=2 ) {
+    days.push(data['forecast']['txt_forecast']['forecastday'][i]['title']);
+    }
+
 
   //fade in+out
   $('#zipcode_form').fadeOut(1000);
@@ -238,13 +261,11 @@ $('#zipcode_form').submit(function(e) {
   render();
   $('#threeJSContainer').fadeIn(3000);
   }, 2000);
+
+
+    });
+  });
 });
-
-
-
-
-});
-
 </script>
 </body>
 </html>
