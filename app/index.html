@@ -9,7 +9,7 @@
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="libs/Three.min.js"></script>
 <script src="libs/dat.gui.min.js"></script>
-
+<script src="http://mrdoob.github.com/three.js/examples/fonts/helvetiker_regular.typeface.js"></script>
 
 </head>
 
@@ -31,7 +31,7 @@ window.addEventListener('resize', function () {
 });
 var scene, camera, renderer, cube, hemilight, plane1, plane2, plane3, plane4;
 var planeSpeed = 0.015;
-var gui, Timeline, controller, controller2;
+var gui, Timeline, controller, controller2, controller3;
 
 function init(){
   scene = new THREE.Scene();
@@ -47,6 +47,7 @@ function init(){
     //camera speed
     this.Zoom = -10;
     this.CubeColor = "#ff00ff";
+    this.CubeOpacity = 1;
   }
   var params = new Params();
   controller = gui.add(params, 'Zoom', -50.0, 10.0).step(0.25);
@@ -62,40 +63,123 @@ function init(){
     cube.material.color.setHex(colorValue);
   });
 
+  controller3 = gui.add(params, 'CubeOpacity', 0, 1);
+  controller3.onChange(function(opacity) {
+  cube.material.opacity = opacity;
+  });
+
   //light
   hemilight = new THREE.HemisphereLight (0xffffff, 0xffffff, 0.6);
   scene.add(hemilight);
 
 //test cube
   var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-  var material = new THREE.MeshPhongMaterial( { color: 0xff00ff } );
+  var material = new THREE.MeshPhongMaterial( { color: 0xff00ff, transparent:true } );
   cube = new THREE.Mesh( geometry, material );
   scene.add( cube );
 
-//test transparent
-  var geometry1 = new THREE.BoxGeometry(10,10,3);
+//test text
+  var text1word = new THREE.TextGeometry( "one", {
+    size: 1,
+    height: 0.1,
+    curveSegments: 2,
+    font: 'helvetiker',
+
+  });
+  var wrapper = new THREE.MeshNormalMaterial( {
+    overdraw: 0.5,
+    color: 0xFFFFFF} );
+  var text1 = new THREE.Mesh(text1word, wrapper);
+
+  var text2word = new THREE.TextGeometry( "two", {
+    size: 1,
+    height: 0.1,
+    curveSegments: 2,
+    font: 'helvetiker',
+
+  });
+  var text2 = new THREE.Mesh(text2word, wrapper);
+
+
+  var text3word = new THREE.TextGeometry( "three", {
+    size: 1,
+    height: 0.1,
+    curveSegments: 2,
+    font: 'helvetiker',
+
+  });
+  var text3 = new THREE.Mesh(text3word, wrapper);
+
+  var text4word = new THREE.TextGeometry( "four", {
+    size: 1,
+    height: 0.1,
+    curveSegments: 2,
+    font: 'helvetiker',
+
+  });
+  var text4 = new THREE.Mesh(text4word, wrapper);
+
+
+// test canvas text
+// var canvas = document.createElement('canvas');
+// var size = 250;
+// canvas.width = size;
+// canvas.height = size;
+// var context = canvas.getContext('2d');
+// context.font = '48px Courier New';
+// context.fillText('testing testing', 0, size/2);
+
+// var newTexture = new THREE.Texture(canvas);
+// newTexture.needsUpdate = true;
+// var sprite = new THREE.Sprite({
+//   map: newTexture,
+//   transparent: true,
+//   useScreenCoordinates: false
+// });
+// scene.add(sprite);
+
+//test transparent planes
+  var geometry1 = new THREE.BoxGeometry(20,20,3);
   var material1 = new THREE.MeshPhongMaterial({color: 0xff00ff, transparent: true, wireframe: false, opacity: 0.2});
   plane1 = new THREE.Mesh(geometry1, material1);
   plane1.position.set(0, 0, -10);
   scene.add(plane1);
+  text1.position.y = plane1.position.y + 10;
+  text1.position.x = plane1.position.x -10;
 
-  var geometry2 = new THREE.BoxGeometry(10,10,3);
+  plane1.add(text1);
+
+
+  var geometry2 = new THREE.BoxGeometry(20,20,3);
   var material2 = new THREE.MeshPhongMaterial({color: 0x00ffff, transparent: true, wireframe: false, opacity: 0.2});
   plane2 = new THREE.Mesh(geometry2, material2);
   plane2.position.set(0, 0, -15);
   scene.add(plane2);
+  text2.position.y = plane2.position.y + 5;
+  text2.position.x = plane1.position.x -10;
 
-  var geometry3 = new THREE.BoxGeometry(10,10,3);
+  plane2.add(text2);
+
+
+  var geometry3 = new THREE.BoxGeometry(20,20,3);
   var material3 = new THREE.MeshPhongMaterial({color: 0xff0000, transparent: true, wireframe: false, opacity: 0.2});
   plane3 = new THREE.Mesh(geometry3, material3);
   plane3.position.set(0, 0, -20);
   scene.add(plane3);
+  text3.position.y = plane3.position.y;
+  text3.position.x = plane1.position.x -10;
 
-  var geometry4 = new THREE.BoxGeometry(10,10,3);
+  plane3.add(text3);
+
+  var geometry4 = new THREE.BoxGeometry(20,20,3);
   var material4 = new THREE.MeshPhongMaterial({color: 0x0000ff, transparent: true, wireframe: false, opacity: 0.2});
   plane4 = new THREE.Mesh(geometry3, material4);
   plane4.position.set(0, 0, -25);
   scene.add(plane4);
+  text4.position.y = plane4.position.y - 5;
+  text4.position.x = plane1.position.x -10;
+
+  plane4.add(text4);
 
 
 }
@@ -118,30 +202,31 @@ function render() {
 //on startup
 $(function() {
 //threeJS setup
-init();
-render();
-// $("#zipcode").focus();
 
-// var weatherObj;
+$("#zipcode").focus();
 
-// //hide this somewhere!
-// var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
+var weatherObj;
+
+//hide this somewhere!
+var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
 
 // //get forecast based on user ZIP
 
-// $('#zipcode_form').submit(function(e) {
-//   e.preventDefault();
-//   // var zip = $('#zipcode').val();
-//   // $.getJSON('http://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
-//   //  + zip + '.json', function(data){
-//   //   console.log(data);
-//   // });
+$('#zipcode_form').submit(function(e) {
+  e.preventDefault();
+  // var zip = $('#zipcode').val();
+  // $.getJSON('http://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
+  //  + zip + '.json', function(data){
+  //   console.log(data);
+  // });
 //   //fade form
   $('#zipcode_form').fadeOut(1000);
-  // setTimeout(function(){
+  setTimeout(function(){
+  init();
+  render();
   $('#threeJSContainer').fadeIn(3000);
-  // }, 2000);
-// });
+  }, 2000);
+});
 
 
 
