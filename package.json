@@ -31,6 +31,6 @@
   "dependencies": {
     "express": "^4.12.4",
     "node": "0.12.4"
-  },
+  }
 
 }
