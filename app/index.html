@@ -238,7 +238,7 @@ var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
 $('#zipcode_form').submit(function(e) {
   e.preventDefault();
   var zip = $('#zipcode').val();
-  $.getJSON('http://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
+  $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
    + zip + '.json', function(data){
 
   //get literal description of forecast
