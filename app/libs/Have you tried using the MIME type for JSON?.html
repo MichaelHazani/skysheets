@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<!-- saved from url=(0117)http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest -->
+<html itemscope="" itemtype="http://schema.org/QAPage"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>javascript - "not well-formed" error in Firefox when loading JSON file with XMLHttpRequest - Stack Overflow</title>
+    <link rel="shortcut icon" href="http://cdn.sstatic.net/stackoverflow/img/favicon.ico?v=6cd6089ee7f6">
+    <link rel="apple-touch-icon image_src" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png?v=41f6e13ade69">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="http://stackoverflow.com/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="stackoverflow.com">
+    <meta property="og:type" content="website">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon@2.png?v=ea71a5211a91&amp;a">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="&quot;not well-formed&quot; error in Firefox when loading JSON file with XMLHttpRequest">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="I&#39;m getting a &quot;not well-formed&quot; error in the error console of Firefox 3.0.7 when the JavaScript on my page loads a text file containing an object in JavaScript Object Notation format. If the file ">
+    <meta property="og:url" content="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest">
+    <link rel="canonical" href="./Have you tried using the MIME type for JSON?_files/Have you tried using the MIME type for JSON?.html">
+
+    
+    
+    <script type="text/javascript" async="" src="./Have you tried using the MIME type for JSON?_files/ados"></script><script async="" src="./Have you tried using the MIME type for JSON?_files/quant.js"></script><script async="" src="./Have you tried using the MIME type for JSON?_files/beacon.js"></script><script async="" src="./Have you tried using the MIME type for JSON?_files/analytics.js"></script><script type="text/javascript" async="" src="./Have you tried using the MIME type for JSON?_files/ados.js"></script><script src="./Have you tried using the MIME type for JSON?_files/jquery.min.js"></script>
+    <script src="./Have you tried using the MIME type for JSON?_files/stub.en.js"></script>
+    <link rel="stylesheet" type="text/css" href="./Have you tried using the MIME type for JSON?_files/all.css">
+
+            <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;&quot;not well-formed&quot; error in Firefox when loading JSON file with XMLHttpRequest&#39;" href="http://stackoverflow.com/feeds/question/677902">
+            <meta name="twitter:app:country" content="US">
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:iphone" content="871299723">
+            <meta name="twitter:app:url:iphone" content="se-zaphod://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest">
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:ipad" content="871299723">
+            <meta name="twitter:app:url:ipad" content="se-zaphod://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest">
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+        
+            StackExchange.ready(function () {
+                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({votesCast:[],autoShowCommentHelp:true,showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:677902});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('1', '677902');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text'); });
+
+            });
+        </script>
+<script>StackExchange.ready(function() { StackExchange.question.initNextPreviousButtons({"IsFromNextPrevious":false,"QuestionId":677902,"ExpectedListId":null,"Referrer":"https://www.google.com/"}); });</script>
+
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1431823750,"networkMetaHostname":"meta.stackexchange.com","routeName":"Questions/Show","styleCode":true,"enableUserHovercards":true,"snippets":{"enabled":true,"domain":"stacksnippets.net"},"site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","recaptchaAudioLang":"en","enableNewTagCreationWarning":true,"insertSpaceAfterNameTabCompletion":false,"nonAsciiTags":true,"enableSocialMediaInSharePopup":true},"user":{"fkey":"65fa4183aec723ad3ab5799588acffbf","isRegistered":true,"userType":3,"userId":4625361,"accountId":5873841,"gravatar":"<div class=\"gravatar-wrapper-32\"><img src=\"http://i.stack.imgur.com/rFTRy.jpg?s=32&amp;g=1\" alt=\"\" width=\"32\" height=\"32\"></div>","profileUrl":"http://stackoverflow.com/users/4625361/aquavitae","ab":{"next_previous_buttons":{"v":"a","g":2}}}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"dd42d07b16e8","js/moderator.en.js":"cdedf81b0b33","js/full-anon.en.js":"66339d0e66f3","js/full.en.js":"e8014f672a89","js/wmd.en.js":"0ab62971b152","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"5faaefde3284","js/help.en.js":"cf0985095088","js/tageditor.en.js":"ac84a2ac428b","js/tageditornew.en.js":"155f70f552e0","js/inline-tag-editing.en.js":"48f13b102998","js/revisions.en.js":"6c7265ea9fa1","js/review.en.js":"e657ce9c6e33","js/tagsuggestions.en.js":"7dfec0d2a2d7","js/post-validation.en.js":"a2826744057a","js/explore-qlist.en.js":"257ba4cb7b04","js/events.en.js":"e3d9b5ce33fd","js/keyboard-shortcuts.en.js":"1a19511f380b","js/external-editor.en.js":"333f2972598f","js/external-editor.en.js":"333f2972598f","js/snippet-javascript.en.js":"eff1370e1b89","js/snippet-javascript-codemirror.en.js":"029309ebadbe"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+    
+    
+<script async="" src="./Have you tried using the MIME type for JSON?_files/full.en.js"></script><script async="" src="./Have you tried using the MIME type for JSON?_files/snippet-javascript.en.js"></script><script async="" src="./Have you tried using the MIME type for JSON?_files/post-validation.en.js"></script><script async="" src="./Have you tried using the MIME type for JSON?_files/prettify-full.en.js"></script><script async="" src="./Have you tried using the MIME type for JSON?_files/external-editor.en.js"></script><script async="" src="./Have you tried using the MIME type for JSON?_files/wmd.en.js"></script><script type="text/javascript" src="./Have you tried using the MIME type for JSON?_files/adFeedback.js"></script><link rel="stylesheet" href="http://static.adzerk.net/Extensions/adFeedback.css"><style type="text/css"> .wmd-snippet-button span { background-position: 0 0; } .wmd-snippet-button:hover span { background-position: 0 -40px; }</style><link type="text/css" rel="stylesheet" href="./Have you tried using the MIME type for JSON?_files/jobs.min.css"></head>
+<body class="question-page new-topbar">
+    <noscript>&lt;div id="noscript-padding"&gt;&lt;/div&gt;</noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+
+
+
+
+<div class="topbar">
+    <div class="topbar-wrapper">
+
+        <div class="js-topbar-dialog-corral">
+
+<div class="topbar-dialog siteSwitcher-dialog dno">
+    <div class="header">
+        <h3><a href="http://stackoverflow.com/">current community</a></h3>
+    </div>
+    <div class="modal-content current-site-container">
+        <ul class="current-site">
+                <li>
+                        <div class="related-links">
+            <a href="http://chat.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+                    <a href="http://blog.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:7 })">blog</a>
+                    <a href="http://stackoverflow.com/users/logout" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:8 })">log out</a>
+    </div>
+
+
+
+
+    <a href="http://stackoverflow.com/" class="current-site-link site-link js-gps-track" data-id="1" data-gps-track="
+        site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-stackoverflow" title="Stack Overflow"></div>
+        Stack Overflow
+    </a>
+
+                </li>
+                <li class="related-site">
+                        <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                    
+
+
+
+    <a href="http://meta.stackoverflow.com/" class="site-link js-gps-track" data-id="552" data-gps-track="
+            site.switch({ target_site:552, item_type:3 }),
+        site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>
+        Meta Stack Overflow
+    </a>
+
+                </li>
+                            <li class="related-site">
+                        <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                    <a class="site-link js-gps-track" href="http://careers.stackoverflow.com/?utm_source=stackoverflow.com&utm_medium=site-ui&utm_campaign=multicollider" data-gps-track="site_switcher.click({ item_type:9 })">
+                        <div class="site-icon favicon favicon-careers" title="Stack Overflow Careers"></div>
+                        Stack Overflow Careers
+                    </a>
+                </li>
+        </ul>
+    </div>
+    
+    <div class="header" id="your-communities-header">
+        <h3>
+                <a href="http://stackexchange.com/users/5873841/?tab=accounts">your communities</a>
+        </h3>
+            
+            <a href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" id="edit-pinned-sites">edit</a>
+            <a href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" id="cancel-pinned-sites" style="display: none;">cancel</a>
+    </div>
+    <div class="modal-content" id="your-communities-section">
+            
+            <ul class="my-sites">
+                    <li>
+                        
+
+
+
+    <a href="http://stackoverflow.com/" class="site-link js-gps-track" data-id="1" data-gps-track="
+            site.switch({ target_site:1, item_type:3 }),
+        site_switcher.click({ item_type:1 })">
+        <div class="site-icon favicon favicon-stackoverflow" title="Stack Overflow"></div>
+        Stack Overflow
+            <span class="rep-score">1</span>
+    </a>
+
+                    </li>
+            </ul>
+                <div class="pinned-site-editor-container" style="display: none;">
+                    <input id="js-site-search-txt" type="text" class="site-filter-input" value="" placeholder="Add a Stack Exchange community">
+                    <input type="submit" id="pin-site-btn" value="Add" disabled="disabled">
+                    <ul class="js-found-sites found-sites"></ul>
+                    <ul class="pinned-site-list sortable" data-custom-list="False">
+                    </ul>
+                    <input type="submit" value="Save" id="save-pinned-sites-btn" disabled="disabled">
+                    <a href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" id="reset-pinned-sites">reset to default list</a>
+                </div>
+    </div>
+    
+    <div class="header">
+        <h3><a href="http://stackexchange.com/sites">more stack exchange communities</a></h3>
+    </div>
+    <div class="modal-content">
+            <div class="child-content"></div>
+    </div>
+</div>
+        </div>
+
+        <div class="network-items">
+
+            <a href="http://stackexchange.com/" class="topbar-icon icon-site-switcher yes-hover js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 144 Stack Exchange sites">
+                <span class="hidden-text">Stack Exchange</span>
+            </a>
+
+                <a href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" class="topbar-icon icon-inbox yes-hover js-inbox-button" title="Recent inbox messages">
+                    <span class="hidden-text">Inbox</span>
+                    <span class="unread-count" style="display:none"></span>
+                </a>
+                <a href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" class="topbar-icon icon-achievements yes-hover js-achievements-button icon-achievements-unread" data-unread-class="icon-achievements-unread" title="You have new achievements">
+                    <span class="hidden-text">Reputation and Badges</span>
+                    <span class="unread-count" style="display:none">
+                        
+                    </span>
+                </a>
+        </div>
+
+        <div class="topbar-links">
+
+                <a href="http://stackoverflow.com/users/4625361/aquavitae" class="profile-me js-gps-track" data-gps-track="profile_summary.click();">
+                    
+                    <div class="gravatar-wrapper-24" title="AquaVitae"><img src="./Have you tried using the MIME type for JSON?_files/rFTRy.jpg" alt="" width="24" height="24" class="avatar-me js-avatar-me"></div>
+
+                    <div class="links-container topbar-flair">
+
+                        <span class="reputation" title="your reputation: 1">
+                            1
+                        </span>
+<span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>                    </div>
+                </a>
+                <div class="links-container">
+                    <span class="topbar-menu-links">
+
+
+
+
+    <a href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" class="icon-help js-help-button" title="Help Center and other resources">
+        help
+        <span class="triangle"></span>
+    </a>
+    <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="http://stackoverflow.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="http://stackoverflow.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                    <li>
+                        <a href="http://meta.stackoverflow.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                            Meta
+                            <span class="item-summary">
+                                Discuss the workings and policies of this site
+                            </span>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+                    </span>
+                </div>
+
+            <div class="search-container">
+                <form id="search" action="http://stackoverflow.com/search" method="get" autocomplete="off">
+                    <input name="q" type="text" placeholder="search" value="" tabindex="1" autocomplete="off" maxlength="240">
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+    <script>
+        StackExchange.ready(function() { StackExchange.topbar.init(); });
+    </script>
+
+    <div class="container">
+        <div id="header">
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="http://stackoverflow.com/">
+                    Stack Overflow
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs">
+                    <ul>
+                        <li class="youarehere"><a id="nav-questions" href="http://stackoverflow.com/questions">Questions</a></li>
+                        <li><a id="nav-tags" href="http://stackoverflow.com/tags">Tags</a></li>
+                        <li><a id="nav-users" href="http://stackoverflow.com/users">Users</a></li>
+                        <li><a id="nav-badges" href="http://stackoverflow.com/help/badges">Badges</a></li>
+                        <li><a id="nav-unanswered" href="http://stackoverflow.com/unanswered">Unanswered</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion" href="http://stackoverflow.com/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content" class="snippet-hidden">
+            
+
+<div itemscope="" itemtype="http://schema.org/Question">
+    <link itemprop="image" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png?v=41f6e13ade69">
+			<div id="question-header">
+                <h1 itemprop="name"><a href="./Have you tried using the MIME type for JSON?_files/Have you tried using the MIME type for JSON?.html" class="question-hyperlink">“not well-formed” error in Firefox when loading JSON file with XMLHttpRequest</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="677902" id="question">
+
+    <script>
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8277,"adzerk390394107",4).setZone(43) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk390394107"><a href="http://engine.adzerk.net/r?e=eyJhdiI6Mzg1NzUsImF0Ijo0LCJidCI6MCwiY20iOjE4MjIyMywiY2giOjExNzgsImNyIjozMTU0NDAsImRpIjoiZjkwOTIwOTNmZWUxNDNkYjk1NDE3M2E5MzYwYzYxMjEiLCJkbSI6MSwiZmMiOjY2OTcyMywiZmwiOjQwMzczOCwiaXAiOiIxNzQuNjEuMTkyLjE1NyIsImt3IjoiamF2YXNjcmlwdCxmaXJlZm94LHhtbGh0dHByZXF1ZXN0LG1pbWUtdHlwZXMseC11c2VyLXJlZ2lzdGVyZWQiLCJtayI6ImZpcmVmb3giLCJudyI6MjIsInBjIjo0LjU4LCJwciI6NTc5MiwicnQiOjIsInJmIjoiaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8iLCJzdCI6ODI3NywidWsiOiJ1ZTEtMzc4ZDIyMzExMTRjNGZkMzllYjk4ZDExNTI1YjY0ZmEiLCJ6biI6NDMsInRzIjoxNDMxODIzNzUxMzg1LCJiZiI6dHJ1ZSwicG4iOiJhZHplcmszOTAzOTQxMDciLCJ1ciI6Imh0dHBzOi8vZGV2ZWxvcGVyLm1vemlsbGEub3JnL2VuLVVTL2RvY3MvTW96aWxsYS9EZXZlbG9wZXJfUHJvZ3JhbSN1dG1fc291cmNlPVN0YWNrT3ZlcmZsb3cmdXRtX21lZGl1bT1mb3J1bXMmdXRtX2NhbXBhaWduPWNvbm5lY3QifQ&s=WXQHpoKwOv0P50Gu472aD-89egU" rel="nofollow" target="_blank" title=""><img src="./Have you tried using the MIME type for JSON?_files/f36c11efe57045549c95549fa7733b8a.png" title="" alt="" border="0" width="728" height="90"></a><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" style="position:absolute;" src="./Have you tried using the MIME type for JSON?_files/i.gif"></div>    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="677902">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">34</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" title="This is a favorite question (click again to undo)">favorite</a>
+        <div class="favoritecount"><b>3</b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>I'm getting a "not well-formed" error in the error console of Firefox 3.0.7 when the JavaScript on my page loads a text file containing an object in JavaScript Object Notation format. If the file contains nothing but the JSON object, it produces the error. If I wrap the object in &lt;document&gt;&lt;/document&gt; tags it does not produce the error. The request succeeds either way, so I could just ignore it, but I don't want my error log filling up with these messages.</p>
+
+<p>Here is some example code to illustrate the problem. First, the "not well-formed" file called "data.json":</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="pun">{</span><span class="pln"> a</span><span class="pun">:</span><span class="pln"> </span><span class="lit">3</span><span class="pln"> </span><span class="pun">}</span></code></pre>
+
+<p>Now some code to load the file:</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="kwd">var</span><span class="pln"> req </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">XMLHttpRequest</span><span class="pun">();</span><span class="pln">
+req</span><span class="pun">.</span><span class="pln">open</span><span class="pun">(</span><span class="str">"GET"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"data.json"</span><span class="pun">);</span><span class="pln">
+req</span><span class="pun">.</span><span class="pln">send</span><span class="pun">(</span><span class="kwd">null</span><span class="pun">);</span></code></pre>
+
+<p>Which produces the following error in the Firefox error console:</p>
+
+<p><strong>not well-formed</strong><br>
+file://path/to/data.json                    Line: 1<br>
+{ a: 3 }<br>
+- ^</p>
+
+<p>If data.json is modified to this:</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="tag">&lt;document&gt;</span><span class="pln">{ a: 3 }</span><span class="tag">&lt;/document&gt;</span></code></pre>
+
+<p>There is no error. I assumed that it is complaining because the plain JSON file is not a well formed XML document, so I tried overriding the MIME type before the "send" call to force it to load as plain text, but that didn't work.</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="kwd">var</span><span class="pln"> req </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">XMLHttpRequest</span><span class="pun">();</span><span class="pln">
+req</span><span class="pun">.</span><span class="pln">open</span><span class="pun">(</span><span class="str">"GET"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"data.json"</span><span class="pun">);</span><span class="pln">
+req</span><span class="pun">.</span><span class="pln">overrideMimeType</span><span class="pun">(</span><span class="str">"text/plain"</span><span class="pun">);</span><span class="pln">
+req</span><span class="pun">.</span><span class="pln">send</span><span class="pun">(</span><span class="kwd">null</span><span class="pun">);</span><span class="pln">
+</span><span class="com">// Still produces an error!</span></code></pre>
+
+<p>I am going to continue with wrapping my JSON data in an XML document to get around whatever validation the XMLHttpRequest is performing, but I'd like to know if there is any way I can force it to just load plain text uncritically and not try to validate it. Alternatively, is there another method of loading data besides XMLHttpRequest that can be used with plain text?</p>
+    </div>
+    <div class="post-taglist">
+        <a href="http://stackoverflow.com/questions/tagged/javascript" class="post-tag js-gps-track" title="show questions tagged &#39;javascript&#39;" rel="tag">javascript</a> <a href="http://stackoverflow.com/questions/tagged/firefox" class="post-tag js-gps-track" title="show questions tagged &#39;firefox&#39;" rel="tag"><img src="./Have you tried using the MIME type for JSON?_files/WcBXc.png" height="16" width="18" alt="" class="sponsor-tag-img">firefox</a> <a href="http://stackoverflow.com/questions/tagged/xmlhttprequest" class="post-tag js-gps-track" title="show questions tagged &#39;xmlhttprequest&#39;" rel="tag">xmlhttprequest</a> <a href="http://stackoverflow.com/questions/tagged/mime-types" class="post-tag js-gps-track" title="show questions tagged &#39;mime-types&#39;" rel="tag">mime-types</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/q/677902/4625361" title="short permalink to this question" class="short-link" id="link-post-677902">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/677902/edit" class="suggest-edit-post" title="revise and improve this post">edit</a></div>        
+    </td>
+    <td class="post-signature owner">
+        <div class="user-info user-hover">
+    <div class="user-action-time">
+        asked <span title="2009-03-24 15:25:19Z" class="relativetime">Mar 24 '09 at 15:25</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/35881/a-levy"><div class="gravatar-wrapper-32"><img src="./Have you tried using the MIME type for JSON?_files/95ee2befbddbd112fbbd1c8b500fcfc9" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/35881/a-levy">A. Levy</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">8,702</span><span title="4 gold badges"><span class="badge1"></span><span class="badgecount">4</span></span><span title="25 silver badges"><span class="badge2"></span><span class="badgecount">25</span></span><span title="40 bronze badges"><span class="badge3"></span><span class="badgecount">40</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+                
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-677902" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-677902" data-rep="50" data-reg="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" onclick=""></a>
+        </div>         
+    </td>
+</tr>        </tbody></table>
+</div>
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								6 Answers
+                                <span style="display:none;" itemprop="answerCount">6</span>
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="677943"></a>
+<div id="answer-677943" class="answer accepted-answer" data-answerid="677943" itemscope="" itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="677943">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">38</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Have you tried using the MIME type for JSON?</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="pln">application</span><span class="pun">/</span><span class="pln">json</span></code></pre>
+
+<p>You could also configure your server to send this MIME type automatically for .json files.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/677943/4625361" title="short permalink to this answer" class="short-link" id="link-post-677943">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/677943/edit" class="suggest-edit-post" title="revise and improve this post">edit</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2009-03-24 15:32:21Z" class="relativetime">Mar 24 '09 at 15:32</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/76514/jthompson"><div class="gravatar-wrapper-32"><img src="./Have you tried using the MIME type for JSON?_files/3ec453405079a8ac0a67e2fe94001933" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/76514/jthompson">jthompson</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">3,209</span><span title="15 silver badges"><span class="badge2"></span><span class="badgecount">15</span></span><span title="28 bronze badges"><span class="badge3"></span><span class="badgecount">28</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-677943" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="1" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-491199" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">This works, thanks!</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/35881/a-levy" title="8702 reputation" class="comment-user owner">A. Levy</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#comment491199_677943"><span title="2009-03-24 15:42:02Z" class="relativetime-clean">Mar 24 '09 at 15:42</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-491229" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">4</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">To be more specific:      req.overrideMimeType("application/json");     req.send(null);  works. Specifying the MIME type in the server would be the better solution, but overriding it works as well.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/35881/a-levy" title="8702 reputation" class="comment-user owner">A. Levy</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#comment491229_677943"><span title="2009-03-24 15:46:01Z" class="relativetime-clean">Mar 24 '09 at 15:46</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-41277619" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">This is great! It works for me. Thanks!</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/2177408/shaosh" title="91 reputation" class="comment-user">shaosh</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#comment41277619_677943"><span title="2014-10-10 17:18:11Z" class="relativetime-clean">Oct 10 '14 at 17:18</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-41505356" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">How to set the type?</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/1150190/abdulmomen-%d8%b9%d8%a8%d8%af%d8%a7%d9%84%d9%85%d8%a4%d9%85%d9%86" title="372 reputation" class="comment-user">AbdulMomen عبدالمؤمن</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#comment41505356_677943"><span title="2014-10-17 17:26:47Z" class="relativetime-clean">Oct 17 '14 at 17:26</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-42094434" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Where should this be placed? In the JSON file?</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/1675976/imray" title="2206 reputation" class="comment-user">Imray</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#comment42094434_677943"><span title="2014-11-05 11:32:54Z" class="relativetime-clean">Nov 5 '14 at 11:32</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-677943" data-rep="50" data-reg="true">
+
+                <a class="js-add-link comments-link  dno" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link " title="expand to show all comments on this post" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" onclick="">show <b>1</b> more comment</a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+<script>
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8277,"adzerk1006917952",4).setZone(44) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk1006917952"><a href="http://engine.adzerk.net/r?e=eyJhdiI6Mzg1NzUsImF0Ijo0LCJidCI6MCwiY20iOjE4MjIyMywiY2giOjExNzgsImNyIjozMTU0NDMsImRpIjoiMDdlNzYzMmZmOGMxNGIyZGE5YmYyZWM1ZTk0YzcwMTMiLCJkbSI6MSwiZmMiOjY2OTcyNSwiZmwiOjQwMzczOCwiaXAiOiIxNzQuNjEuMTkyLjE1NyIsImt3IjoiamF2YXNjcmlwdCxmaXJlZm94LHhtbGh0dHByZXF1ZXN0LG1pbWUtdHlwZXMseC11c2VyLXJlZ2lzdGVyZWQiLCJtayI6ImZpcmVmb3giLCJudyI6MjIsInBjIjo0LjU4LCJwciI6NTc5MiwicnQiOjIsInJmIjoiaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8iLCJzdCI6ODI3NywidWsiOiJ1ZTEtMzc4ZDIyMzExMTRjNGZkMzllYjk4ZDExNTI1YjY0ZmEiLCJ6biI6NDQsInRzIjoxNDMxODIzNzUxMzg3LCJiZiI6dHJ1ZSwicG4iOiJhZHplcmsxMDA2OTE3OTUyIiwidXIiOiJodHRwczovL2RldmVsb3Blci5tb3ppbGxhLm9yZy9lbi1VUy9kb2NzL01vemlsbGEvRGV2ZWxvcGVyX1Byb2dyYW0jdXRtX3NvdXJjZT1TdGFja092ZXJmbG93JnV0bV9tZWRpdW09Zm9ydW1zJnV0bV9jYW1wYWlnbj1jb25uZWN0In0&s=c7TkY7vGSF2CQsi5YglrfknhZU4" rel="nofollow" target="_blank" title=""><img src="./Have you tried using the MIME type for JSON?_files/f36c11efe57045549c95549fa7733b8a.png" title="" alt="" border="0" width="728" height="90"></a><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" style="position:absolute;" src="./Have you tried using the MIME type for JSON?_files/i(1).gif"></div>
+  
+<a name="677945"></a>
+<div id="answer-677945" class="answer" data-answerid="677945" itemscope="" itemtype="http://schema.org/Answer">
+
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="677945">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">14</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Firstly, true JSON is much stricter than JavaScript, and to be valid JSON, you have to have your keys quoted. </p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="str">"a"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">3</span><span class="pln"> </span><span class="pun">}</span></code></pre>
+
+<p>Also, as you are using a bare XMLHttpRequest, which generally expects to receive an XML result unless MIME headers specify strictly otherwise. </p>
+
+<p>You may however wish to make your own life easier by simply using a JavaScript framework such as jQuery which will abstract away all this problem for you and deal with all the nasty edge cases.</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="pln">$</span><span class="pun">.</span><span class="pln">getJSON</span><span class="pun">(</span><span class="str">"data.json"</span><span class="pun">,{},</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln"> data </span><span class="pun">){</span><span class="pln"> 
+  </span><span class="com">/*  # do stuff here  */</span><span class="pln"> 
+</span><span class="pun">});</span></code></pre>
+
+<p>Additionally, if you use both strict JSON and use a library to abstract it for you, when browsers start having native JSON parsers the library will be able to transparently make use of these and get a significant speed improvement. </p>
+
+<p>( This is slated to happen sooner than later, and when it happens, your users will get a silent upgrade with no effort required! ).</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/677945/4625361" title="short permalink to this answer" class="short-link" id="link-post-677945">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/677945/edit" class="suggest-edit-post" title="revise and improve this post">edit</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/677945/revisions" title="show all edits to this post">edited <span title="2009-03-24 15:41:50Z" class="relativetime">Mar 24 '09 at 15:41</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2009-03-24 15:33:12Z" class="relativetime">Mar 24 '09 at 15:33</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/15614/kent-fredric"><div class="gravatar-wrapper-32"><img src="./Have you tried using the MIME type for JSON?_files/7455fbe2cde016f6cd36b4352be52eaf" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/15614/kent-fredric">Kent Fredric</a><br>
+        <span class="reputation-score" title="reputation score 38605" dir="ltr">38.6k</span><span title="11 gold badges"><span class="badge1"></span><span class="badgecount">11</span></span><span title="75 silver badges"><span class="badge2"></span><span class="badgecount">75</span></span><span title="135 bronze badges"><span class="badge3"></span><span class="badgecount">135</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-677945" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="2" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-491207" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Thanks for the pointers on JSON. I will change my data to use quoted string attribute names. Unfortunately, jQuery, or some other framework, is not an option for me.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/35881/a-levy" title="8702 reputation" class="comment-user owner">A. Levy</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#comment491207_677945"><span title="2009-03-24 15:43:08Z" class="relativetime-clean">Mar 24 '09 at 15:43</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-491240" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I'd be most interested why, generally that's the sign of code-stink to vehemently avoid code reuse and to avoid using solved problems.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/15614/kent-fredric" title="38605 reputation" class="comment-user">Kent Fredric</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#comment491240_677945"><span title="2009-03-24 15:47:58Z" class="relativetime-clean">Mar 24 '09 at 15:47</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-491322" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">this should be the real answer...</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/45786/thehippo" title="16063 reputation" class="comment-user">TheHippo</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#comment491322_677945"><span title="2009-03-24 16:05:51Z" class="relativetime-clean">Mar 24 '09 at 16:05</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-666238" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@Kent, I'd be happy to use jQuery. However, the approval process for using jQuery is prohibitively difficult. The amount of time it would take to argue with the customer and demonstrate that we need to use jQuery is not worth the benefit. Sad, but true.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/35881/a-levy" title="8702 reputation" class="comment-user owner">A. Levy</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#comment666238_677945"><span title="2009-05-13 15:06:29Z" class="relativetime-clean">May 13 '09 at 15:06</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-5322578" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">using <code>$.getJSON()</code> still generates that error message for me.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/9611/shoosh" title="36728 reputation" class="comment-user">shoosh</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#comment5322578_677945"><span title="2011-01-26 08:41:32Z" class="relativetime-clean">Jan 26 '11 at 8:41</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-677945" data-rep="50" data-reg="true">
+
+                <a class="js-add-link comments-link  dno" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link " title="expand to show all comments on this post" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" onclick="">show <b>2</b> more comments</a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="4081266"></a>
+<div id="answer-4081266" class="answer" data-answerid="4081266" itemscope="" itemtype="http://schema.org/Answer">
+
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="4081266">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">3</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>This also occurs when Content-Type is completely empty (thereby circumventing the natural type-detection).</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/4081266/4625361" title="short permalink to this answer" class="short-link" id="link-post-4081266">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/4081266/edit" class="suggest-edit-post" title="revise and improve this post">edit</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2010-11-02 19:12:58Z" class="relativetime">Nov 2 '10 at 19:12</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/706421/dustin-oprea"><div class="gravatar-wrapper-32"><img src="./Have you tried using the MIME type for JSON?_files/bb7e85832e0110214043a8726ad70a76" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/706421/dustin-oprea">Dustin Oprea</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,278</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="13 silver badges"><span class="badge2"></span><span class="badgecount">13</span></span><span title="35 bronze badges"><span class="badge3"></span><span class="badgecount">35</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-4081266" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-4081266" data-rep="50" data-reg="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="677948"></a>
+<div id="answer-677948" class="answer" data-answerid="677948" itemscope="" itemtype="http://schema.org/Answer">
+
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="677948">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">2</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>It should be {"a": 3} actually.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/677948/4625361" title="short permalink to this answer" class="short-link" id="link-post-677948">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/677948/edit" class="suggest-edit-post" title="revise and improve this post">edit</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2009-03-24 15:33:33Z" class="relativetime">Mar 24 '09 at 15:33</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/75192/julian-aubourg"><div class="gravatar-wrapper-32"><img src="./Have you tried using the MIME type for JSON?_files/3132902b0c2bd9b95eced29c649263a1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/75192/julian-aubourg">Julian Aubourg</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">6,513</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="16 silver badges"><span class="badge2"></span><span class="badgecount">16</span></span><span title="27 bronze badges"><span class="badge3"></span><span class="badgecount">27</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-677948" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-677948" data-rep="50" data-reg="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="10074069"></a>
+<div id="answer-10074069" class="answer" data-answerid="10074069" itemscope="" itemtype="http://schema.org/Answer">
+
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="10074069">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">1</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I found the same error message but from a very different cause.  After a little time fruitlessly changing the JSON content, realized that I had accidentally restarted the page running off the local file system (file://Users/me/Sites/mypage.html) rather than the server (http://localhost/~me/Sites/mypage.html).  </p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/10074069/4625361" title="short permalink to this answer" class="short-link" id="link-post-10074069">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/10074069/edit" class="suggest-edit-post" title="revise and improve this post">edit</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2012-04-09 13:39:31Z" class="relativetime">Apr 9 '12 at 13:39</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/645715/user645715"><div class="gravatar-wrapper-32"><img src="./Have you tried using the MIME type for JSON?_files/3974ec36e115aa7295da14f6b39dc23a" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/645715/user645715">user645715</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,481</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="20 silver badges"><span class="badge2"></span><span class="badgecount">20</span></span><span title="36 bronze badges"><span class="badge3"></span><span class="badgecount">36</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-10074069" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-10074069" data-rep="50" data-reg="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="4264343"></a>
+<div id="answer-4264343" class="answer downvoted-answer" data-answerid="4264343" itemscope="" itemtype="http://schema.org/Answer">
+
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="4264343">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">-3</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Kent, I disagree.</p>
+
+<p>The following <strong>IS</strong> "valid" JSON:</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="pun">{</span><span class="pln"> a</span><span class="pun">:</span><span class="pln"> </span><span class="lit">3</span><span class="pln"> </span><span class="pun">}</span></code></pre>
+
+<p>JavaScript object property names do NOT have to be strings.</p>
+
+<p>The problem is one of MIME type, not JSON/JavaScript syntax.</p>
+
+<p>I just solved this very issue by adding json as "text/javascript" to my webserver mime types file:</p>
+
+<pre class="default prettyprint prettyprinted"><code><span class="pln">text</span><span class="pun">/</span><span class="pln">javascript                 js</span><span class="pun">,</span><span class="pln"> json</span></code></pre>
+
+<p>The "not well-formed" error disappeared.  The browser (FireFox) assumed, incorrectly, that the .json file was XML.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/4264343/4625361" title="short permalink to this answer" class="short-link" id="link-post-4264343">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/4264343/edit" class="suggest-edit-post" title="revise and improve this post">edit</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/4264343/revisions" title="show all edits to this post">edited <span title="2012-12-06 13:25:27Z" class="relativetime">Dec 6 '12 at 13:25</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/231716/brian-mains"><div class="gravatar-wrapper-32"><img src="./Have you tried using the MIME type for JSON?_files/f983f7a23d33aa383453583cbf20bf2a" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/231716/brian-mains">Brian Mains</a><br>
+        <span class="reputation-score" title="reputation score 34694" dir="ltr">34.7k</span><span title="21 gold badges"><span class="badge1"></span><span class="badgecount">21</span></span><span title="83 silver badges"><span class="badge2"></span><span class="badgecount">83</span></span><span title="171 bronze badges"><span class="badge3"></span><span class="badgecount">171</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2010-11-24 07:23:53Z" class="relativetime">Nov 24 '10 at 7:23</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/518441/rhino"><div class="gravatar-wrapper-32"><img src="./Have you tried using the MIME type for JSON?_files/de7419f3be101430400f2c9d26f4d122" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/518441/rhino">Rhino</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">11</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-4264343" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-5446452" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="warm">5</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Wrong. It is valid <i>javascript</i>, and if you interpret it as javascript, then it will be fine. Howver, JSON is <i>stricter</i> than javascript, and the JSON format is parsed seperatly by a conformant client thant wants "JSON" not "Javascript".  Any Specificiation compatible JSON parser treats unquoted keys as an error.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/15614/kent-fredric" title="38605 reputation" class="comment-user">Kent Fredric</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#comment5446452_4264343"><span title="2011-02-04 03:29:15Z" class="relativetime-clean">Feb 4 '11 at 3:29</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-5446461" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">To reiterate, JSON is a <i>sublanguage</i> of javascript, and while <i>ALL</i> JSON is valid javascript, <b>NOT</b> all Javascript is valid JSON.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/15614/kent-fredric" title="38605 reputation" class="comment-user">Kent Fredric</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#comment5446461_4264343"><span title="2011-02-04 03:30:36Z" class="relativetime-clean">Feb 4 '11 at 3:30</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-5472580" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">If you disagree with me, take your complaint to Mozilla, as you're arguing their JSON parser is wrong =).   <a href="http://jsfiddle.net/kentnl/uGDQP/" rel="nofollow">jsfiddle.net/kentnl/uGDQP</a></span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/15614/kent-fredric" title="38605 reputation" class="comment-user">Kent Fredric</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#comment5472580_4264343"><span title="2011-02-06 13:04:30Z" class="relativetime-clean">Feb 6 '11 at 13:04</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-29309901" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I have to say that requiring keys to have "" is a mayor flaw in JSON. It's extra slump, JS proves it isn't required. It's probably there to accomodate parser writers, and there's far less parser writers than there's users. I also take grief of not being able to pass functions, but that at least makes sense.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/638258/lodewijk" title="421 reputation" class="comment-user">Lodewijk</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#comment29309901_4264343"><span title="2013-11-01 13:59:44Z" class="relativetime-clean">Nov 1 '13 at 13:59</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-29309915" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Also the name "JavaScript Object Notation" is misguiding. It isn't the same notation as used in Javascript.</span>
+                –&nbsp;
+                    <a href="http://stackoverflow.com/users/638258/lodewijk" title="421 reputation" class="comment-user">Lodewijk</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#comment29309915_4264343"><span title="2013-11-01 14:00:21Z" class="relativetime-clean">Nov 1 '13 at 14:00</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-4264343" data-rep="50" data-reg="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+									<a name="new-answer"></a>
+						<form id="post-form" action="http://stackoverflow.com/questions/677902/answer/submit" method="post" class="post-form">
+						    <input type="hidden" id="post-id" value="677902">
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false">
+                            <input type="hidden" name="referrer" value="https://www.google.com/">
+							<h2 class="space">Your Answer</h2>
+
+
+
+            <script>
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+    
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+            // Have to fire editor after snippets, if snippets enabled
+            if (StackExchange.options.snippets.enabled) {
+                StackExchange.using("snippets", function() {
+                    createEditor();
+                });
+            }
+            else {
+                createEditor();
+            }
+        });
+
+        function createEditor() {
+            prepareEditor({
+                heartbeatType: 'answer',
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: false,
+                    discardSelector: ".discard-answer"
+                ,immediatelyShowMarkdownHelp:true
+                });
+                
+
+        }
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li class="wmd-button" id="wmd-bold-button" title="Strong &lt;strong&gt; Ctrl+B" style="left: 0px;"><span style="background-position: 0px 0px;"></span></li><li class="wmd-button" id="wmd-italic-button" title="Emphasis &lt;em&gt; Ctrl+I" style="left: 25px;"><span style="background-position: -20px 0px;"></span></li><li class="wmd-spacer wmd-spacer1" id="wmd-spacer1"></li><li class="wmd-button" id="wmd-link-button" title="Hyperlink &lt;a&gt; Ctrl+L" style="left: 75px;"><span style="background-position: -40px 0px;"></span></li><li class="wmd-button" id="wmd-quote-button" title="Blockquote &lt;blockquote&gt; Ctrl+Q" style="left: 100px;"><span style="background-position: -60px 0px;"></span></li><li class="wmd-button" id="wmd-code-button" title="Code Sample &lt;pre&gt;&lt;code&gt; Ctrl+K" style="left: 125px;"><span style="background-position: -80px 0px;"></span></li><li class="wmd-button" id="wmd-image-button" title="Image &lt;img&gt; Ctrl+G" style="left: 150px;"><span style="background-position: -100px 0px;"></span></li><li class="wmd-button wmd-snippet-button" style="left:175px" id="wmd-snippet-button" title="Code snippet Ctrl-M"><span style="background-image: url(http://stackoverflow.com/content/balsamiq/wmd-mockup-button.png?v=4);"></span></li><li class="wmd-spacer wmd-spacer2" id="wmd-spacer2" style="left: 220px;"></li><li class="wmd-button" id="wmd-olist-button" title="Numbered List &lt;ol&gt; Ctrl+O" style="left: 225px;"><span style="background-position: -120px 0px;"></span></li><li class="wmd-button" id="wmd-ulist-button" title="Bulleted List &lt;ul&gt; Ctrl+U" style="left: 250px;"><span style="background-position: -140px 0px;"></span></li><li class="wmd-button" id="wmd-heading-button" title="Heading &lt;h1&gt;/&lt;h2&gt; Ctrl+H" style="left: 275px;"><span style="background-position: -160px 0px;"></span></li><li class="wmd-button" id="wmd-hr-button" title="Horizontal Rule &lt;hr&gt; Ctrl+R" style="left: 300px;"><span style="background-position: -180px 0px;"></span></li><li class="wmd-spacer wmd-spacer3" id="wmd-spacer3" style="left: 346px;"></li><li class="wmd-button" id="wmd-undo-button" title="Undo - Ctrl+Z" style="left: 350px;"><span style="background-position: -200px -20px;"></span></li><li class="wmd-button" id="wmd-redo-button" title="Redo - Ctrl+Shift+Z" style="left: 375px;"><span style="background-position: -220px -20px;"></span></li><li class="wmd-button wmd-help-button active-help" id="wmd-help-button" title="Markdown Editing Help" style="right: 0px;"><span style="background-position: -240px 0px;"></span></li><div id="mdhelp" class="mdhelp" style="right: -13px; width: 660px; top: 41px;">
+    <ul id="mdhelp-tabs" class="mdhelp-tabs">
+        <li data-tab="mdhelp-links" data-buttons="link">Links</li>
+        <li data-tab="mdhelp-images" data-buttons="image">Images</li>
+        <li data-tab="mdhelp-styles" data-buttons="bold,italic,heading">Styling/Headers</li>
+        <li data-tab="mdhelp-lists" data-buttons="olist,ulist">Lists</li>
+        <li data-tab="mdhelp-blockquotes" data-buttons="quote">Blockquotes</li>
+        <li data-tab="mdhelp-code" data-buttons="code">Code</li>
+        <li data-tab="mdhelp-html"> HTML </li>
+        <li style="float:right"><a href="http://stackoverflow.com/editing-help" target="_blank">advanced help »</a></li>
+    </ul>
+    
+    <div class="mdhelp-tab" id="mdhelp-links">
+            <p>
+                In most cases, a plain URL will be recognized as such and automatically linked:
+            </p>
+            <pre>Visit http://area51.stackexchange.com/ regularly!
+Use angle brackets to force linking: Have you seen &lt;http://superuser.com&gt;?
+</pre>
+            <p>
+                To create fancier links, use Markdown:
+            </p>
+                <pre>Here's [a link](http://www.example.com/)! And a reference-style link to [a panda][1].
+References don't have to be [numbers][question].
+
+ [1]: http://notfound.stackexchange.com/
+ [question]: http://english.stackexchange.com/questions/11481
+</pre>
+                <p>You can add tooltips to links:</p>
+<pre>Click [here](http://diy.stackexchange.com<span class="spaces">&nbsp;</span>"this text appears when you mouse over")!
+This works with [reference links][blog] as well.
+
+ [blog]: http://blog.stackoverflow.com/<span class="spaces">&nbsp;</span>"click here for updates"
+</pre>
+    </div>
+
+    <div class="mdhelp-tab" id="mdhelp-images">
+        <p>Images are exactly like links, but they have an exclamation point in front of them:</p>
+        <pre>![a busy cat](http://sstatic.net/stackoverflow/img/error-lolcat-problemz.jpg)
+![two muppets][1]
+
+ [1]: http://i.imgur.com/I5DFV.jpg "tooltip"
+</pre>
+        <p>
+            The word in square brackets is the alt text, which gets displayed if the browser
+ can't show the image. Be sure to include meaningful alt text for screen-reading
+ software.
+        </p>
+   
+    </div>
+    <div class="mdhelp-tab" id="mdhelp-styles">
+        <div class="col1">
+            <p>Be sure to use text styling sparingly; only where it helps readability.</p>
+                <pre>*This is italicized*, and so
+is _this_.
+
+**This is bold**, just like __this__.
+
+You can ***combine*** them
+if you ___really have to___.
+</pre>
+        
+        </div>
+        <div class="col2">
+            <p>
+                To break your text into sections, you can use headers:
+            </p>
+                <pre>A Large Header
+==============
+
+Smaller Subheader
+-----------------
+</pre>
+            <p>
+                Use hash marks if you need several levels of headers:</p>
+    <pre># Header 1 #
+## Header 2 ##
+### Header 3 ###
+</pre>
+
+            
+        </div>
+
+    </div>
+    <div class="mdhelp-tab" id="mdhelp-lists">
+        <p>Both bulleted and numbered lists are possible:</p>
+        <div class="col1">
+<pre>-<span class="spaces">&nbsp;</span>Use a minus sign for a bullet
++<span class="spaces">&nbsp;</span>Or plus sign
+*<span class="spaces">&nbsp;</span>Or an asterisk
+
+1.<span class="spaces">&nbsp;</span>Numbered lists are easy
+2.<span class="spaces">&nbsp;</span>Markdown keeps track of
+ the numbers for you
+7.<span class="spaces">&nbsp;</span>So this will be item 3.
+</pre>
+        </div>
+        <div class="col2">
+<pre>1.<span class="spaces">&nbsp;</span>Lists in a list item:
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>-<span class="spaces">&nbsp;</span>Indented four spaces.
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>*<span class="spaces">&nbsp;</span>indented eight spaces.
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>-<span class="spaces">&nbsp;</span>Four spaces again.
+2.<span class="spaces">&nbsp;&nbsp;</span>You can have multiple
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>paragraphs in a list items.
+<span class="spaces">&nbsp;</span>
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>Just be sure to indent.
+</pre>        
+        </div>
+    </div>
+
+    <div class="mdhelp-tab" id="mdhelp-blockquotes">
+        <div class="col1">
+            <pre>&gt; Create a blockquote by
+&gt; prepending “&gt;” to each line.
+&gt;
+&gt; Other formatting also works here, e.g.
+&gt;
+&gt; 1. Lists or
+&gt; 2. Headings:
+&gt;
+&gt; ## Quoted Heading ##
+</pre>
+        </div>
+        <div class="col2">
+                <p>
+                    You can even put blockquotes in blockquotes:
+                </p>
+                <pre>&gt; A standard blockquote is indented
+&gt; &gt; A nested blockquote is indented more
+&gt; &gt; &gt; &gt; You can nest to any depth.
+</pre>
+        </div>
+    </div>
+
+    <div class="mdhelp-tab" id="mdhelp-code">
+        <p>
+            To create code blocks or other preformatted text, indent by four spaces:
+        </p>
+        <pre><span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>This will be displayed in a monospaced font. The first four spaces
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>will be stripped off, but all other whitespace will be preserved.
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>Markdown and HTML are turned off in code blocks:
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>&lt;i&gt;This is not italic&lt;/i&gt;, and [this is not a link](http://example.com)
+</pre>
+        <p>
+            To create not a block, but an inline code span, use backticks:
+        </p>
+        <pre>The `$` character is just a shortcut for `window.jQuery`.
+</pre>
+        <p>
+            If you want to have a preformatted block within a list, indent by eight spaces:
+        </p>
+        <pre>1. This is normal text.
+2. So is this, but now follows a code block:
+<span class="spaces">&nbsp;</span>
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Skip a line and indent eight spaces.
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>That's four spaces for the list
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>and four to trigger the code block.
+</pre>
+    </div>
+
+    <div class="mdhelp-tab" id="mdhelp-html">
+        <p>
+            If you need to do something that Markdown can't handle, use HTML. Note that <a href="http://meta.stackexchange.com/questions/1777/what-html-tags-are-allowed" target="_blank">we only support a very strict subset of HTML!</a>
+        </p>
+        <pre>Strikethrough humor is &lt;strike&gt;funny&lt;/strike&gt;.
+</pre>
+        <p>
+            Markdown is smart enough not to mangle your span-level HTML:
+        </p>
+        <pre>&lt;b&gt;Markdown works *fine* in here.&lt;/b&gt;
+</pre>
+        <p>
+            Block-level HTML elements have a few restrictions:
+        </p>
+        <ol>
+            <li>They must be separated from surrounding text by blank lines.</li>
+            <li>The begin and end tags of the outermost block element must not be indented.</li>
+            <li>Markdown can't be used within HTML blocks.</li>
+        </ol>
+        <br>
+        <pre>&lt;pre&gt;
+ You can &lt;em&gt;not&lt;/em&gt; use Markdown in here.
+&lt;/pre&gt;
+</pre>
+    </div>
+
+    <div class="cbt"></div>
+</div></ul></div>
+            <div style="clear: both; height: 27px;"></div><textarea id="wmd-input" class="wmd-input processed" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        <div class="grippie" style="margin-right: 0px;"></div></div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="65fa4183aec723ad3ab5799588acffbf">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+							<div style="position: relative;">
+								
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" class="discard-answer dno">discard</a>
+								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?							Browse other questions tagged <a href="http://stackoverflow.com/questions/tagged/javascript" class="post-tag" title="show questions tagged &#39;javascript&#39;" rel="tag">javascript</a> <a href="http://stackoverflow.com/questions/tagged/firefox" class="post-tag" title="show questions tagged &#39;firefox&#39;" rel="tag"><img src="./Have you tried using the MIME type for JSON?_files/WcBXc.png" height="16" width="18" alt="" class="sponsor-tag-img">firefox</a> <a href="http://stackoverflow.com/questions/tagged/xmlhttprequest" class="post-tag" title="show questions tagged &#39;xmlhttprequest&#39;" rel="tag">xmlhttprequest</a> <a href="http://stackoverflow.com/questions/tagged/mime-types" class="post-tag" title="show questions tagged &#39;mime-types&#39;" rel="tag">mime-types</a>  or <a href="http://stackoverflow.com/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+
+
+
+<script>
+    window.showNewUser = false;
+
+</script>
+
+<div class="module newuser newuser-greeting" id="newuser-box" style="display:none;">
+    <h4>Hello World!</h4>
+    <div>
+        <p>This is a collaboratively edited question and answer site for <b>professional and enthusiast programmers</b>. It's 100% free, no registration required.</p><p>Got a question about the site itself? <a href="http://meta.stackoverflow.com/">meta</a> is the place to talk about things like what questions are appropriate, what tags we should use, etc.</p>
+        <p class="ar">
+                <a href="http://stackoverflow.com/tour?mnu=1">about »</a>&nbsp;&nbsp;&nbsp;
+            <a href="http://stackoverflow.com/help?mnu=1">help »</a>
+                &nbsp; <a href="http://meta.stackoverflow.com/">meta »</a>
+        </p>
+    </div>
+</div>
+    <script>
+    if (showNewUser) {
+        document.getElementById('newuser-box').style.display = '';
+    }
+    </script>						    <div class="module question-stats">
+			        <table id="qinfo">
+			            <tbody><tr>
+			                <td>
+			                    <p class="label-key">asked</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-key" title="2009-03-24 15:25:19Z"><b>6 years ago</b></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">viewed</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-key">
+			                        <b>43077 times</b>
+			                    </p>
+			                </td>
+			            </tr>
+			                <tr>
+			                    <td>
+			                        <p class="label-key">active</p>
+			                    </td>
+			                    <td style="padding-left: 10px">
+			                        <p class="label-key"><b><a href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest?lastactivity" class="lastactivity-link" title="2012-12-06 13:25:27Z">2 years ago</a></b></p>
+			                    </td>
+			                </tr>
+			        </tbody></table>
+			    </div>
+			<div class="module community-bulletin" data-tracker="cb=1">
+    <div class="related">
+                <div class="bulletin-title">
+                    Featured on Meta
+                </div>
+                <hr>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <a href="http://meta.stackoverflow.com/questions/291017/april-2015-community-moderator-election-results?cb=1" class="question-hyperlink">
+<div class="favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>                </a>
+            </div>
+                <div class="bulletin-item-content">
+                    <a href="http://meta.stackoverflow.com/questions/291017/april-2015-community-moderator-election-results?cb=1" class="question-hyperlink">April 2015 Community Moderator Election Results</a>
+                </div>
+                <br class="cbt">
+            </div>
+                <div class="bulletin-title">
+                    Hot Meta Posts
+                </div>
+                <hr>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <span title="Vote score (upvotes - downvotes)">24</span>
+            </div>
+                <div class="bulletin-item-content">
+                    <a href="http://meta.stackoverflow.com/questions/294325/how-exactly-is-this-question-off-topic?cb=1" class="question-hyperlink">How exactly is this question off topic?</a>
+                </div>
+                <br class="cbt">
+            </div>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <span title="Vote score (upvotes - downvotes)">12</span>
+            </div>
+                <div class="bulletin-item-content">
+                    <a href="http://meta.stackoverflow.com/questions/294440/big-arrow-navigation-confusing-for-home-page-lists?cb=1" class="question-hyperlink">Big arrow navigation confusing for home page lists</a>
+                </div>
+                <br class="cbt">
+            </div>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <span title="Vote score (upvotes - downvotes)">20</span>
+            </div>
+                <div class="bulletin-item-content">
+                    <a href="http://meta.stackoverflow.com/questions/294421/detect-when-an-asker-is-putting-code-in-a-comment-and-suggest-that-they-append-i?cb=1" class="question-hyperlink">Detect when an asker is putting code in a comment and suggest that they appen…</a>
+                </div>
+                <br class="cbt">
+            </div>
+    </div>
+</div>			
+			<script>
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8277,"adzerk1262173333",[17,2221]).setZone(45) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk1262173333"><a href="http://engine.adzerk.net/r?e=eyJhdiI6Mzg1NzUsImF0IjoxNywiYnQiOjAsImNtIjoxODIyMjMsImNoIjoxMTc4LCJjciI6MzE1NDQyLCJkaSI6IjdhOTg1MTRmNGVjMDQyZWU4M2MzYzZjYmI1MTViYjQzIiwiZG0iOjEsImZjIjo2Njk3MjQsImZsIjo0MDM3MzgsImlwIjoiMTc0LjYxLjE5Mi4xNTciLCJrdyI6ImphdmFzY3JpcHQsZmlyZWZveCx4bWxodHRwcmVxdWVzdCxtaW1lLXR5cGVzLHgtdXNlci1yZWdpc3RlcmVkIiwibWsiOiJmaXJlZm94IiwibnciOjIyLCJwYyI6NC41OCwicHIiOjU3OTIsInJ0IjoyLCJyZiI6Imh0dHBzOi8vd3d3Lmdvb2dsZS5jb20vIiwic3QiOjgyNzcsInVrIjoidWUxLTM3OGQyMjMxMTE0YzRmZDM5ZWI5OGQxMTUyNWI2NGZhIiwiem4iOjQ1LCJ0cyI6MTQzMTgyMzc1MTM4OCwiYmYiOnRydWUsInBuIjoiYWR6ZXJrMTI2MjE3MzMzMyIsInVyIjoiaHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9Nb3ppbGxhL0RldmVsb3Blcl9Qcm9ncmFtI3V0bV9zb3VyY2U9U3RhY2tPdmVyZmxvdyZ1dG1fbWVkaXVtPWZvcnVtcyZ1dG1fY2FtcGFpZ249Y29ubmVjdCJ9&s=Izw3e-gX415Is0EA3UKVHZtL4Oc" rel="nofollow" target="_blank" title=""><img src="./Have you tried using the MIME type for JSON?_files/9cf6038f5f384c49b1cd50a4b3cda571.png" title="" alt="" border="0" width="220" height="250"></a><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="http://stackoverflow.com/questions/677902/not-well-formed-error-in-firefox-when-loading-json-file-with-xmlhttprequest#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" style="position:absolute;" src="./Have you tried using the MIME type for JSON?_files/i(2).gif"></div>  
+        <div id="hireme" class="tag-themed python tagged"><a href="http://careers.stackoverflow.com/jobs/tag/python?a=71Qw8" target="_blank" data-la="71Qw8" data-hf="h" class="top"> <span>Want a <span class="header-tag">python</span> job?</span></a><ul class="jobs"><li><a data-cid="172532" data-la="sX4JC5GvwPv" href="http://careers.stackoverflow.com/jobs/86331/sdet-context-relevant" target="_blank" title="SDET at Context Relevant. Click to learn more.">SDET<br><div class="company">Context Relevant</div><div class="location" title="Seattle, WA / relocation">Seattle, WA / relocation</div><span class="post-tag">sdet</span><span class="post-tag highlight">python</span></a></li><li><a data-cid="167246" data-la="r8TJ1JDhF1o" href="http://careers.stackoverflow.com/jobs/80936/release-engineer-qumulo-inc" target="_blank" title="Release Engineer at Qumulo, Inc.. Click to learn more.">Release Engineer<br><div class="company">Qumulo</div><div class="location" title="Seattle, WA / relocation">Seattle, WA / relocation</div><span class="post-tag highlight">python</span><span class="post-tag">scripting</span></a></li></ul><img class="impression" src="./Have you tried using the MIME type for JSON?_files/i" style="display:none;"><img class="impression" src="./Have you tried using the MIME type for JSON?_files/sX4JC5GvwPv-r8TJ1JDhF1o-71Qw8" style="display:none;"></div>
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/2618959?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">3</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/2618959/not-well-formed-warning-when-loading-client-side-json-in-firefox-via-jquery-aj?lq=1" class="question-hyperlink">“not well-formed” warning when loading client-side JSON in Firefox via jQuery.ajax</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/3986629?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">2</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/3986629/firefox-json-not-well-formed-errror-on-valid-json?lq=1" class="question-hyperlink">Firefox JSON “not well formed” errror on valid JSON</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/9996485?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">3</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/9996485/jquery-ajax-request-causes-not-well-formed-error-in-firefox?lq=1" class="question-hyperlink">jQuery ajax request causes 'not well-formed' error in Firefox</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/13022562?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/13022562/firefoxs-firebug-giving-error-of-not-well-formed-with-json-on-jquery-ajax-res?lq=1" class="question-hyperlink">Firefox's Firebug giving error of “not-well formed” with JSON on jQuery Ajax response; using jCryption plugin with JavaCryption implementation</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/29213028?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/29213028/jquery-ajax-request-to-xml-resource-yields-not-well-formed-error-in-firefox?lq=1" class="question-hyperlink">jquery ajax request to xml resource yields “not well-formed” error in Firefox</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/28983958?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/28983958/not-well-formed-error-when-adding-geojson-object-in-leaflet-map-locally?lq=1" class="question-hyperlink">Not well formed error when adding geojson object in leaflet map locally</a>
+</div><div class="spacer">
+	<a href="http://stackoverflow.com/q/29643291?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/29643291/how-can-i-get-ajax-requests-in-firefox-to-not-parse-the-result?lq=1" class="question-hyperlink">How can I get AJAX requests in Firefox to not parse the result?</a>
+</div>			</div>
+</div>
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/244777?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted extra-large">2107
+    </div>
+</a><a href="http://stackoverflow.com/questions/244777/can-i-comment-a-json-file?rq=1" class="question-hyperlink">Can I comment a JSON file?</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/1468295?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="http://stackoverflow.com/questions/1468295/xmlhttprequest-firefox-extension-and-error-code-1012-access-denied?rq=1" class="question-hyperlink">XMLHttpRequest, FireFox Extension, and error code '1012' (Access Denied)</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/1924551?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="http://stackoverflow.com/questions/1924551/firefox-xmlhttprequest-sets-error-flag-on-a-302-response?rq=1" class="question-hyperlink">Firefox XMLHttpRequest sets error flag on a 302 response</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/2618959?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="http://stackoverflow.com/questions/2618959/not-well-formed-warning-when-loading-client-side-json-in-firefox-via-jquery-aj?rq=1" class="question-hyperlink">“not well-formed” warning when loading client-side JSON in Firefox via jQuery.ajax</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/3595515?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted large">397
+    </div>
+</a><a href="http://stackoverflow.com/questions/3595515/xmlhttprequest-error-origin-null-is-not-allowed-by-access-control-allow-origin?rq=1" class="question-hyperlink">XmlHttpRequest error: Origin null is not allowed by Access-Control-Allow-Origin</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/10313015?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="http://stackoverflow.com/questions/10313015/not-well-formed-error-in-firefox-when-using-getscript?rq=1" class="question-hyperlink">Not well formed error in firefox when using getScript</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/11623538?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="http://stackoverflow.com/questions/11623538/firefox-14-0-1-returns-error-when-reading-a-json-file-sent-via-ajax?rq=1" class="question-hyperlink">Firefox 14.0.1 returns error when reading a JSON file sent via AJAX</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/14399648?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="http://stackoverflow.com/questions/14399648/reading-text-file-trough-xmlhttprequest-produces-syntax-error-in-text-file-work?rq=1" class="question-hyperlink">Reading text file trough XMLHttpRequest produces syntax error in text file, works tough</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/17195402?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="http://stackoverflow.com/questions/17195402/xmlhttprequest-firefox-issue-when-setrequestheader?rq=1" class="question-hyperlink">XMLHttpRequest : Firefox Issue when “setRequestHeader”</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/24463622?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="http://stackoverflow.com/questions/24463622/firefox-addon-xmlhttprequest-minor-bug-reading-json?rq=1" class="question-hyperlink">Firefox Addon: XMLHttpRequest minor bug reading JSON</a>
+</div>
+
+                    </div>
+				</div>
+            
+<div id="hot-network-questions" class="module">
+    <h4>
+        <a href="http://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/1284948/transcendental-number" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Transcendental number
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/1284043/vector-spaces-redundant-axiom" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Vector Spaces: Redundant Axiom?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="http://worldbuilding.stackexchange.com/questions/17043/how-to-keep-humans-pilots-instead-of-ai-in-sci-fi-future" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to keep humans pilots instead of AI in sci-fi future?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-travel" title="Travel Stack Exchange"></div><a href="http://travel.stackexchange.com/questions/47676/is-it-ok-to-play-the-piano-housed-in-the-lobbies-of-hotels" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:273 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is it OK to play the piano housed in the lobbies of hotels?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-askubuntu" title="Ask Ubuntu"></div><a href="http://askubuntu.com/questions/624441/how-to-delete-all-files-except-one-named-file-from-a-specific-folder" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:89 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to delete all files except one named file from a specific folder
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-tex" title="TeX - LaTeX Stack Exchange"></div><a href="http://tex.stackexchange.com/questions/245281/tikz-draw-arrow-with-empty-space-in-the-middle" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:85 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    TikZ – draw arrow with empty space in the middle
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-movies" title="Movies &amp; TV Stack Exchange"></div><a href="http://movies.stackexchange.com/questions/34404/what-happened-to-the-dothraki-loyal-to-daenerys" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:367 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What happened to the Dothraki loyal to Daenerys?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codereview" title="Code Review Stack Exchange"></div><a href="http://codereview.stackexchange.com/questions/90911/calculating-the-factorial-of-a-number-efficiently" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:196 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Calculating the factorial of a number efficiently
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-mathematica" title="Mathematica Stack Exchange"></div><a href="http://mathematica.stackexchange.com/questions/83618/how-to-plot-frequency-polygon" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:387 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to plot frequency polygon?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-money" title="Personal Finance &amp; Money Stack Exchange"></div><a href="http://money.stackexchange.com/questions/48087/how-do-i-permanently-opt-out-of-having-a-credit-history" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:93 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How do I permanently opt out of having a credit history?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-money" title="Personal Finance &amp; Money Stack Exchange"></div><a href="http://money.stackexchange.com/questions/48073/why-would-anyone-want-to-pay-off-their-debts-in-a-way-other-than-highest-intere" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:93 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why would anyone want to pay off their debts in a way other than "highest interest" first?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/1285416/show-a-polynomial-is-irreducible-mod-29" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Show a polynomial is irreducible mod 29
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/1285176/skew-symmetric-matrix-subspace-dimension-and-basis" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Skew-symmetric matrix subspace dimension and basis
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-askubuntu" title="Ask Ubuntu"></div><a href="http://askubuntu.com/questions/624506/how-to-recover-accidentally-removed-bin-ls-binary" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:89 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to recover accidentally removed /bin/ls binary
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="http://stackoverflow.com/questions/30216000/why-is-faster-than-list" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why is [] faster than list()?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-graphicdesign" title="Graphic Design Stack Exchange"></div><a href="http://graphicdesign.stackexchange.com/questions/53660/how-does-one-get-work-in-the-graphic-design-field" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:174 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How does one get work in the graphic design field?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-ux" title="User Experience Stack Exchange"></div><a href="http://ux.stackexchange.com/questions/78628/do-signs-printed-on-the-road-offer-a-significant-advantage-for-the-user-over-sig" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:102 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Do signs printed on the road offer a significant advantage for the user over signs on a post?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-space" title="Space Exploration Stack Exchange"></div><a href="http://space.stackexchange.com/questions/9130/is-it-scientifically-possible-to-briefly-walk-on-the-moon-bare-footed" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:508 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is it scientifically possible to briefly walk on the moon bare footed?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-tex" title="TeX - LaTeX Stack Exchange"></div><a href="http://tex.stackexchange.com/questions/245283/conflict-with-limit-font-babel" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:85 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Conflict with limit , font, babel
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/1285186/soft-what-maths-should-i-concentrate-on-at-16-18-years-old" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    (Soft) What maths should I concentrate on at 16-18 years old?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="http://scifi.stackexchange.com/questions/89971/which-middle-earth-baddie-am-i-thinking-of" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Which Middle-Earth baddie am I thinking of?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-ell" title="English Language Learners Stack Exchange"></div><a href="http://ell.stackexchange.com/questions/56962/putting-the-noun-debut-before-or-after-a-modifying-noun" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:481 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Putting the noun "debut" before or after a modifying noun
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-japanese" title="Japanese Language Stack Exchange"></div><a href="http://japanese.stackexchange.com/questions/24367/why-is-%e3%82%9f-considered-obsolete" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:257 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why is ゟ considered obsolete?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-cooking" title="Seasoned Advice"></div><a href="http://cooking.stackexchange.com/questions/57533/if-a-us-recipe-specifies-vegetable-oil-what-type-of-oil-should-i-use-in-the-uk" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:49 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    If a US recipe specifies 'vegetable oil' what type of oil should I use in the UK?
+                </a>
+
+            </li>
+    </ul>
+
+        
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="http://stackoverflow.com/feeds/question/677902" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>	<script>
+StackExchange.ready(function(){$.get('/posts/677902/ivc/5b5e');});
+</script>
+<noscript>
+    &lt;div&gt;&lt;img src="/posts/677902/ivc/5b5e" class="dno" alt="" width="0" height="0"&gt;&lt;/div&gt;
+</noscript><div style="display:none" id="prettify-lang">default</div></div>
+
+    <script>
+        $('#wmd-input').one("keypress", function() {
+            $.ajax({
+                url: '/accounts/email-settings-form',
+                cache: false,
+                success: function(data) {
+                    $('#submit-button').parent().prepend(data);
+                }
+            });
+        });
+
+    </script>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="http://stackoverflow.com/tour">tour</a>
+                    <a href="http://stackoverflow.com/help">help</a>
+                    <a href="http://blog.stackoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackoverflow.com/">chat</a>
+                    <a href="http://data.stackexchange.com/">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/work-here">work here</a>
+                    <a href="http://stackexchange.com/mediakit">advertising info</a>
+
+                    <a onclick="StackExchange.switchMobile(&quot;on&quot;)">mobile</a>
+                    <b><a href="http://stackoverflow.com/contact">contact us</a></b>
+                        <b><a href="http://meta.stackoverflow.com/">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tbody><tr>
+            <th colspan="3">
+                Technology
+            </th>
+            <th>
+                Life / Arts
+            </th>
+            <th>
+                Culture / Recreation
+            </th>
+            <th>
+                Science
+            </th>
+            <th>
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com/" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com/" title="system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com/" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com/" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com/" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com/" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com/" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com/" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com/" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com/" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com/" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com/" title="WordPress developers and administrators">WordPress Development</a></li>
+                        <li><a href="http://gis.stackexchange.com/" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com/" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com/" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com/" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com/" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com/" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com/" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com/" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com/" title="users of Mathematica">Mathematica</a></li>
+                        <li><a href="http://salesforce.stackexchange.com/" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com/" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com/" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://graphicdesign.stackexchange.com/" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                        <li><a href="http://cooking.stackexchange.com/" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com/" title="contractors and serious DIYers">Home Improvement</a></li>
+                        <li><a href="http://money.stackexchange.com/" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                        <li><a href="http://academia.stackexchange.com/" title="academics and those enrolled in higher education">Academia</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (10)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com/" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com/" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com/" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com/" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com/" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com/" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com/" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com/" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com/" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com/" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com/" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com/" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net/" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com/" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackexchange.com/" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                        <li><a href="http://area51.stackexchange.com/" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com/">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</tbody></table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo © 2015 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a> 
+                with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="svnrev">
+                rev 2015.5.16.2581
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        &lt;div id="noscript-warning"&gt;Stack Overflow works best with JavaScript enabled&lt;img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"&gt;&lt;/div&gt;
+    </noscript>
+<script>var p = "http", d = "static"; if (document.location.protocol == "https:") { p += "s"; d = "engine"; } var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = p + "://" + d + ".adzerk.net/ados.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script>
+<script>
+    var ados = ados || {};
+    ados.run = ados.run || [];
+    ados.run.push(function () { ados_setKeywords('javascript,firefox,xmlhttprequest,mime-types,x-user-registered');; ados_load(); });         
+</script>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-5620270-1');        
+        ga('set', 'dimension1', '5873841');         
+        ga('set', 'dimension2', '|javascript|firefox|xmlhttprequest|mime-types|');         
+        ga('send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+            qc.async=true;
+            qc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+            s.parentNode.insertBefore(qc, s);
+            var sc=document.createElement('script');
+            sc.async=true;
+            sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+            s.parentNode.insertBefore(sc, s);
+        })();
+        _comscore.push({ c1: "2", c2: "17440561" });
+        _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+    
+<script type="text/javascript">(function () {
+        return window.SIG_EXT = {};
+      })()</script><script type="text/javascript" src="./Have you tried using the MIME type for JSON?_files/p"></script></body></html>
