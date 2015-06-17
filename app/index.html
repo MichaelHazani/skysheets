@@ -222,6 +222,32 @@ function render() {
 }
 
 
+//full screen function
+function toggleFullScreen() {
+  if (!document.fullscreenElement &&    // alternative standard method
+      !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) {
+      document.documentElement.msRequestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+      document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+    }
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
+}
+
 //on startup
 $(function() {
 //threeJS setup
@@ -237,6 +263,8 @@ var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
 
 $('#zipcode_form').submit(function(e) {
   e.preventDefault();
+  //set full screen
+  toggleFullScreen();
   var zip = $('#zipcode').val();
   $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
    + zip + '.json', function(data){
@@ -246,20 +274,22 @@ $('#zipcode_form').submit(function(e) {
     planeTexts.push(data['forecast']['txt_forecast']['forecastday'][i]['fcttext']);
     }
 
-
-
   //  add days of the week
     for (var i = 0; i < data['forecast']['txt_forecast']['forecastday'].length; i+=2 ) {
     days.push(data['forecast']['txt_forecast']['forecastday'][i]['title']);
     }
 
 
+
+
   //fade in+out
-  $('#zipcode_form').fadeOut(1000);
+  $('#zipcode_form').hide();
+
+
   setTimeout(function(){
   init();
   render();
-  $('#threeJSContainer').fadeIn(3000);
+  $('#threeJSContainer').fadeIn(2000);
   }, 2000);
 
 
