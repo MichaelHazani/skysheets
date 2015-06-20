@@ -10,7 +10,7 @@
 <script src="libs/Three.min.js"></script>
 <script src="libs/dat.gui.min.js"></script>
 <script src="libs/helvetiker_regular.typeface.js"></script>
-<script src="js/threejs.js"></script>
+<script src="js/sheets.js"></script>
 
 </head>
 
@@ -20,8 +20,8 @@
 <form id="zipcode_form" class="form">
 <label for="zipcode">zipcode</label>
 <input type="text" id="zipcode" class="blinker" style="width: 100px;">
+</form>
 
- </form>
 <div id="threeJSContainer"> </div>
 
 <script>
@@ -45,13 +45,17 @@ var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
 
 // //get forecast based on user ZIP
 
-$('#zipcode_form').submit(function(e) {
-  e.preventDefault();
-  //set full screen
-  //toggleFullScreen();
+// $('#zipcode_form').submit(function(e) {
+//   e.preventDefault();
+//   //set full screen
+//   //toggleFullScreen();
+
+
+//REMEMBER TO CHANGE ZIP BACK!!!!
+
   var zip = $('#zipcode').val();
   $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
-   + zip + '.json', function(data){
+   + 98125 + '.json', function(data){
 
   //get literal description of forecast
   //  add days of the week
@@ -76,7 +80,7 @@ $('#zipcode_form').submit(function(e) {
 
 
 
-  //fade in+out
+  // //fade in+out
   $('#zipcode_form').hide();
 
 
@@ -87,9 +91,9 @@ $('#zipcode_form').submit(function(e) {
   }, 2000);
 
 
-    });
+});    // });
   });
-});
+//});
 </script>
 </body>
 </html>

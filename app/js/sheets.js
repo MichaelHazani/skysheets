@@ -38,11 +38,11 @@ window.addEventListener('resize', function () {
     this.CubeOpacity = 0;
   }
   var params = new Params();
-  controller = gui.add(params, 'Zoom', -50.0, 10.0).step(0.25);
-  controller.listen();
-  controller.onChange(function(value) {
-    camera.position.z = value * -1;
-  });
+  // controller = gui.add(params, 'Zoom', -50.0, 10.0).step(0.25);
+  // controller.listen();
+  // controller.onChange(function(value) {
+  //   camera.position.z = value * -1;
+  // });
 
   controller2 = gui.addColor(params, 'CubeColor');
   controller2.onChange(function(colorValue) {
@@ -177,6 +177,18 @@ for (var i = 0; i < sheets.days.length; i++) {
 
   plane4.add(text4);
 
+
+
+  // scrollwheel to zoom
+    $('#threeJSContainer').bind('mousewheel', function(e){
+      e.preventDefault();
+      if(e.originalEvent.wheelDelta > 0) {
+          camera.position.z -= 3;
+      }
+      else{
+          camera.position.z += 3;
+      }
+  });
 
 }
 
