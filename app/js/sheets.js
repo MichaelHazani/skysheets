@@ -2,8 +2,6 @@
 
 //weather global vars
 var planeText1, planeText2, planeText3, planeText4;
-
-var planeTexts = [];
 var textSize = 0.3;
 var textHeight = 0.1;
 
@@ -11,93 +9,10 @@ var textHeight = 0.1;
 var scene, camera, listener,
     renderer, cube, hemilight,
     plane1, plane2, plane3, plane4;
+
 var planeSpeed = 0.015;
 var gui, Timeline, controller, controller2, controller3;
 
-
-// //    ****************webAudio stuff*********************
-// //WebAudio init
-// var context;
-
-// try {
-//   // still needed for Safari
-//   window.AudioContext = window.AudioContext || window.webkitAudioContext;
-
-//   // create an AudioContext
-//   context = new AudioContext();
-// } catch(e) {
-//   // API not supported
-//   throw new Error('Web Audio API not supported.');
-// }
-
-// // Next, we’ll load a sound. The binary audio data is
-// // loaded into an ArrayBuffer via Ajax. In the onload callback, i
-// // t’s decoded using the AudioContext’s decodeAudioData method.
-// // The decoded audio is then assigned to our sound variable.
-
-// // Next, we’ll load a sound. The binary audio data is
-// // loaded into an ArrayBuffer via Ajax. In the onload callback, i
-// // t’s decoded using the AudioContext’s decodeAudioData method.
-// // The decoded audio is then assigned to our sound variable.
-
-// var sound;
-
-// /**
-//  * Example 1: Load a sound
-//  * @param {String} src Url of the sound to be loaded.
-//  */
-
-// var rain = "../audio/heavyRain.mp3"
-// var panner = context.createPanner();
-// var listener = context.listener;
-
-
-// var listenerData = document.querySelector('.listener-data');
-// var pannerData = document.querySelector('.panner-data');
-
-// function loadSound(url) {
-//   var request = new XMLHttpRequest();
-//   request.open('GET', url, true);
-//   request.responseType = 'arraybuffer';
-
-//   request.onload = function() {
-//     // request.response is encoded... so decode it now
-//     context.decodeAudioData(request.response, function(buffer) {
-//       sound = buffer;
-//       playSound(sound);
-//     }, function(err) {
-//       throw new Error(err);
-//     });
-//   }
-
-//   request.send();
-// }
-
-// // To play a sound, we need to take the AudioBuffer containing
-// // our sound, and use it to create an AudioBufferSourceNode.
-// // We then connect the AudioBufferSourceNode to the AudioContext’s
-// // destination and call the start() method to play it.
-
-// /**
-//  * Example 2: Play a sound
-//  * @param {Object} buffer AudioBuffer object - a loaded sound.
-//  */
-
-// var gainNode = context.createGain();
-
-// function playSound(buffer) {
-//   var source = context.createBufferSource();
-
-//   source.connect(gainNode);
-//   source.buffer = buffer;
-//   gainNode.connect(context.destination);
-//   source.loop = true;
-//   source.start(0);
-// }
-
-// loadSound(rain);
-
-//  ****************ThreeJS stuff*********************
 
 function init(){
 
@@ -163,30 +78,81 @@ window.addEventListener('resize', function () {
   scene.add( cube );
 
 
+
+
+
+
+
 //audio:
 
-  // var rain = new THREE.Audio(listener);
-  // rain.load('../audio/heavyRain.mp3');
-  // rain.setRefDistance(5);
-  //rain.autoplay = false;
+  var sheet1Sound = new THREE.Audio(listener);
+  sheet1Sound.load('../audio/' + sheets.weatherAudio[0]);
+  sheet1Sound.setRefDistance(4);
+  sheet1Sound.autoplay = true;
+  sheet1Sound.loop = true;
+  var sheet2Sound = new THREE.Audio(listener);
+  sheet2Sound.load('../audio/' + sheets.weatherAudio[1]);
+  sheet2Sound.setRefDistance(4);
+  sheet2Sound.autoplay = true;
+  sheet1Sound.loop = true;
 
+  var sheet3Sound = new THREE.Audio(listener);
+  sheet3Sound.load('../audio/' + sheets.weatherAudio[2]);
+  sheet3Sound.setRefDistance(4);
+  sheet3Sound.autoplay = true;
+  sheet1Sound.loop = true;
+
+
+  var sheet4Sound = new THREE.Audio(listener);
+  sheet4Sound.load('../audio/' + sheets.weatherAudio[3]);
+  sheet4Sound.setRefDistance(4);
+  sheet4Sound.autoplay = true;
+  sheet1Sound.loop = true;
+
+
+  // var drizzle = new THREE.Audio(listener);
+  // drizzle.load('../audio/drizzle.mp3');
+  // drizzle.setRefDistance(1);
+  // drizzle.autoplay = true;
+
+  // var snow = new THREE.Audio(listener);
+  // snow.load('../audio/snow.mp3');
+  // snow.setRefDistance(1);
+  // snow.autoplay = true;
+
+  // var thunderstorm = new THREE.Audio(listener);
+  // thunderstorm.load('../audio/thunderstorm.mp3');
+  // thunderstorm.setRefDistance(1);
+  // thunderstorm.autoplay = true;
+
+  // var clear = new THREE.Audio(listener);
+  // clear.load('../audio/clear.mp3');
+  // clear.setRefDistance(1);
+  // clear.autoplay = true;
+
+  // var hail = new THREE.Audio(listener);
+  // hail.load('../audio/hail.mp3');
+  // hail.setRefDistance(1);
+  // hail.autoplay = true;
 
 
 //setup strings:
-for (var i = 0; i < sheets.days.length; i++) {
-  sheets.pt[i] = sheets.days[i] + ": " + planeTexts[i];
+for (var i = 0; i < sheets.day.length; i++) {
+  sheets.pt[i] = sheets.day[i] + ": " + sheets.text[i];
 }
 
 //append strings to planes:
+  var wrapper = new THREE.MeshNormalMaterial( {
+    overdraw: 0.5,
+    color: 0xFFFFFF} );
+
   var text1word = new THREE.TextGeometry( sheets.pt[0], {
     size: textSize,
     height: textHeight,
     curveSegments: 2,
     font: 'helvetiker',
   });
-  var wrapper = new THREE.MeshNormalMaterial( {
-    overdraw: 0.5,
-    color: 0xFFFFFF} );
+
   var text1 = new THREE.Mesh(text1word, wrapper);
 
   var text2word = new THREE.TextGeometry( sheets.pt[1], {
@@ -214,53 +180,52 @@ for (var i = 0; i < sheets.days.length; i++) {
   });
   var text4 = new THREE.Mesh(text4word, wrapper);
 
-
 //transparent planes
   var geometry1 = new THREE.BoxGeometry(20,20,2);
   var material1 = new THREE.MeshPhongMaterial({color: 0xde64de, transparent: true, wireframe: false, opacity: 0.3});
   plane1 = new THREE.Mesh(geometry1, material1);
-  plane1.position.set(0, 0, -10);
+  plane1.position.set(0, 0, -50);
   scene.add(plane1);
   text1.position.y = plane1.position.y + 10;
   text1.position.x = plane1.position.x -10;
   plane1.add(text1);
 
-
-
-
-
   var geometry2 = new THREE.BoxGeometry(20,20,2);
   var material2 = new THREE.MeshPhongMaterial({color: 0x9c6ce1, transparent: true, wireframe: false, opacity: 0.3});
   plane2 = new THREE.Mesh(geometry2, material2);
-  plane2.position.set(0, 0, -20);
+  plane2.position.set(0, 0, -100);
   scene.add(plane2);
   text2.position.y = plane2.position.y + 5;
   text2.position.x = plane1.position.x -10;
-
   plane2.add(text2);
 
 
   var geometry3 = new THREE.BoxGeometry(20,20,2);
   var material3 = new THREE.MeshPhongMaterial({color: 0xa9e16c, transparent: true, wireframe: false, opacity: 0.3});
   plane3 = new THREE.Mesh(geometry3, material3);
-  plane3.position.set(0, 0, -30);
+  plane3.position.set(0, 0, -150);
   scene.add(plane3);
   text3.position.y = plane3.position.y;
   text3.position.x = plane1.position.x -10;
-
   plane3.add(text3);
+
 
   var geometry4 = new THREE.BoxGeometry(20,20,2);
   var material4 = new THREE.MeshPhongMaterial({color: 0xfa5050, transparent: true, wireframe: false, opacity: 0.3});
-  plane4 = new THREE.Mesh(geometry3, material4);
-  plane4.position.set(0, 0, -40);
+  plane4 = new THREE.Mesh(geometry4, material4);
+  plane4.position.set(0, 0, -200);
   scene.add(plane4);
   text4.position.y = plane4.position.y - 5;
   text4.position.x = plane1.position.x -10;
-
   plane4.add(text4);
 
 
+
+//add audio
+  plane1.add(sheet1Sound);
+  plane2.add(sheet2Sound);
+  plane3.add(sheet3Sound);
+  plane4.add(sheet4Sound);
 
 
   // scrollwheel to zoom

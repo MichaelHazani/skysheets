@@ -27,9 +27,13 @@
 
 
 var sheets = {
+  day : [],
+  text : [],
   pt : [],
-  days : [],
-  weatherType : []
+  weatherType : [],
+  weatherAudio: [],
+  weatherGfx: [],
+  weatherAudioSound: {}
 };
 
 //on startup
@@ -45,40 +49,126 @@ var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
 
 // //get forecast based on user ZIP
 
-// $('#zipcode_form').submit(function(e) {
-//   e.preventDefault();
-//   //set full screen
-//   //toggleFullScreen();
+$('#zipcode_form').submit(function(e) {
+  e.preventDefault();
+  //set full screen
+  toggleFullScreen();
 
 
 //REMEMBER TO CHANGE ZIP BACK!!!!
 
   var zip = $('#zipcode').val();
   $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
-   + 98125 + '.json', function(data){
+   + zip + '.json', function(data){
 
   //get literal description of forecast
   //  add days of the week
   // add type of weather
-
-    for (var i = 0; i < data['forecast']['txt_forecast']['forecastday'].length; i+=2 ) {
-    planeTexts.push(data['forecast']['txt_forecast']['forecastday'][i]['fcttext']);
-    sheets.days.push(data['forecast']['txt_forecast']['forecastday'][i]['title']);
-
-    sheets.weatherType.push(data['forecast']['txt_forecast']['forecastday'][i]
-      ['icon'])
-
+  // add audio
+  function makeSheets() {
+    for (var i = 0; i < data['forecast']['txt_forecast']
+    ['forecastday'].length; i+=2 ) {
+        sheets.text.push(data['forecast']['txt_forecast']['forecastday'][i]['fcttext']);
+        sheets.day.push(data['forecast']['txt_forecast']['forecastday'][i]['title']);
+        sheets.weatherType.push(data['forecast']['txt_forecast']['forecastday'][i]['icon']);
     }
 
+
+    for (var i = 0; i < sheets.weatherType.length; i++ ) {
+
+         if (sheets.weatherType[i] == "chanceflurries") {
+            sheets.weatherAudio[i] = "snow.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "chancerain") {
+            sheets.weatherAudio[i] = "heavyRain.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "chancesleet") {
+            sheets.weatherAudio[i] = "snow.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "chancesnow") {
+            sheets.weatherAudio[i] = "snow.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "chancetstorms") {
+            sheets.weatherAudio[i] = "thunderstorm.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "clear") {
+            sheets.weatherAudio[i] = "clear.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "cloudy") {
+            sheets.weatherAudio[i] = "clear.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] == "flurries") {
+            sheets.weatherAudio[i] = "snow.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "drizzle") {
+            sheets.weatherAudio[i] = "drizzle.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+
+        } else if (sheets.weatherType[i] === "fog") {
+            sheets.weatherAudio[i] = "clear.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "hazy") {
+            sheets.weatherAudio[i] = "clear.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "mostlycloudy") {
+          sheets.weatherAudio[i] = "clear.mp3";
+          console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "mostlysunny") {
+          sheets.weatherAudio[i] = "clear.mp3";
+          console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "partlycloudy") {
+          sheets.weatherAudio[i] = "clear.mp3";
+          console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "partlysunny") {
+          sheets.weatherAudio[i] = "clear.mp3";
+          console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "sleet") {
+            sheets.weatherAudio[i] = "snow.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "rain") {
+            sheets.weatherAudio[i] = "heavyRain.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "snow") {
+            sheets.weatherAudio[i] = "snow.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "sunny") {
+            sheets.weatherAudio[i] = "clear.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+        } else if (sheets.weatherType[i] === "tstorms") {
+            sheets.weatherAudio[i] = "thunderstorm.mp3";
+            console.log(sheets.weatherAudio[i]);
+
+        } else {
+          sheets.weatherAudio[i] = "No matching weather pattern at" + [i];
+          console.log(sheets.weatherAudio[i]);
+        }
+
+    }
     console.log(sheets);
-    function setSound(typeOfDay) {
+  }
 
 
-
-
-    }
-
-
+  //Make the sheets
+  makeSheets();
 
   // //fade in+out
   $('#zipcode_form').hide();
@@ -91,7 +181,8 @@ var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
   }, 2000);
 
 
-});    // });
+});
+ });
   });
 //});
 </script>
