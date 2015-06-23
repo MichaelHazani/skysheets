@@ -25,7 +25,7 @@
 
 <script>
 
-
+//create weathersheets
 var sheets = {
   day : [],
   text : [],
@@ -33,33 +33,8 @@ var sheets = {
   weatherType : [],
   weatherAudio: [],
   weatherGfx: [],
-  weatherAudioSound: {}
+
 };
-
-//on startup
-$(function() {
-//threeJS setup
-
-$("#zipcode").focus();
-
-var weatherObj;
-
-//hide this somewhere!
-var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
-
-// //get forecast based on user ZIP
-
-$('#zipcode_form').submit(function(e) {
-  e.preventDefault();
-  //set full screen
-  toggleFullScreen();
-
-
-//REMEMBER TO CHANGE ZIP BACK!!!!
-
-  var zip = $('#zipcode').val();
-  $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
-   + zip + '.json', function(data){
 
   //get literal description of forecast
   //  add days of the week
@@ -166,25 +141,68 @@ $('#zipcode_form').submit(function(e) {
     console.log(sheets);
   }
 
+//on startup
+$(function() {
+//threeJS setup
+
+$("#zipcode").focus();
+
+var weatherObj;
+
+//hide this somewhere!
+var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
+
+// //get forecast based on user ZIP
+
+$('#zipcode_form').submit(function(e) {
+  e.preventDefault();
+
+
+
+  var zip = $('#zipcode').val();
+  if (zip !== "demo") {
+
+  $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
+   + zip + '.json', function(data){
 
   //Make the sheets
   makeSheets();
 
   // //fade in+out
   $('#zipcode_form').hide();
-
+  //set full screen
+  toggleFullScreen();
 
   setTimeout(function(){
   init();
   render();
   $('#threeJSContainer').fadeIn(2000);
   }, 2000);
-
-
-});
- });
   });
-//});
+
+   } else {
+
+  $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
+   + zip + '.json', function(data){
+
+  //Make the sheets
+  makeSheets();
+
+  // //fade in+out
+  $('#zipcode_form').hide();
+  //set full screen
+  toggleFullScreen();
+
+  setTimeout(function(){
+  init();
+  render();
+  $('#threeJSContainer').fadeIn(2000);
+  }, 2000);
+  });
+  }
+
+  });
+});
 </script>
 </body>
 </html>

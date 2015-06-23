@@ -27,6 +27,7 @@ function init(){
 
   renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
   renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer.setClearColor(0x000000);
   $('#threeJSContainer').append( renderer.domElement );
 
 //dynamic resize
@@ -38,7 +39,7 @@ window.addEventListener('resize', function () {
 
 //GUI
   gui = new dat.GUI();
-  //dat.GUI.toggleHide();
+  dat.GUI.toggleHide();
   function Params() {
     //camera speed
     this.Zoom = -10;
@@ -89,51 +90,29 @@ window.addEventListener('resize', function () {
   sheet1Sound.load('../audio/' + sheets.weatherAudio[0]);
   sheet1Sound.setRefDistance(4);
   sheet1Sound.autoplay = true;
-  sheet1Sound.loop = true;
+  sheet1Sound.source.loop = true;
   var sheet2Sound = new THREE.Audio(listener);
   sheet2Sound.load('../audio/' + sheets.weatherAudio[1]);
   sheet2Sound.setRefDistance(4);
   sheet2Sound.autoplay = true;
-  sheet1Sound.loop = true;
+  sheet2Sound.source.loop = true;
 
   var sheet3Sound = new THREE.Audio(listener);
   sheet3Sound.load('../audio/' + sheets.weatherAudio[2]);
   sheet3Sound.setRefDistance(4);
   sheet3Sound.autoplay = true;
-  sheet1Sound.loop = true;
+  sheet3Sound.source.loop = true;
 
 
   var sheet4Sound = new THREE.Audio(listener);
   sheet4Sound.load('../audio/' + sheets.weatherAudio[3]);
   sheet4Sound.setRefDistance(4);
   sheet4Sound.autoplay = true;
-  sheet1Sound.loop = true;
+  sheet4Sound.source.loop = true;
 
 
-  // var drizzle = new THREE.Audio(listener);
-  // drizzle.load('../audio/drizzle.mp3');
-  // drizzle.setRefDistance(1);
-  // drizzle.autoplay = true;
+//webGL:
 
-  // var snow = new THREE.Audio(listener);
-  // snow.load('../audio/snow.mp3');
-  // snow.setRefDistance(1);
-  // snow.autoplay = true;
-
-  // var thunderstorm = new THREE.Audio(listener);
-  // thunderstorm.load('../audio/thunderstorm.mp3');
-  // thunderstorm.setRefDistance(1);
-  // thunderstorm.autoplay = true;
-
-  // var clear = new THREE.Audio(listener);
-  // clear.load('../audio/clear.mp3');
-  // clear.setRefDistance(1);
-  // clear.autoplay = true;
-
-  // var hail = new THREE.Audio(listener);
-  // hail.load('../audio/hail.mp3');
-  // hail.setRefDistance(1);
-  // hail.autoplay = true;
 
 
 //setup strings:
@@ -186,18 +165,13 @@ for (var i = 0; i < sheets.day.length; i++) {
   plane1 = new THREE.Mesh(geometry1, material1);
   plane1.position.set(0, 0, -50);
   scene.add(plane1);
-  text1.position.y = plane1.position.y + 10;
-  text1.position.x = plane1.position.x -10;
-  plane1.add(text1);
+
 
   var geometry2 = new THREE.BoxGeometry(20,20,2);
   var material2 = new THREE.MeshPhongMaterial({color: 0x9c6ce1, transparent: true, wireframe: false, opacity: 0.3});
   plane2 = new THREE.Mesh(geometry2, material2);
   plane2.position.set(0, 0, -100);
   scene.add(plane2);
-  text2.position.y = plane2.position.y + 5;
-  text2.position.x = plane1.position.x -10;
-  plane2.add(text2);
 
 
   var geometry3 = new THREE.BoxGeometry(20,20,2);
@@ -205,9 +179,6 @@ for (var i = 0; i < sheets.day.length; i++) {
   plane3 = new THREE.Mesh(geometry3, material3);
   plane3.position.set(0, 0, -150);
   scene.add(plane3);
-  text3.position.y = plane3.position.y;
-  text3.position.x = plane1.position.x -10;
-  plane3.add(text3);
 
 
   var geometry4 = new THREE.BoxGeometry(20,20,2);
@@ -215,10 +186,24 @@ for (var i = 0; i < sheets.day.length; i++) {
   plane4 = new THREE.Mesh(geometry4, material4);
   plane4.position.set(0, 0, -200);
   scene.add(plane4);
+
+
+//add text
+  text1.position.y = plane1.position.y + 10;
+  text1.position.x = plane1.position.x -10;
+  plane1.add(text1);
+
+  text2.position.y = plane2.position.y + 5;
+  text2.position.x = plane1.position.x -10;
+  plane2.add(text2);
+
+  text3.position.y = plane3.position.y;
+  text3.position.x = plane1.position.x -10;
+  plane3.add(text3);
+
   text4.position.y = plane4.position.y - 5;
   text4.position.x = plane1.position.x -10;
   plane4.add(text4);
-
 
 
 //add audio
