@@ -40,7 +40,7 @@ var sheets = {
   //  add days of the week
   // add type of weather
   // add audio
-  function makeSheets() {
+  function makeSheets(data) {
     for (var i = 0; i < data['forecast']['txt_forecast']
     ['forecastday'].length; i+=2 ) {
         sheets.text.push(data['forecast']['txt_forecast']['forecastday'][i]['fcttext']);
@@ -157,21 +157,18 @@ var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
 $('#zipcode_form').submit(function(e) {
   e.preventDefault();
 
-
-
   var zip = $('#zipcode').val();
   if (zip !== "demo") {
-
+  toggleFullScreen();
   $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
    + zip + '.json', function(data){
 
   //Make the sheets
-  makeSheets();
+  makeSheets(data);
 
   // //fade in+out
   $('#zipcode_form').hide();
-  //set full screen
-  toggleFullScreen();
+
 
   setTimeout(function(){
   init();
@@ -181,17 +178,17 @@ $('#zipcode_form').submit(function(e) {
   });
 
    } else {
-
-  $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
-   + zip + '.json', function(data){
+   //set full screen
+  toggleFullScreen();
+  $.getJSON('demo.json', function(data){
 
   //Make the sheets
-  makeSheets();
+  makeSheets(data);
 
   // //fade in+out
   $('#zipcode_form').hide();
-  //set full screen
-  toggleFullScreen();
+
+
 
   setTimeout(function(){
   init();

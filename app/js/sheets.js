@@ -27,7 +27,7 @@ function init(){
 
   renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
   renderer.setSize( window.innerWidth, window.innerHeight );
-  renderer.setClearColor(0x000000);
+  renderer.setClearColor(0x222222);
   $('#threeJSContainer').append( renderer.domElement );
 
 //dynamic resize
