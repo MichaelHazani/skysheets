@@ -12,11 +12,77 @@ var scene, camera, listener,
 
 var planeSpeed = 0.015;
 var gui, Timeline, controller, controller2, controller3;
+var snowParticles, rainParticles, emitter;
 
+
+
+
+//webGL weather scenarios:
+function initSnowParticles(weatherSheet) {
+    initSnowParticles.called = true;
+    snowParticles = new SPE.Group({
+      texture: THREE.ImageUtils.loadTexture('images/smokeparticle.png'),
+      maxAge: 3
+    });
+
+    emitter = new SPE.Emitter({
+          type: 'sphere',
+          //position: new THREE.Vector3(0, 40, 00),
+          radius: 5,
+          radiusScale: new THREE.Vector3(1, 1, 1),
+
+          speed: 40,
+          colorStart: new THREE.Color('white'),
+          colorEnd: new THREE.Color('blue'),
+          sizeStart: 5,
+          sizespread: 7,
+          sizeEnd: 0,
+
+            opacityStart: 0.2,
+            opacityEnd: 1,
+
+          particleCount: 30000
+    });
+    emitter.position.x = weatherSheet.position.x;
+    emitter.position.y = weatherSheet.position.y + 70;
+    emitter.position.z = weatherSheet.position.z + 10;
+    snowParticles.addEmitter( emitter );
+    weatherSheet.add( snowParticles.mesh);
+  }
+
+function initRainParticles(weatherSheet) {
+    initRainParticles.called = true;
+    rainParticles = new SPE.Group({
+      texture: THREE.ImageUtils.loadTexture('images/raindrop.png'),
+      maxAge: 5
+    });
+
+    emitter = new SPE.Emitter({
+          type: 'sphere',
+          //position: new THREE.Vector3(0, 40, 00),
+          radius: 5,
+          radiusScale: new THREE.Vector3(1, 1, 1),
+
+          speed: 200,
+          colorStart: new THREE.Color('white'),
+          colorEnd: new THREE.Color('blue'),
+          sizeStart: 2,
+          sizespread: 20,
+          sizeEnd: 0,
+
+            opacityStart: 0.2,
+            opacityEnd: 1,
+
+          particleCount: 50000
+    });
+    emitter.position.x = weatherSheet.position.x;
+    emitter.position.y = weatherSheet.position.y + 70;
+    emitter.position.z = weatherSheet.position.z - 30;
+    rainParticles.addEmitter( emitter );
+    weatherSheet.add( rainParticles.mesh);
+  }
 
 function init(){
-
-
 
 //standard vars
   scene = new THREE.Scene();
@@ -79,11 +145,6 @@ window.addEventListener('resize', function () {
   scene.add( cube );
 
 
-
-
-
-
-
 //audio:
 
   var sheet1Sound = new THREE.Audio(listener);
@@ -109,10 +170,6 @@ window.addEventListener('resize', function () {
   sheet4Sound.setRefDistance(4);
   sheet4Sound.autoplay = true;
   sheet4Sound.source.loop = true;
-
-
-//webGL:
-
 
 
 //setup strings:
@@ -161,28 +218,28 @@ for (var i = 0; i < sheets.day.length; i++) {
 
 //transparent planes
   var geometry1 = new THREE.BoxGeometry(20,20,2);
-  var material1 = new THREE.MeshPhongMaterial({color: 0xde64de, transparent: true, wireframe: false, opacity: 0.3});
+  var material1 = new THREE.MeshPhongMaterial({color: 0xde64de, transparent: true, wireframe: true, opacity: 0.3});
   plane1 = new THREE.Mesh(geometry1, material1);
   plane1.position.set(0, 0, -50);
   scene.add(plane1);
 
 
   var geometry2 = new THREE.BoxGeometry(20,20,2);
-  var material2 = new THREE.MeshPhongMaterial({color: 0x9c6ce1, transparent: true, wireframe: false, opacity: 0.3});
+  var material2 = new THREE.MeshPhongMaterial({color: 0x9c6ce1, transparent: true, wireframe: true, opacity: 0.3});
   plane2 = new THREE.Mesh(geometry2, material2);
   plane2.position.set(0, 0, -100);
   scene.add(plane2);
 
 
   var geometry3 = new THREE.BoxGeometry(20,20,2);
-  var material3 = new THREE.MeshPhongMaterial({color: 0xa9e16c, transparent: true, wireframe: false, opacity: 0.3});
+  var material3 = new THREE.MeshPhongMaterial({color: 0xa9e16c, transparent: true, wireframe: true, opacity: 0.3});
   plane3 = new THREE.Mesh(geometry3, material3);
   plane3.position.set(0, 0, -150);
   scene.add(plane3);
 
 
   var geometry4 = new THREE.BoxGeometry(20,20,2);
-  var material4 = new THREE.MeshPhongMaterial({color: 0xfa5050, transparent: true, wireframe: false, opacity: 0.3});
+  var material4 = new THREE.MeshPhongMaterial({color: 0xfa5050, transparent: true, wireframe: true, opacity: 0.3});
   plane4 = new THREE.Mesh(geometry4, material4);
   plane4.position.set(0, 0, -200);
   scene.add(plane4);
@@ -194,15 +251,15 @@ for (var i = 0; i < sheets.day.length; i++) {
   plane1.add(text1);
 
   text2.position.y = plane2.position.y + 5;
-  text2.position.x = plane1.position.x -10;
+  text2.position.x = plane2.position.x -10;
   plane2.add(text2);
 
   text3.position.y = plane3.position.y;
-  text3.position.x = plane1.position.x -10;
+  text3.position.x = plane3.position.x -10;
   plane3.add(text3);
 
   text4.position.y = plane4.position.y - 5;
-  text4.position.x = plane1.position.x -10;
+  text4.position.x = plane4.position.x -10;
   plane4.add(text4);
 
 
@@ -211,6 +268,11 @@ for (var i = 0; i < sheets.day.length; i++) {
   plane2.add(sheet2Sound);
   plane3.add(sheet3Sound);
   plane4.add(sheet4Sound);
+
+//start WebGL particles
+// initRainParticles(plane1);
+ initSnowParticles(plane2);
+ initRainParticles(plane1);
 
 
   // scrollwheel to zoom
@@ -236,7 +298,12 @@ function render() {
   plane2.position.z += planeSpeed;
   plane3.position.z += planeSpeed;
   plane4.position.z += planeSpeed;
-
+  if (initSnowParticles.called) {
+    snowParticles.tick(0.004);
+    }
+  if (initRainParticles.called) {
+      rainParticles.tick(0.004);
+      }
   renderer.render(scene, camera);
 
 }

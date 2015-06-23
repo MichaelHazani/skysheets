@@ -8,6 +8,7 @@
 <title> WEATHERVIZ BETA </title>
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="libs/Three.min.js"></script>
+<script src="libs/ShaderParticles.min.js"></script>
 <script src="libs/dat.gui.min.js"></script>
 <script src="libs/helvetiker_regular.typeface.js"></script>
 <script src="js/sheets.js"></script>
@@ -159,7 +160,7 @@ $('#zipcode_form').submit(function(e) {
 
   var zip = $('#zipcode').val();
   if (zip !== "demo") {
-  toggleFullScreen();
+  // toggleFullScreen();
   $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
    + zip + '.json', function(data){
 
@@ -179,7 +180,7 @@ $('#zipcode_form').submit(function(e) {
 
    } else {
    //set full screen
-  toggleFullScreen();
+  // toggleFullScreen();
   $.getJSON('demo.json', function(data){
 
   //Make the sheets
