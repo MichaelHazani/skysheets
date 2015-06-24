@@ -21,14 +21,24 @@
 </head>
 
 <body>
-
-
+<div id="intro">
+<div id="title"> Skysheets</div>
+<div id="subt"> A Three.JS Weather Experiment by Michael Hazani</div>
 <form id="zipcode_form" class="form">
-<label for="zipcode">zipcode</label>
+<label for="zipcode">zipcode</label><br>
 <input type="text" id="zipcode" class="blinker" style="width: 100px;">
+<div id="exp"> (enter your own or "demo" for a demonstration)</div>
+<audio id="bg" src="audio/bg.ogg" type="audio/ogg">
+</audio>
 </form>
+</div>
+<div id="threeJSContainer">
+<div id="instructions">
+scroll wheel to move in time <br>
+esc to exit
 
-<div id="threeJSContainer"> </div>
+</div>
+</div>
 
 <script>
 
@@ -53,84 +63,84 @@
     for (var i = 0; i < sheets.weatherType.length; i++ ) {
 
          if (sheets.weatherType[i] == "chanceflurries") {
-            sheets.weatherAudio[i] = "snow.mp3";
+            sheets.weatherAudio[i] = "snow.ogg";
             sheets.weatherGfx[i] = "snow";
 
         } else if (sheets.weatherType[i] === "chancerain") {
-            sheets.weatherAudio[i] = "heavyRain.mp3";
+            sheets.weatherAudio[i] = "heavyRain.ogg";
             sheets.weatherGfx[i] = "rain";
 
         } else if (sheets.weatherType[i] === "chancesleet") {
-            sheets.weatherAudio[i] = "snow.mp3";
+            sheets.weatherAudio[i] = "snow.ogg";
             sheets.weatherGfx[i] = "snow";
 
         } else if (sheets.weatherType[i] === "chancesnow") {
-            sheets.weatherAudio[i] = "snow.mp3";
+            sheets.weatherAudio[i] = "snow.ogg";
             sheets.weatherGfx[i] = "snow";
 
         } else if (sheets.weatherType[i] === "chancetstorms") {
-            sheets.weatherAudio[i] = "thunderstorm.mp3";
+            sheets.weatherAudio[i] = "thunderstorm.ogg";
             sheets.weatherGfx[i] = "thunderstorm";
 
         } else if (sheets.weatherType[i] === "clear") {
-            sheets.weatherAudio[i] = "clear.mp3";
+            sheets.weatherAudio[i] = "clear.ogg";
             sheets.weatherGfx[i] = "clear";
 
         } else if (sheets.weatherType[i] === "cloudy") {
-            sheets.weatherAudio[i] = "clear.mp3";
+            sheets.weatherAudio[i] = "clear.ogg";
             sheets.weatherGfx[i] = "cloudy";
 
         } else if (sheets.weatherType[i] == "flurries") {
-            sheets.weatherAudio[i] = "snow.mp3";
+            sheets.weatherAudio[i] = "snow.ogg";
             sheets.weatherGfx[i] = "snow";
 
         } else if (sheets.weatherType[i] === "drizzle") {
-            sheets.weatherAudio[i] = "drizzle.mp3";
+            sheets.weatherAudio[i] = "drizzle.ogg";
             sheets.weatherGfx[i] = "rain";
 
 
         } else if (sheets.weatherType[i] === "fog") {
-            sheets.weatherAudio[i] = "clear.mp3";
+            sheets.weatherAudio[i] = "clear.ogg";
             sheets.weatherGfx[i] = "fog";
 
         } else if (sheets.weatherType[i] === "hazy") {
-            sheets.weatherAudio[i] = "clear.mp3";
+            sheets.weatherAudio[i] = "clear.ogg";
             sheets.weatherGfx[i] = "clear";
 
         } else if (sheets.weatherType[i] === "mostlycloudy") {
-          sheets.weatherAudio[i] = "clear.mp3";
+          sheets.weatherAudio[i] = "clear.ogg";
           sheets.weatherGfx[i] = "cloudy";
 
         } else if (sheets.weatherType[i] === "mostlysunny") {
-          sheets.weatherAudio[i] = "clear.mp3";
+          sheets.weatherAudio[i] = "clear.ogg";
           sheets.weatherGfx[i] = "clear";
 
         } else if (sheets.weatherType[i] === "partlycloudy") {
-          sheets.weatherAudio[i] = "clear.mp3";
+          sheets.weatherAudio[i] = "clear.ogg";
           sheets.weatherGfx[i] = "cloudy";
 
         } else if (sheets.weatherType[i] === "partlysunny") {
-          sheets.weatherAudio[i] = "clear.mp3";
+          sheets.weatherAudio[i] = "clear.ogg";
           sheets.weatherGfx[i] = "clear";
 
         } else if (sheets.weatherType[i] === "sleet") {
-            sheets.weatherAudio[i] = "snow.mp3";
+            sheets.weatherAudio[i] = "snow.ogg";
             sheets.weatherGfx[i] = "snow";
 
         } else if (sheets.weatherType[i] === "rain") {
-            sheets.weatherAudio[i] = "heavyRain.mp3";
+            sheets.weatherAudio[i] = "heavyRain.ogg";
             sheets.weatherGfx[i] = "rain";
 
         } else if (sheets.weatherType[i] === "snow") {
-            sheets.weatherAudio[i] = "snow.mp3";
+            sheets.weatherAudio[i] = "snow.ogg";
             sheets.weatherGfx[i] = "snow";
 
         } else if (sheets.weatherType[i] === "sunny") {
-            sheets.weatherAudio[i] = "clear.mp3";
+            sheets.weatherAudio[i] = "clear.ogg";
             sheets.weatherGfx[i] = "clear";
 
         } else if (sheets.weatherType[i] === "tstorms") {
-            sheets.weatherAudio[i] = "thunderstorm.mp3";
+            sheets.weatherAudio[i] = "thunderstorm.ogg";
             sheets.weatherGfx[i] = "thunderstorm";
 
         } else {
@@ -192,6 +202,8 @@ var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
 
     var zip = $('#zipcode').val();
 
+    if (zip.length === 5 || zip === "demo") {
+
     if (zip !== "demo") {
 
       toggleFullScreen();
@@ -202,16 +214,18 @@ var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
       makeSheets(data);
 
       // //fade in+out
-      $('#zipcode_form').hide();
+        $('#intro').fadeOut(500);
 
 
       setTimeout(function(){
       init();
       addWebGL();
-              console.log(sheets.weatherGfx);
+      $("#bg").volume = 0.7;
+      $("#bg").get(0).play();
       render();
       $('#threeJSContainer').fadeIn(2000);
       }, 2000);
+
       });
 
    } else {
@@ -224,18 +238,31 @@ var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
         makeSheets(data);
 
         // //fade in+out
-        $('#zipcode_form').hide();
+        $('#intro').fadeOut(500);
 
         setTimeout(function(){
         init();
         addWebGL();
-
+        $("#bg").volume = 0.7;
+        $("#bg").get(0).play();
         render();
 
         $('#threeJSContainer').fadeIn(2000);
         }, 2000);
       });
+  }
+      $(document).keyup(function(e) {
+        if (e.keyCode == 27) {
+          e.preventDefault();
+          $("#bg").animate({volume: 0}, 1000);
+          $('#threeJSContainer').fadeOut(1000, function(){
+          window.location.reload();
+          });
+        };
+      });
+
     }
+
   });
 });
 </script>
