@@ -44,7 +44,8 @@ function init(){
 
   renderer = new THREE.WebGLRenderer({antialias:true, alpha:false});
   renderer.setSize( window.innerWidth, window.innerHeight );
-  renderer.setClearColor(0x9988bb);
+  renderer.setClearColor(new THREE.Color(Math.random(),
+                         Math.random(), Math.random()));
   $('#threeJSContainer').append( renderer.domElement );
 
 //dynamic resize
@@ -175,7 +176,7 @@ for (var i = 0; i < sheets.day.length; i++) {
 
 //transparent planes
   var geometry1 = new THREE.BoxGeometry(40,20,2);
-  var material1 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: true, opacity: 0.7});
+  var material1 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: false, opacity: 0.7});
   sheets.plane[0] = new THREE.Mesh(geometry1, material1);
   sheets.plane[0].position.set(0, 0, -50);
   scene.add(sheets.plane[0]);
@@ -184,21 +185,21 @@ for (var i = 0; i < sheets.day.length; i++) {
 
 
   var geometry2 = new THREE.BoxGeometry(40,20,2);
-  var material2 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: true, opacity: 0.7});
+  var material2 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: false, opacity: 0.7});
   sheets.plane[1] = new THREE.Mesh(geometry2, material2);
   sheets.plane[1].position.set(0, 0, -100);
   scene.add(sheets.plane[1]);
 
 
   var geometry3 = new THREE.BoxGeometry(40,20,2);
-  var material3 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: true, opacity: 0.7});
+  var material3 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: false, opacity: 0.7});
   sheets.plane[2] = new THREE.Mesh(geometry3, material3);
   sheets.plane[2].position.set(0, 0, -150);
   scene.add(sheets.plane[2]);
 
 
   var geometry4 = new THREE.BoxGeometry(40,20,2);
-  var material4 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: true, opacity: 0.7});
+  var material4 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: false, opacity: 0.7});
   sheets.plane[3] = new THREE.Mesh(geometry4, material4);
   sheets.plane[3].position.set(0, 0, -200);
   scene.add(sheets.plane[3]);
