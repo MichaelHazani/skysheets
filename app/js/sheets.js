@@ -2,7 +2,7 @@
 
 //weather global vars
 var planeText1, planeText2, planeText3, planeText4;
-var textSize = 0.3;
+var textSize = 0.5;
 var textHeight = 0.1;
 
 //threeJS init vars
@@ -13,8 +13,10 @@ var scene, camera, listener,
 //DAT.Gui vars
 var gui, Timeline, controller, controller2, controller3;
 
-//variable speed for sheets
+//opacity & speed for sheets
 var planeSpeed = 0.015;
+var planeOpacity = 0.7;
+
 //var plane1, sheets.plane[1], sheets.plane[2], sheets.plane[3], weatherObj;
 
 //particles
@@ -24,6 +26,10 @@ var snowParticles, rainParticles, cloudParticles, fogParticles, clearParticles,
 var sheets = {
   day : [],
   text : [],
+  date : [],
+  tempHigh: [],
+  tempLow: [],
+  highLow: [],
   pt : [],
   weatherType : [],
   weatherAudio: [],
@@ -130,12 +136,14 @@ weatherObj.position.set(0,0,0)
 //setup strings:
 for (var i = 0; i < sheets.day.length; i++) {
   sheets.pt[i] = sheets.day[i] + ": " + sheets.text[i];
+  sheets.highLow[i] = "High: " + sheets.tempHigh[i] + ", Low: " + sheets.tempLow[i];
 }
 
-//append strings to planes:
-  var wrapper = new THREE.MeshNormalMaterial( {
-    overdraw: 0.5,
-    color: 0xFFFFFF} );
+
+// create text:
+  var wrapper = new THREE.MeshPhongMaterial( {
+    overdraw: 0.1,
+    color: 0x000000} );
 
   var text1word = new THREE.TextGeometry( sheets.pt[0], {
     size: textSize,
@@ -171,35 +179,65 @@ for (var i = 0; i < sheets.day.length; i++) {
   });
   var text4 = new THREE.Mesh(text4word, wrapper);
 
+var text1aword = new THREE.TextGeometry( sheets.highLow[0], {
+    size: textSize,
+    height: textHeight,
+    curveSegments: 2,
+    font: 'helvetiker',
+  });
+  var text1a = new THREE.Mesh(text1aword, wrapper);
+
+  var text2aword = new THREE.TextGeometry( sheets.highLow[1], {
+    size: textSize,
+    height: textHeight,
+    curveSegments: 2,
+    font: 'helvetiker',
+  });
+  var text2a = new THREE.Mesh(text2aword, wrapper);
+
+
+  var text3aword = new THREE.TextGeometry( sheets.highLow[2], {
+    size: textSize,
+    height: textHeight,
+    curveSegments: 2,
+    font: 'helvetiker',
+  });
+  var text3a = new THREE.Mesh(text3aword, wrapper);
+
+  var text4aword = new THREE.TextGeometry( sheets.highLow[3], {
+    size: textSize,
+    height: textHeight,
+    curveSegments: 2,
+    font: 'helvetiker',
+  });
+  var text4a = new THREE.Mesh(text4aword, wrapper);
 
 
 
 //transparent planes
   var geometry1 = new THREE.BoxGeometry(40,20,2);
-  var material1 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: false, opacity: 0.7});
+  var material1 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: false, opacity: planeOpacity});
   sheets.plane[0] = new THREE.Mesh(geometry1, material1);
   sheets.plane[0].position.set(0, 0, -50);
   scene.add(sheets.plane[0]);
 
 
-
-
   var geometry2 = new THREE.BoxGeometry(40,20,2);
-  var material2 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: false, opacity: 0.7});
+  var material2 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: false, opacity: planeOpacity});
   sheets.plane[1] = new THREE.Mesh(geometry2, material2);
   sheets.plane[1].position.set(0, 0, -100);
   scene.add(sheets.plane[1]);
 
 
   var geometry3 = new THREE.BoxGeometry(40,20,2);
-  var material3 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: false, opacity: 0.7});
+  var material3 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: false, opacity: planeOpacity});
   sheets.plane[2] = new THREE.Mesh(geometry3, material3);
   sheets.plane[2].position.set(0, 0, -150);
   scene.add(sheets.plane[2]);
 
 
   var geometry4 = new THREE.BoxGeometry(40,20,2);
-  var material4 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: false, opacity: 0.7});
+  var material4 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: false, opacity: planeOpacity});
   sheets.plane[3] = new THREE.Mesh(geometry4, material4);
   sheets.plane[3].position.set(0, 0, -200);
   scene.add(sheets.plane[3]);
@@ -207,24 +245,43 @@ for (var i = 0; i < sheets.day.length; i++) {
 
 //add text
 
-  text1.position.y = sheets.plane[0].position.y;
+  text1.position.y = sheets.plane[0].position.y + 6;
   text1.position.x = sheets.plane[0].position.x - 20;
-  sheets.plane[0].add(text1);
+  sheets.plane[0].add(text1);6
 
-  text2.position.y = sheets.plane[1].position.y;
+  text2.position.y = sheets.plane[1].position.y + 6;
   text2.position.x = sheets.plane[1].position.x - 20;
   sheets.plane[1].add(text2);
 
-  text3.position.y = sheets.plane[2].position.y;
+  text3.position.y = sheets.plane[2].position.y + 6;
   text3.position.x = sheets.plane[2].position.x - 20;
   sheets.plane[2].add(text3);
 
-  text4.position.y = sheets.plane[3].position.y;
+  text4.position.y = sheets.plane[3].position.y + 6;
   text4.position.x = sheets.plane[3].position.x - 20;
   sheets.plane[3].add(text4);
 
 
-//add audio
+//add highlows
+  text1a.position.y = sheets.plane[0].position.y - 2;
+  text1a.position.x = sheets.plane[0].position.x - 20;
+
+  sheets.plane[0].add(text1a);
+
+  text2a.position.y = sheets.plane[1].position.y - 2;
+  text2a.position.x = sheets.plane[1].position.x - 20;
+  sheets.plane[1].add(text2a);
+
+  text3a.position.y = sheets.plane[2].position.y - 2;
+  text3a.position.x = sheets.plane[2].position.x - 20;
+  sheets.plane[2].add(text3a);
+
+  text4a.position.y = sheets.plane[3].position.y - 2;
+  text4a.position.x = sheets.plane[3].position.x - 20;
+  sheets.plane[3].add(text4a);
+  console.log(sheets.highLow);
+
+//add weather SFX
   sheets.plane[0].add(sheet1Sound);
   sheets.plane[1].add(sheet2Sound);
   sheets.plane[2].add(sheet3Sound);
@@ -311,7 +368,7 @@ function render() {
       }
 
   if (initClearParticles.called) {
-    clearParticles.tick(0.1);
+    clearParticles.tick(0.014);
     }
 
   if (initFogParticles.called) {
@@ -459,29 +516,36 @@ function initFogParticles(plane) {
   }
 
 function initClearParticles(plane) {
+
+  if (!initClearParticles.called) {
     initClearParticles.called = true;
 
     clearParticles = new SPE.Group({
       texture: THREE.ImageUtils.loadTexture('images/smokeparticle.png'),
-      maxAge: 3
+      maxAge: 1
     });
 
     emitter = new SPE.Emitter({
-      position: (0,0,30),
-          positionSpread: new THREE.Vector3(30, 20, 20),
+      position: (0,0,-5),
+          positionSpread: new THREE.Vector3(40, 20, 10),
       colorStart: new THREE.Color('white'),
       //colorStartSpread: new THREE.Vector3(1, 1, 1),
       colorEnd: new THREE.Color('blue'),
       sizeStart: 3,
-          sizeSpread: 5,
+          sizeSpread: 4,
           opacityStart: 0,
-          opacityMiddle: 1,
+          opacityMiddle: 0.6,
           opacityEnd: 0,
       particleCount: 10000,
     });
     clearParticles.addEmitter( emitter );
     plane.add( clearParticles.mesh );
-  }
+  }}
+
+
+
+
+
 
 function initThunderStormParticles(plane) {
     initThunderStormParticles.called = true;

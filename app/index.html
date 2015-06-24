@@ -1,10 +1,22 @@
+<!-- Skysheets: A Three.js Weather Forecast Experiment by Michael Hazani
+Utilizing:
+
+Three.js by Mr. d00b
+ShaderParticleEngine by squarefeet
+Other stuff
+
+The brains are in sheets.js. It's mostly documented.
+It's a little messy at times but you're welcome to check it out.
+
+More at: michaelhazani.tumblr.com -->
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:fb="http://ogp.me/ns/fb#">
 <head>
 <meta charset="utf-8">
 <meta property="og:site_name" content="Skysheets">
-<meta property="og:title" content="A Three.JS Weather Forecast Experience by Michael Hazani">
+<meta property="og:title" content="A Three.js Weather Forecast Experience by Michael Hazani">
 <meta property="og:description" content="4-day dynamic zipcode-based forecast visualized with Three.JS">
 <meta property="og:image" content="images/skysheets.png">
 <meta property="og:url" content="skysheets.herokuapp.com">
@@ -23,12 +35,20 @@
 <body>
 <div id="intro">
 <div id="title"> Skysheets</div>
-<div id="subt"> A Three.JS Weather Experiment by Michael Hazani</div>
+<div id="subt"> A Weather Visualization Experiment by Michael Hazani</div>
+<div id="credits">
+Code and music by <a href="http://michaelhazani.tumblr.com">Michael Hazani</a> <br>
+Three.js by <a href="https://github.com/mrdoob/three.js/">Mr. d00b</a> <br>
+ShaderParticleEngine by <a href="https://github.com/squarefeet/ShaderParticleEngine">squarefeet</a> <br>
+Weather by <a href="http://www.wunderground.com/">Weather Underground</a>
+
+
+</div>
 <form id="zipcode_form" class="form">
 <label for="zipcode">zipcode</label><br>
 <input type="text" id="zipcode" class="blinker" style="width: 100px;">
 <div id="exp"> (enter your own or "demo" for a demonstration)</div>
-<audio id="bg" src="audio/bg.ogg" type="audio/ogg">
+<audio id="bg" src="audio/bg.ogg" type="audio/ogg" loop>
 </audio>
 </form>
 </div>
@@ -54,11 +74,22 @@ esc to exit
     for (var i = 0; i < data['forecast']['txt_forecast']
     ['forecastday'].length; i+=2 ) {
 
+        //text description
         sheets.text.push(data['forecast']['txt_forecast']['forecastday'][i]['fcttext']);
+        //day
         sheets.day.push(data['forecast']['txt_forecast']['forecastday'][i]['title']);
+        //weather icon
         sheets.weatherType.push(data['forecast']['txt_forecast']['forecastday'][i]['icon']);
-    }
+      }
 
+    //different forLoop due to other incr. in 'simpleforecast'
+    for (var i = 0; i < data['forecast']['simpleforecast']
+    ['forecastday'].length; i++ ) {
+              //date
+        sheets.date.push(data['forecast']['simpleforecast']['forecastday'][i]['date']['pretty']);
+        sheets.tempHigh.push(data['forecast']['simpleforecast']['forecastday'][i]['high']['fahrenheit']);
+        sheets.tempLow.push(data['forecast']['simpleforecast']['forecastday'][i]['low']['fahrenheit']);
+      }
 
     for (var i = 0; i < sheets.weatherType.length; i++ ) {
 
@@ -206,7 +237,7 @@ var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
 
     if (zip !== "demo") {
 
-      toggleFullScreen();
+      // toggleFullScreen();
       $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
        + zip + '.json', function(data){
 
@@ -231,7 +262,7 @@ var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
    } else {
 
      //set full screen
-    toggleFullScreen();
+    // toggleFullScreen();
     $.getJSON('demo.json', function(data){
 
         //Make the sheets
