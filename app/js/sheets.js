@@ -8,79 +8,28 @@ var textHeight = 0.1;
 //threeJS init vars
 var scene, camera, listener,
     renderer, cube, hemilight,
-    plane1, plane2, plane3, plane4;
+     weatherSheet;
 
-var planeSpeed = 0.015;
+//DAT.Gui vars
 var gui, Timeline, controller, controller2, controller3;
-var snowParticles, rainParticles, emitter;
 
+//variable speed for sheets
+var planeSpeed = 0.015;
+//var plane1, sheets.plane[1], sheets.plane[2], sheets.plane[3], weatherObj;
 
+//particles
+var snowParticles, rainParticles, cloudParticles, fogParticles, clearParticles,
+    tRainParticles, tCloudParticles, cloudEmitter, rainEmitter, emitter;
 
-
-//webGL weather scenarios:
-function initSnowParticles(weatherSheet) {
-    initSnowParticles.called = true;
-    snowParticles = new SPE.Group({
-      texture: THREE.ImageUtils.loadTexture('images/smokeparticle.png'),
-      maxAge: 3
-    });
-
-    emitter = new SPE.Emitter({
-          type: 'sphere',
-          //position: new THREE.Vector3(0, 40, 00),
-          radius: 5,
-          radiusScale: new THREE.Vector3(1, 1, 1),
-
-          speed: 40,
-          colorStart: new THREE.Color('white'),
-          colorEnd: new THREE.Color('blue'),
-          sizeStart: 5,
-          sizespread: 7,
-          sizeEnd: 0,
-
-            opacityStart: 0.2,
-            opacityEnd: 1,
-
-          particleCount: 30000
-    });
-    emitter.position.x = weatherSheet.position.x;
-    emitter.position.y = weatherSheet.position.y + 70;
-    emitter.position.z = weatherSheet.position.z + 10;
-    snowParticles.addEmitter( emitter );
-    weatherSheet.add( snowParticles.mesh);
-  }
-
-function initRainParticles(weatherSheet) {
-    initRainParticles.called = true;
-    rainParticles = new SPE.Group({
-      texture: THREE.ImageUtils.loadTexture('images/raindrop.png'),
-      maxAge: 5
-    });
-
-    emitter = new SPE.Emitter({
-          type: 'sphere',
-          //position: new THREE.Vector3(0, 40, 00),
-          radius: 5,
-          radiusScale: new THREE.Vector3(1, 1, 1),
-
-          speed: 200,
-          colorStart: new THREE.Color('white'),
-          colorEnd: new THREE.Color('blue'),
-          sizeStart: 2,
-          sizespread: 20,
-          sizeEnd: 0,
-
-            opacityStart: 0.2,
-            opacityEnd: 1,
-
-          particleCount: 50000
-    });
-    emitter.position.x = weatherSheet.position.x;
-    emitter.position.y = weatherSheet.position.y + 70;
-    emitter.position.z = weatherSheet.position.z - 30;
-    rainParticles.addEmitter( emitter );
-    weatherSheet.add( rainParticles.mesh);
-  }
+var sheets = {
+  day : [],
+  text : [],
+  pt : [],
+  weatherType : [],
+  weatherAudio: [],
+  weatherGfx: [],
+  plane: []
+  };
 
 function init(){
 
@@ -88,12 +37,14 @@ function init(){
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
   camera.position.z = 10;
+  // camera.rotation.y = 45 * Math.PI / 180;
+  // camera.position.x = 90;
   listener = new THREE.AudioListener();
   camera.add(listener);
 
-  renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+  renderer = new THREE.WebGLRenderer({antialias:true, alpha:false});
   renderer.setSize( window.innerWidth, window.innerHeight );
-  renderer.setClearColor(0x222222);
+  renderer.setClearColor(0x9988bb);
   $('#threeJSContainer').append( renderer.domElement );
 
 //dynamic resize
@@ -107,7 +58,7 @@ window.addEventListener('resize', function () {
   gui = new dat.GUI();
   dat.GUI.toggleHide();
   function Params() {
-    //camera speed
+    //camera distance
     this.Zoom = -10;
     this.CubeColor = "#ff00ff";
     this.CubeOpacity = 0;
@@ -144,6 +95,9 @@ window.addEventListener('resize', function () {
   cube = new THREE.Mesh( geometry, material );
   scene.add( cube );
 
+//particle holder:
+var weatherObj = new THREE.Object3D();
+weatherObj.position.set(0,0,0)
 
 //audio:
 
@@ -216,66 +170,105 @@ for (var i = 0; i < sheets.day.length; i++) {
   });
   var text4 = new THREE.Mesh(text4word, wrapper);
 
+
+
+
 //transparent planes
-  var geometry1 = new THREE.BoxGeometry(20,20,2);
-  var material1 = new THREE.MeshPhongMaterial({color: 0xde64de, transparent: true, wireframe: true, opacity: 0.3});
-  plane1 = new THREE.Mesh(geometry1, material1);
-  plane1.position.set(0, 0, -50);
-  scene.add(plane1);
+  var geometry1 = new THREE.BoxGeometry(40,20,2);
+  var material1 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: true, opacity: 0.7});
+  sheets.plane[0] = new THREE.Mesh(geometry1, material1);
+  sheets.plane[0].position.set(0, 0, -50);
+  scene.add(sheets.plane[0]);
 
 
-  var geometry2 = new THREE.BoxGeometry(20,20,2);
-  var material2 = new THREE.MeshPhongMaterial({color: 0x9c6ce1, transparent: true, wireframe: true, opacity: 0.3});
-  plane2 = new THREE.Mesh(geometry2, material2);
-  plane2.position.set(0, 0, -100);
-  scene.add(plane2);
 
 
-  var geometry3 = new THREE.BoxGeometry(20,20,2);
-  var material3 = new THREE.MeshPhongMaterial({color: 0xa9e16c, transparent: true, wireframe: true, opacity: 0.3});
-  plane3 = new THREE.Mesh(geometry3, material3);
-  plane3.position.set(0, 0, -150);
-  scene.add(plane3);
+  var geometry2 = new THREE.BoxGeometry(40,20,2);
+  var material2 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: true, opacity: 0.7});
+  sheets.plane[1] = new THREE.Mesh(geometry2, material2);
+  sheets.plane[1].position.set(0, 0, -100);
+  scene.add(sheets.plane[1]);
 
 
-  var geometry4 = new THREE.BoxGeometry(20,20,2);
-  var material4 = new THREE.MeshPhongMaterial({color: 0xfa5050, transparent: true, wireframe: true, opacity: 0.3});
-  plane4 = new THREE.Mesh(geometry4, material4);
-  plane4.position.set(0, 0, -200);
-  scene.add(plane4);
+  var geometry3 = new THREE.BoxGeometry(40,20,2);
+  var material3 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: true, opacity: 0.7});
+  sheets.plane[2] = new THREE.Mesh(geometry3, material3);
+  sheets.plane[2].position.set(0, 0, -150);
+  scene.add(sheets.plane[2]);
+
+
+  var geometry4 = new THREE.BoxGeometry(40,20,2);
+  var material4 = new THREE.MeshPhongMaterial({color: 0xC6E2FF, transparent: true, wireframe: true, opacity: 0.7});
+  sheets.plane[3] = new THREE.Mesh(geometry4, material4);
+  sheets.plane[3].position.set(0, 0, -200);
+  scene.add(sheets.plane[3]);
 
 
 //add text
-  text1.position.y = plane1.position.y + 10;
-  text1.position.x = plane1.position.x -10;
-  plane1.add(text1);
 
-  text2.position.y = plane2.position.y + 5;
-  text2.position.x = plane2.position.x -10;
-  plane2.add(text2);
+  text1.position.y = sheets.plane[0].position.y;
+  text1.position.x = sheets.plane[0].position.x - 20;
+  sheets.plane[0].add(text1);
 
-  text3.position.y = plane3.position.y;
-  text3.position.x = plane3.position.x -10;
-  plane3.add(text3);
+  text2.position.y = sheets.plane[1].position.y;
+  text2.position.x = sheets.plane[1].position.x - 20;
+  sheets.plane[1].add(text2);
 
-  text4.position.y = plane4.position.y - 5;
-  text4.position.x = plane4.position.x -10;
-  plane4.add(text4);
+  text3.position.y = sheets.plane[2].position.y;
+  text3.position.x = sheets.plane[2].position.x - 20;
+  sheets.plane[2].add(text3);
+
+  text4.position.y = sheets.plane[3].position.y;
+  text4.position.x = sheets.plane[3].position.x - 20;
+  sheets.plane[3].add(text4);
 
 
 //add audio
-  plane1.add(sheet1Sound);
-  plane2.add(sheet2Sound);
-  plane3.add(sheet3Sound);
-  plane4.add(sheet4Sound);
+  sheets.plane[0].add(sheet1Sound);
+  sheets.plane[1].add(sheet2Sound);
+  sheets.plane[2].add(sheet3Sound);
+  sheets.plane[3].add(sheet4Sound);
 
-//start WebGL particles
-// initRainParticles(plane1);
- initSnowParticles(plane2);
- initRainParticles(plane1);
+  // addWebGL();
+
+//add WebGL particles
+  // function addWebGL() {
+    for (var i = 0; i < sheets.weatherType.length; i++ ) {
+    //var num = "plane" + [i + 1];
+    if (sheets.weatherGfx[i] === "snow") {
+      initSnowParticles(sheets.plane[i]);
+
+    } else if (sheets.weatherGfx[i] === "clear") {
+      weatherSheet = "plane" + [i];
+      initClearParticles(sheets.plane[i]);
+
+    } else if (sheets.weatherGfx[i] === "cloudy") {
+      weatherSheet = "plane" + [i];
+      initCloudParticles(sheets.plane[i]);
 
 
-  // scrollwheel to zoom
+    } else if (sheets.weatherGfx[i] === "fog") {
+      weatherSheet = "plane" + [i];
+      initFogParticles(sheets.plane[i]);
+
+
+    } else if (sheets.weatherGfx[i] === "thunderstorm") {
+      weatherSheet = "plane" + [i];
+      initThunderStormParticles(sheets.plane[i]);
+
+    } else if (sheets.weatherGfx[i] === "rain") {
+      initRainParticles(sheets.plane[i]);
+    }
+  }
+// }
+
+// initThunderStormParticles(sheets.plane[2]);
+// initRainParticles(sheets.plane[0]);
+// initSnowParticles(sheets.plane[1]);
+// initFogParticles(sheets.plane[2])
+// initCloudParticles(sheets.plane[2]);
+
+   // scrollwheel to zoom
     $('#threeJSContainer').bind('mousewheel', function(e){
       e.preventDefault();
       if(e.originalEvent.wheelDelta > 0) {
@@ -286,7 +279,10 @@ for (var i = 0; i < sheets.day.length; i++) {
       }
   });
 
+
+
 }
+
 
 
 function render() {
@@ -294,19 +290,39 @@ function render() {
   requestAnimationFrame(render);
   cube.rotation.x += 0.01;
   cube.rotation.y += 0.01;
-  plane1.position.z += planeSpeed;
-  plane2.position.z += planeSpeed;
-  plane3.position.z += planeSpeed;
-  plane4.position.z += planeSpeed;
+  sheets.plane[0].position.z += planeSpeed;
+  sheets.plane[1].position.z += planeSpeed;
+  sheets.plane[2].position.z += planeSpeed;
+  sheets.plane[3].position.z += planeSpeed;
+
   if (initSnowParticles.called) {
     snowParticles.tick(0.004);
     }
   if (initRainParticles.called) {
-      rainParticles.tick(0.004);
+      rainParticles.tick(0.01);
       }
+  if (initCloudParticles.called) {
+      cloudParticles.tick(0.004);
+      }
+  if (initThunderStormParticles.called) {
+      tCloudParticles.tick(0.034);
+      tRainParticles.tick(0.014);
+      }
+
+  if (initClearParticles.called) {
+    clearParticles.tick(0.1);
+    }
+
+  if (initFogParticles.called) {
+    fogParticles.tick(0.1);
+    }
+
   renderer.render(scene, camera);
 
 }
+
+
+
 
 
 //full screen function
@@ -334,3 +350,184 @@ function toggleFullScreen() {
     }
   }
 }
+
+//webGL weather scenarios:
+function initSnowParticles(plane) {
+    initSnowParticles.called = true;
+    snowParticles = new SPE.Group({
+      texture: THREE.ImageUtils.loadTexture('images/smokeparticle.png'),
+      maxAge: 2
+    });
+    emitter = new SPE.Emitter({
+            position: new THREE.Vector3(0, 0, 0),
+            positionSpread: new THREE.Vector3( 40, 20, 30 ),
+            acceleration: new THREE.Vector3(0, -20, 0),
+            accelerationSpread: new THREE.Vector3( 0, 0, 0 ),
+            velocity: new THREE.Vector3(0, 0, 0),
+            velocitySpread: new THREE.Vector3(20, 10, 0),
+            colorStart: new THREE.Color('white'),
+            colorEnd: new THREE.Color('blue'),
+            sizeStart: 1.4,
+            sizeEnd: 0,
+            particleCount: 5000,
+            opacityStart: 1,
+            opacityEnd: 1,
+});
+
+    emitter.position.set = new THREE.Vector3(0,0,0);
+    snowParticles.addEmitter( emitter );
+    var num = weatherSheet;
+    plane.add( snowParticles.mesh);
+  }
+
+
+function initRainParticles(plane) {
+    initRainParticles.called = true;
+    rainParticles = new SPE.Group({
+      texture: THREE.ImageUtils.loadTexture('images/raindrop.png'),
+      maxAge: 2
+    });
+
+    emitter = new SPE.Emitter({
+                position: new THREE.Vector3(0,0,0),
+                positionSpread: new THREE.Vector3( 40, 20, 30 ),
+                acceleration: new THREE.Vector3(0, -200, 0),
+                accelerationSpread: new THREE.Vector3( 30, 30, 0 ),
+                velocity: new THREE.Vector3(0, -500, 0),
+                velocitySpread: new THREE.Vector3(20, 10, 0),
+                colorStart: new THREE.Color('white'),
+                colorEnd: new THREE.Color('white'),
+                sizeStart: 0.7,
+                sizeEnd: 0.3,
+                particleCount: 30000,
+                //alive: 1
+    });
+    emitter.position.set = new THREE.Vector3(0,0,0),
+    rainParticles.addEmitter( emitter );
+    plane.add(rainParticles.mesh);
+  }
+
+function initCloudParticles(plane) {
+    initCloudParticles.called = true;
+
+    cloudParticles = new SPE.Group({
+      texture: THREE.ImageUtils.loadTexture('images/cloud2.png'),
+      maxAge: 2
+    });
+
+    emitter = new SPE.Emitter({
+      position: new THREE.Vector3(0,0,0),
+          positionSpread: new THREE.Vector3(40, 20, 30),
+      colorStart: new THREE.Color('white'),
+          //colorStartSpread: new THREE.Vector3(1, 1, 1),
+      colorEnd: new THREE.Color('black'),
+      sizeStart: 100,
+          sizeSpread: 100,
+          opacityStart: 0,
+          opacityMiddle: 0.5,
+          opacityEnd: 0,
+      particleCount: 400,
+    });
+    cloudParticles.addEmitter( emitter );
+    plane.add( cloudParticles.mesh );
+  }
+
+function initFogParticles(plane) {
+    initFogParticles.called = true;
+
+    fogParticles = new SPE.Group({
+      texture: THREE.ImageUtils.loadTexture('images/smokeparticle.png'),
+      maxAge: 5
+    });
+
+    emitter = new SPE.Emitter({
+      position: new THREE.Vector3(0,0,0),
+          positionSpread: new THREE.Vector3(40, 30, 30),
+      colorStart: new THREE.Color('grey'),
+          colorStartSpread: new THREE.Vector3(1, 1, 1),
+      colorEnd: new THREE.Color('grey'),
+      sizeStart: 4,
+          sizeSpread: 6,
+          opacityStart: 0,
+          opacityMiddle: 1,
+          opacityEnd: 0,
+      particleCount: 10000,
+    });
+    fogParticles.addEmitter( emitter );
+    plane.add( fogParticles.mesh );
+  }
+
+function initClearParticles(plane) {
+    initClearParticles.called = true;
+
+    clearParticles = new SPE.Group({
+      texture: THREE.ImageUtils.loadTexture('images/smokeparticle.png'),
+      maxAge: 3
+    });
+
+    emitter = new SPE.Emitter({
+      position: (0,0,30),
+          positionSpread: new THREE.Vector3(30, 20, 20),
+      colorStart: new THREE.Color('white'),
+      //colorStartSpread: new THREE.Vector3(1, 1, 1),
+      colorEnd: new THREE.Color('blue'),
+      sizeStart: 3,
+          sizeSpread: 5,
+          opacityStart: 0,
+          opacityMiddle: 1,
+          opacityEnd: 0,
+      particleCount: 10000,
+    });
+    clearParticles.addEmitter( emitter );
+    plane.add( clearParticles.mesh );
+  }
+
+function initThunderStormParticles(plane) {
+    initThunderStormParticles.called = true;
+
+    tCloudParticles = new SPE.Group({
+      texture: THREE.ImageUtils.loadTexture('images/darkcloud1.png'),
+      maxAge: 5
+    });
+
+    cloudEmitter = new SPE.Emitter({
+      position: new THREE.Vector3(0, 10,10),
+          positionSpread: new THREE.Vector3(40, 0, 40),
+      colorStart: new THREE.Color(0xFFFFFF),
+          //colorStartSpread: new THREE.Vector3(1, 1, 1),
+      colorEnd: new THREE.Color('black'),
+      sizeStart: 100,
+          sizeSpread: 20,
+          opacityStart: 0,
+          opacityMiddle: 1,
+          opacityEnd: 0,
+      particleCount: 500,
+    });
+
+    tRainParticles = new SPE.Group({
+        texture: THREE.ImageUtils.loadTexture('images/raindrop.png'),
+        maxAge: 2
+      });
+
+      rainEmitter = new SPE.Emitter({
+                  position: new THREE.Vector3(0,0,0),
+                  positionSpread: new THREE.Vector3( 40, 20, 30 ),
+                  acceleration: new THREE.Vector3(0, -200, 0),
+                  accelerationSpread: new THREE.Vector3( 30, 30, 0 ),
+                  velocity: new THREE.Vector3(0, -500, 0),
+                  velocitySpread: new THREE.Vector3(20, 10, 0),
+                  colorStart: new THREE.Color('white'),
+                  colorEnd: new THREE.Color('white'),
+                  sizeStart: 0.5,
+                  sizeEnd: 0.5,
+                  particleCount: 30000,
+                  //alive: 1
+      });
+      tCloudParticles.addEmitter( cloudEmitter );
+      tRainParticles.addEmitter( rainEmitter );
+      plane.add( tCloudParticles.mesh );
+      plane.add( tRainParticles.mesh);
+  }
+
+
+

@@ -73,7 +73,7 @@
 		,
 		{
 		"period":6,
-		"icon":"partlycloudy",
+		"icon":"clear",
 		"icon_url":"http://icons.wxug.com/i/c/k/partlycloudy.gif",
 		"title":"Thursday",
 		"fcttext":"It will be a clear day!",
