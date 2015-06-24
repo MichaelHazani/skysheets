@@ -237,7 +237,7 @@ var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
 
     if (zip !== "demo") {
 
-      // toggleFullScreen();
+      toggleFullScreen();
       $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
        + zip + '.json', function(data){
 
@@ -262,7 +262,7 @@ var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
    } else {
 
      //set full screen
-    // toggleFullScreen();
+    toggleFullScreen();
     $.getJSON('demo.json', function(data){
 
         //Make the sheets
