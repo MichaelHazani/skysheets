@@ -1,38 +1,109 @@
 form {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+
     position: absolute;
-    top:0;
-    bottom:0;
+    bottom:500;
     left:0;
     right:0;
     margin: auto;
     color: blue;
-    text-align: left;
+    text-align: center;
     font-family: "courier new";
     font-weight: "bold";
-    top: 100px;
+    top: 300px;
 }
+
 
 input, input:focus {
   border:none;
   outline: 0;
-  top:0;
+  top:300px;
   bottom:0;
   left:30;
   right:0;
   margin: auto;
   font-size: 130%;
+  text-align: center;
   font-family:"courier new";
 }
 
 #threeJSContainer {
   height:100%;
   width:100%;
+
   overflow:hidden;
   display:none;
+
 }
 
+#title {
+
+    width: 100%;
+    height: 0px;
+    position: absolute;
+    top: 10px;
+    margin: auto;
+    font-family: "courier new";
+      font-size: 300%;
+  font-weight: "bold";
+  color: black;
+    text-align: center;
+}
+
+#subt {
+
+    width: 100%;
+    height: 0px;
+    position: absolute;
+    top: 90px;
+    margin: auto;
+    font-family: "courier new";
+      font-size: 100%;
+  font-weight: "bold";
+  color: black;
+    text-align: center;
+}
+
+#exp {
+
+    width: 100%;
+    height: 0px;
+    position: absolute;
+    top: 100px;
+    margin: auto;
+    font-family: "courier new";
+  font-weight: "bold";
+  color: black;
+    text-align: center;
+}
+
+#credits {
+
+    width: 100%;
+    height: 0px;
+    position: absolute;
+    bottom: 300px;
+    margin: auto;
+    font-family: "courier new";
+  font-weight: "bold";
+  color: black;
+    font-size: 75%;
+    text-align: center;
+}
+
+
+#instructions {
+
+    width: 100%;
+    height: 0px;
+    position: absolute;
+    bottom: 100px;
+    margin: auto;
+    font-family: "courier new";
+  font-weight: "bold";
+  color: white;
+    text-align: center;
+}
 .blinker {
   animation-name: blinker;
   animation-iteration-count: infinite;
