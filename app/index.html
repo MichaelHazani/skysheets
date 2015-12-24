@@ -27,12 +27,6 @@ More at: michaelhazani.tumblr.com -->
 <meta property="og:type" content="art">
 <link rel="stylesheet" type="text/css" href="stylesheet.css">
 <title> Skysheets </title>
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="libs/Three.min.js"></script>
-<script src="libs/ShaderParticles.min.js"></script>
-<script src="libs/dat.gui.min.js"></script>
-<script src="libs/helvetiker_regular.typeface.js"></script>
-<script src="js/sheets.js"></script>
 
 </head>
 
@@ -68,6 +62,86 @@ esc to exit
 
 <script>
 
+
+//on startup
+$(function() {
+
+$("#zipcode").focus();
+
+var weatherObj;
+
+//hide this somewhere!
+var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
+
+//get forecast based on user ZIP
+
+  $('#zipcode_form').submit(function(e) {
+    e.preventDefault();
+
+    var zip = $('#zipcode').val();
+
+    if (zip.length === 5 || zip === "demo") {
+
+    if (zip !== "demo") {
+
+      toggleFullScreen();
+      $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
+       + zip + '.json', function(data){
+
+      //Make the sheets
+      makeSheets(data);
+
+      // //fade in+out
+        $('#intro').fadeOut(500);
+
+
+      setTimeout(function(){
+      init();
+      addWebGL();
+      $("#bg").volume = 0.7;
+      $("#bg").get(0).play();
+      render();
+      $('#threeJSContainer').fadeIn(2000);
+      }, 2000);
+
+      });
+
+   } else {
+
+     //set full screen
+    toggleFullScreen();
+    $.getJSON('demo.json', function(data){
+
+        //Make the sheets
+        makeSheets(data);
+
+        // //fade in+out
+        $('#intro').fadeOut(500);
+
+        setTimeout(function(){
+        init();
+        addWebGL();
+        $("#bg").volume = 0.7;
+        $("#bg").get(0).play();
+        render();
+
+        $('#threeJSContainer').fadeIn(2000);
+        }, 2000);
+      });
+  }
+      $(document).keyup(function(e) {
+        if (e.keyCode == 27) {
+          e.preventDefault();
+          $("#bg").animate({volume: 0}, 1000);
+          $('#threeJSContainer').fadeOut(1000, function(){
+          window.location.reload();
+          });
+        };
+      });
+
+    }
+
+  });
 
 
 
@@ -327,86 +401,12 @@ esc to exit
   }
 }
 
-//on startup
-$(function() {
-
-$("#zipcode").focus();
-
-var weatherObj;
-
-//hide this somewhere!
-var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
-
-//get forecast based on user ZIP
-
-  $('#zipcode_form').submit(function(e) {
-    e.preventDefault();
-
-    var zip = $('#zipcode').val();
-
-    if (zip.length === 5 || zip === "demo") {
-
-    if (zip !== "demo") {
-
-      toggleFullScreen();
-      $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
-       + zip + '.json', function(data){
-
-      //Make the sheets
-      makeSheets(data);
-
-      // //fade in+out
-        $('#intro').fadeOut(500);
-
-
-      setTimeout(function(){
-      init();
-      addWebGL();
-      $("#bg").volume = 0.7;
-      $("#bg").get(0).play();
-      render();
-      $('#threeJSContainer').fadeIn(2000);
-      }, 2000);
-
-      });
-
-   } else {
-
-     //set full screen
-    toggleFullScreen();
-    $.getJSON('demo.json', function(data){
-
-        //Make the sheets
-        makeSheets(data);
-
-        // //fade in+out
-        $('#intro').fadeOut(500);
-
-        setTimeout(function(){
-        init();
-        addWebGL();
-        $("#bg").volume = 0.7;
-        $("#bg").get(0).play();
-        render();
-
-        $('#threeJSContainer').fadeIn(2000);
-        }, 2000);
-      });
-  }
-      $(document).keyup(function(e) {
-        if (e.keyCode == 27) {
-          e.preventDefault();
-          $("#bg").animate({volume: 0}, 1000);
-          $('#threeJSContainer').fadeOut(1000, function(){
-          window.location.reload();
-          });
-        };
-      });
-
-    }
-
-  });
 });
 </script>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="libs/Three.min.js" async></script>
+<script src="libs/ShaderParticles.min.js" async></script>
+<script src="libs/helvetiker_regular.typeface.js"></script>
+<script src="js/sheets.js" async></script>
 </body>
 </html>
