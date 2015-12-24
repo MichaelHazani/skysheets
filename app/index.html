@@ -12,401 +12,403 @@ Special thanks to squarefeet for all the help!
 
 
 More at: michaelhazani.tumblr.com -->
-
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:fb="http://ogp.me/ns/fb#">
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="utf-8">
-<meta property="og:site_name" content="Skysheets">
-<meta property="og:title" content="A Three.js Weather Forecast Experience by Michael Hazani">
-<meta property="og:description" content="4-day dynamic zipcode-based forecast visualized with Three.JS">
-<meta property="og:image" content="images/skysheets.png">
-<meta property="og:url" content="skysheets.herokuapp.com">
-<meta property="og:type" content="art">
-<link rel="stylesheet" type="text/css" href="stylesheet.css">
-<title> Skysheets </title>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta property="og:site_name" content="Skysheets">
+    <meta property="og:title" content="A Three.js Weather Forecast Experience by Michael Hazani">
+    <meta property="og:description" content="4-day dynamic zipcode-based forecast visualized with Three.JS">
+    <meta property="og:image" content="images/skysheets.png">
+    <meta property="og:url" content="skysheets.herokuapp.com">
+    <meta property="og:type" content="art">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <title> Skysheets </title>
 </head>
 
 <body>
-<div id="intro">
-<div id="title"> Skysheets</div>
-<div id="subt"> A Weather Visualization Experiment by Michael Hazani <br><br>
-<div id="subt2" style="font-size: 85%"> <a href="http://michaelhazani.net/post/122358860249/1-skysheets">more details</a></div></div>
-<div id="credits">
-Code and music by <a href="http://michaelhazani.tumblr.com">Michael Hazani</a> <br>
-Three.js by <a href="https://github.com/mrdoob/three.js/">Mr. d00b</a> <br>
-ShaderParticleEngine by <a href="https://github.com/squarefeet/ShaderParticleEngine">squarefeet</a> <br>
-Weather by <a href="http://www.wunderground.com/">Weather Underground</a><br><br><br>
-(special thanks go to squarefeet for all the help, <br>
-and for creating a great particle engine!)
+    <div id="intro">
+        <div id="title"> Skysheets</div>
+        <div id="subt"> A Weather Visualization Experiment by Michael Hazani
+            <br>
+            <br>
+            <div id="subt2" style="font-size: 85%"> <a target="_blank" href="http://michaelhazani.tumblr.com/post/122358860249/1-skysheets">more details</a> <br><br><a href="https://github.com/michaelhazani/skysheets" target="_blank"> github</a></div>
+        </div>
+        <form id="zipcode_form" class="form">
+            <label for="zipcode">enter zipcode</label>
+            <br>
+            <input type="text" id="zipcode" class="blinker" style="width: 100px;">
+            <!-- <div id="exp"> (enter your own or "demo" for a demonstration)</div> -->
+            <audio id="bg" src="audio/bg.ogg" type="audio/ogg" loop>
+            </audio>
+        </form>
+    </div>
+            <div id="credits">
+            Code and music by <a target="_blank" href="http://michaelhazani.tumblr.com">Michael Hazani</a>
+            <br><br> Three.js by <a target="_blank" href="https://github.com/mrdoob/three.js/">Mr. d00b</a>
+            <br><br> ShaderParticleEngine by <a target="_blank" href="https://github.com/squarefeet/ShaderParticleEngine">squarefeet</a>
+            <br><br> Weather by <a target="_blank" href="http://www.wunderground.com/">Weather Underground</a>
+            <br>
+            <br>
+            <br> (special thanks go to squarefeet for all the help,
+            <br> and for creating a great particle engine!)
+        </div>
+    <div id="threeJSContainer">
+        <div id="instructions">
+            scroll wheel to move in time
+            <br> esc to exit
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="libs/Three.min.js"></script>
+    <script>
+    //on startup
+    $(function() {
 
-</div>
-<form id="zipcode_form" class="form">
-<label for="zipcode">zipcode</label><br>
-<input type="text" id="zipcode" class="blinker" style="width: 100px;">
-<!-- <div id="exp"> (enter your own or "demo" for a demonstration)</div> -->
-<audio id="bg" src="audio/bg.ogg" type="audio/ogg" loop>
-</audio>
-</form>
-</div>
-<div id="threeJSContainer">
-<div id="instructions">
-scroll wheel to move in time <br>
-esc to exit
+        $("#zipcode").focus();
 
-</div>
-</div>
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="libs/Three.min.js"></script>
-<script>
+        var weatherObj;
 
+        //hide this somewhere!
+        var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
 
-//on startup
-$(function() {
+        //get forecast based on user ZIP
 
-$("#zipcode").focus();
+        $('#zipcode_form').submit(function(e) {
+            e.preventDefault();
 
-var weatherObj;
+            var zip = $('#zipcode').val();
 
-//hide this somewhere!
-var apiKey = "f71f75cd9e99dbc211c6e48ceaae557c";
+            if (zip.length === 5 || zip === "demo") {
 
-//get forecast based on user ZIP
+                if (zip !== "demo") {
 
-  $('#zipcode_form').submit(function(e) {
-    e.preventDefault();
+                    toggleFullScreen();
+                    $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/' + zip + '.json', function(data) {
 
-    var zip = $('#zipcode').val();
+                        //Make the sheets
+                        makeSheets(data);
 
-    if (zip.length === 5 || zip === "demo") {
-
-    if (zip !== "demo") {
-
-      toggleFullScreen();
-      $.getJSON('https://api.wunderground.com/api/19e8ddc94141aec0/forecast/q/'
-       + zip + '.json', function(data){
-
-      //Make the sheets
-      makeSheets(data);
-
-      // //fade in+out
-        $('#intro').fadeOut(500);
-
-
-      setTimeout(function(){
-      init();
-      addWebGL();
-      $("#bg").volume = 0.7;
-      $("#bg").get(0).play();
-      render();
-      $('#threeJSContainer').fadeIn(2000);
-      }, 2000);
-
-      });
-
-   } else {
-
-     //set full screen
-    toggleFullScreen();
-    $.getJSON('demo.json', function(data){
-
-        //Make the sheets
-        makeSheets(data);
-
-        // //fade in+out
-        $('#intro').fadeOut(500);
-
-        setTimeout(function(){
-        init();
-        addWebGL();
-        $("#bg").volume = 0.7;
-        $("#bg").get(0).play();
-        render();
-
-        $('#threeJSContainer').fadeIn(2000);
-        }, 2000);
-      });
-  }
-      $(document).keyup(function(e) {
-        if (e.keyCode == 27) {
-          e.preventDefault();
-          $("#bg").animate({volume: 0}, 1000);
-          $('#threeJSContainer').fadeOut(1000, function(){
-          window.location.reload();
-          });
-        };
-      });
-
-    }
-
-  });
+                        // //fade in+out
+                        $('#intro').fadeOut(500);
+                        $('#credits').fadeOut(500);
 
 
+                        setTimeout(function() {
+                            init();
+                            addWebGL();
+                            $("#bg").volume = 0.7;
+                            $("#bg").get(0).play();
+                            render();
+                            $('#threeJSContainer').fadeIn(2000);
+                        }, 2000);
 
-  //get literal description of forecast
-  //  add days of the week
-  // add audio
-  // add type of weather
-  function makeSheets(data) {
+                    });
 
-    for (var i = 0; i < data['forecast']['txt_forecast']
-    ['forecastday'].length; i+=2 ) {
+                } else {
 
-        //text description
-        sheets.text.push(data['forecast']['txt_forecast']['forecastday'][i]['fcttext']);
-        //day
-        sheets.day.push(data['forecast']['txt_forecast']['forecastday'][i]['title']);
-        //weather icon
-        sheets.weatherType.push(data['forecast']['txt_forecast']['forecastday'][i]['icon']);
-      }
+                    //set full screen
+                    toggleFullScreen();
+                    $.getJSON('demo.json', function(data) {
 
-    //different forLoop due to other incr. in 'simpleforecast'
-    for (var i = 0; i < data['forecast']['simpleforecast']
-    ['forecastday'].length; i++ ) {
-              //date
-        sheets.date.push(data['forecast']['simpleforecast']['forecastday'][i]['date']['pretty']);
-        sheets.tempHigh.push(data['forecast']['simpleforecast']['forecastday'][i]['high']['fahrenheit']);
-        sheets.tempLow.push(data['forecast']['simpleforecast']['forecastday'][i]['low']['fahrenheit']);
-      }
+                        //Make the sheets
+                        makeSheets(data);
 
-    for (var i = 0; i < sheets.weatherType.length; i++ ) {
+                        // //fade in+out
+                        $('#intro').fadeOut(500);
 
-         if (sheets.weatherType[i] == "chanceflurries") {
-            sheets.weatherAudio[i] = "snow.ogg";
-            sheets.weatherGfx[i] = "snow";
+                        setTimeout(function() {
+                            init();
+                            addWebGL();
+                            $("#bg").volume = 0.7;
+                            $("#bg").get(0).play();
+                            render();
 
-        } else if (sheets.weatherType[i] === "chancerain") {
-            sheets.weatherAudio[i] = "heavyRain.ogg";
-            sheets.weatherGfx[i] = "rain";
+                            $('#threeJSContainer').fadeIn(2000);
+                        }, 2000);
+                    });
+                }
+                $(document).keyup(function(e) {
+                    if (e.keyCode == 27) {
+                        e.preventDefault();
+                        $("#bg").animate({
+                            volume: 0
+                        }, 1000);
+                        $('#threeJSContainer').fadeOut(1000, function() {
+                            window.location.reload();
+                        });
+                    };
+                });
 
-        } else if (sheets.weatherType[i] === "chancesleet") {
-            sheets.weatherAudio[i] = "snow.ogg";
-            sheets.weatherGfx[i] = "snow";
+            }
 
-        } else if (sheets.weatherType[i] === "chancesnow") {
-            sheets.weatherAudio[i] = "snow.ogg";
-            sheets.weatherGfx[i] = "snow";
-
-        } else if (sheets.weatherType[i] === "chancetstorms") {
-            sheets.weatherAudio[i] = "thunderstorm.ogg";
-            sheets.weatherGfx[i] = "thunderstorm";
-
-        } else if (sheets.weatherType[i] === "clear") {
-            sheets.weatherAudio[i] = "clear.ogg";
-            sheets.weatherGfx[i] = "clear";
-
-        } else if (sheets.weatherType[i] === "cloudy") {
-            sheets.weatherAudio[i] = "clear.ogg";
-            sheets.weatherGfx[i] = "cloudy";
-
-        } else if (sheets.weatherType[i] == "flurries") {
-            sheets.weatherAudio[i] = "snow.ogg";
-            sheets.weatherGfx[i] = "snow";
-
-        } else if (sheets.weatherType[i] === "drizzle") {
-            sheets.weatherAudio[i] = "drizzle.ogg";
-            sheets.weatherGfx[i] = "rain";
+        });
 
 
-        } else if (sheets.weatherType[i] === "fog") {
-            sheets.weatherAudio[i] = "clear.ogg";
-            sheets.weatherGfx[i] = "fog";
 
-        } else if (sheets.weatherType[i] === "hazy") {
-            sheets.weatherAudio[i] = "clear.ogg";
-            sheets.weatherGfx[i] = "clear";
+        //get literal description of forecast
+        //  add days of the week
+        // add audio
+        // add type of weather
+        function makeSheets(data) {
 
-        } else if (sheets.weatherType[i] === "mostlycloudy") {
-          sheets.weatherAudio[i] = "clear.ogg";
-          sheets.weatherGfx[i] = "cloudy";
+            for (var i = 0; i < data['forecast']['txt_forecast']
+                ['forecastday'].length; i += 2) {
 
-        } else if (sheets.weatherType[i] === "mostlysunny") {
-          sheets.weatherAudio[i] = "clear.ogg";
-          sheets.weatherGfx[i] = "clear";
+                //text description
+                sheets.text.push(data['forecast']['txt_forecast']['forecastday'][i]['fcttext']);
+                //day
+                sheets.day.push(data['forecast']['txt_forecast']['forecastday'][i]['title']);
+                //weather icon
+                sheets.weatherType.push(data['forecast']['txt_forecast']['forecastday'][i]['icon']);
+            }
 
-        } else if (sheets.weatherType[i] === "partlycloudy") {
-          sheets.weatherAudio[i] = "clear.ogg";
-          sheets.weatherGfx[i] = "cloudy";
+            //different forLoop due to other incr. in 'simpleforecast'
+            for (var i = 0; i < data['forecast']['simpleforecast']
+                ['forecastday'].length; i++) {
+                //date
+                sheets.date.push(data['forecast']['simpleforecast']['forecastday'][i]['date']['pretty']);
+                sheets.tempHigh.push(data['forecast']['simpleforecast']['forecastday'][i]['high']['fahrenheit']);
+                sheets.tempLow.push(data['forecast']['simpleforecast']['forecastday'][i]['low']['fahrenheit']);
+            }
 
-        } else if (sheets.weatherType[i] === "partlysunny") {
-          sheets.weatherAudio[i] = "clear.ogg";
-          sheets.weatherGfx[i] = "clear";
+            for (var i = 0; i < sheets.weatherType.length; i++) {
 
-        } else if (sheets.weatherType[i] === "sleet") {
-            sheets.weatherAudio[i] = "snow.ogg";
-            sheets.weatherGfx[i] = "snow";
+                if (sheets.weatherType[i] == "chanceflurries") {
+                    sheets.weatherAudio[i] = "snow.ogg";
+                    sheets.weatherGfx[i] = "snow";
 
-        } else if (sheets.weatherType[i] === "rain") {
-            sheets.weatherAudio[i] = "heavyRain.ogg";
-            sheets.weatherGfx[i] = "rain";
+                } else if (sheets.weatherType[i] === "chancerain") {
+                    sheets.weatherAudio[i] = "heavyRain.ogg";
+                    sheets.weatherGfx[i] = "rain";
 
-        } else if (sheets.weatherType[i] === "snow") {
-            sheets.weatherAudio[i] = "snow.ogg";
-            sheets.weatherGfx[i] = "snow";
+                } else if (sheets.weatherType[i] === "chancesleet") {
+                    sheets.weatherAudio[i] = "snow.ogg";
+                    sheets.weatherGfx[i] = "snow";
 
-        } else if (sheets.weatherType[i] === "sunny") {
-            sheets.weatherAudio[i] = "clear.ogg";
-            sheets.weatherGfx[i] = "clear";
+                } else if (sheets.weatherType[i] === "chancesnow") {
+                    sheets.weatherAudio[i] = "snow.ogg";
+                    sheets.weatherGfx[i] = "snow";
 
-        } else if (sheets.weatherType[i] === "tstorms") {
-            sheets.weatherAudio[i] = "thunderstorm.ogg";
-            sheets.weatherGfx[i] = "thunderstorm";
+                } else if (sheets.weatherType[i] === "chancetstorms") {
+                    sheets.weatherAudio[i] = "thunderstorm.ogg";
+                    sheets.weatherGfx[i] = "thunderstorm";
 
-        } else {
-          sheets.weatherAudio[i] = "No matching weather pattern at" + [i];
-          sheets.weatherGfx[i] = "No matching weather pattern at" + [i];
+                } else if (sheets.weatherType[i] === "clear") {
+                    sheets.weatherAudio[i] = "clear.ogg";
+                    sheets.weatherGfx[i] = "clear";
+
+                } else if (sheets.weatherType[i] === "cloudy") {
+                    sheets.weatherAudio[i] = "clear.ogg";
+                    sheets.weatherGfx[i] = "cloudy";
+
+                } else if (sheets.weatherType[i] == "flurries") {
+                    sheets.weatherAudio[i] = "snow.ogg";
+                    sheets.weatherGfx[i] = "snow";
+
+                } else if (sheets.weatherType[i] === "drizzle") {
+                    sheets.weatherAudio[i] = "drizzle.ogg";
+                    sheets.weatherGfx[i] = "rain";
+
+
+                } else if (sheets.weatherType[i] === "fog") {
+                    sheets.weatherAudio[i] = "clear.ogg";
+                    sheets.weatherGfx[i] = "fog";
+
+                } else if (sheets.weatherType[i] === "hazy") {
+                    sheets.weatherAudio[i] = "clear.ogg";
+                    sheets.weatherGfx[i] = "clear";
+
+                } else if (sheets.weatherType[i] === "mostlycloudy") {
+                    sheets.weatherAudio[i] = "clear.ogg";
+                    sheets.weatherGfx[i] = "cloudy";
+
+                } else if (sheets.weatherType[i] === "mostlysunny") {
+                    sheets.weatherAudio[i] = "clear.ogg";
+                    sheets.weatherGfx[i] = "clear";
+
+                } else if (sheets.weatherType[i] === "partlycloudy") {
+                    sheets.weatherAudio[i] = "clear.ogg";
+                    sheets.weatherGfx[i] = "cloudy";
+
+                } else if (sheets.weatherType[i] === "partlysunny") {
+                    sheets.weatherAudio[i] = "clear.ogg";
+                    sheets.weatherGfx[i] = "clear";
+
+                } else if (sheets.weatherType[i] === "sleet") {
+                    sheets.weatherAudio[i] = "snow.ogg";
+                    sheets.weatherGfx[i] = "snow";
+
+                } else if (sheets.weatherType[i] === "rain") {
+                    sheets.weatherAudio[i] = "heavyRain.ogg";
+                    sheets.weatherGfx[i] = "rain";
+
+                } else if (sheets.weatherType[i] === "snow") {
+                    sheets.weatherAudio[i] = "snow.ogg";
+                    sheets.weatherGfx[i] = "snow";
+
+                } else if (sheets.weatherType[i] === "sunny") {
+                    sheets.weatherAudio[i] = "clear.ogg";
+                    sheets.weatherGfx[i] = "clear";
+
+                } else if (sheets.weatherType[i] === "tstorms") {
+                    sheets.weatherAudio[i] = "thunderstorm.ogg";
+                    sheets.weatherGfx[i] = "thunderstorm";
+
+                } else {
+                    sheets.weatherAudio[i] = "No matching weather pattern at" + [i];
+                    sheets.weatherGfx[i] = "No matching weather pattern at" + [i];
+                }
+
+            }
+
+            //once we know the weather, assign webGL too
+            //assignGFX();
         }
 
-    }
+        //add WebGL particles
+        function addWebGL() {
+            for (var i = 0; i < sheets.weatherType.length; i++) {
+                //var num = "plane" + [i + 1];
+                if (sheets.weatherGfx[i] === "snow") {
 
-    //once we know the weather, assign webGL too
-    //assignGFX();
-  }
+                    emitter = new SPE.Emitter({
+                        position: new THREE.Vector3(0, 0, 0),
+                        positionSpread: new THREE.Vector3(40, 20, 30),
+                        acceleration: new THREE.Vector3(0, -20, 0),
+                        accelerationSpread: new THREE.Vector3(0, 0, 0),
+                        velocity: new THREE.Vector3(0, 0, 0),
+                        velocitySpread: new THREE.Vector3(20, 10, 0),
+                        colorStart: new THREE.Color('white'),
+                        colorEnd: new THREE.Color('blue'),
+                        sizeStart: 1.4,
+                        sizeEnd: 0,
+                        particleCount: 5000,
+                        opacityStart: 1,
+                        opacityEnd: 1,
+                    });
 
-//add WebGL particles
-  function addWebGL() {
-    for (var i = 0; i < sheets.weatherType.length; i++ ) {
-    //var num = "plane" + [i + 1];
-    if (sheets.weatherGfx[i] === "snow") {
+                    emitter.position = sheets.plane[i].position;
+                    snowParticles.addEmitter(emitter);
 
-    emitter = new SPE.Emitter({
-    position: new THREE.Vector3(0, 0, 0),
-    positionSpread: new THREE.Vector3( 40, 20, 30 ),
-    acceleration: new THREE.Vector3(0, -20, 0),
-    accelerationSpread: new THREE.Vector3( 0, 0, 0 ),
-    velocity: new THREE.Vector3(0, 0, 0),
-    velocitySpread: new THREE.Vector3(20, 10, 0),
-    colorStart: new THREE.Color('white'),
-    colorEnd: new THREE.Color('blue'),
-    sizeStart: 1.4,
-    sizeEnd: 0,
-    particleCount: 5000,
-    opacityStart: 1,
-    opacityEnd: 1,
+                } else if (sheets.weatherGfx[i] === "clear") {
+                    var emitter = new SPE.Emitter({
+                        position: (0, 0, -5),
+                        positionSpread: new THREE.Vector3(40, 20, 10),
+                        colorStart: new THREE.Color('white'),
+                        //colorStartSpread: new THREE.Vector3(1, 1, 1),
+                        colorEnd: new THREE.Color('blue'),
+                        sizeStart: 3,
+                        sizeSpread: 4,
+                        opacityStart: 0,
+                        opacityMiddle: 0.6,
+                        opacityEnd: 0,
+                        particleCount: 10000,
+                    });
+                    emitter.position = sheets.plane[i].position;
+                    clearParticles.addEmitter(emitter);
+
+                } else if (sheets.weatherGfx[i] === "cloudy") {
+                    weatherSheet = "plane" + [i];
+                    var emitter = new SPE.Emitter({
+                        position: new THREE.Vector3(0, 0, 0),
+                        positionSpread: new THREE.Vector3(40, 20, 30),
+                        colorStart: new THREE.Color('white'),
+                        //colorStartSpread: new THREE.Vector3(1, 1, 1),
+                        colorEnd: new THREE.Color('black'),
+                        sizeStart: 100,
+                        sizeSpread: 100,
+                        opacityStart: 0,
+                        opacityMiddle: 0.5,
+                        opacityEnd: 0,
+                        particleCount: 400,
+                    });
+                    emitter.position = sheets.plane[i].position;
+                    cloudParticles.addEmitter(emitter);
+
+                } else if (sheets.weatherGfx[i] === "fog") {
+                    var emitter = new SPE.Emitter({
+                        position: new THREE.Vector3(0, 0, 0),
+                        positionSpread: new THREE.Vector3(40, 30, 30),
+                        colorStart: new THREE.Color('grey'),
+                        colorStartSpread: new THREE.Vector3(1, 1, 1),
+                        colorEnd: new THREE.Color('grey'),
+                        sizeStart: 4,
+                        sizeSpread: 6,
+                        opacityStart: 0,
+                        opacityMiddle: 1,
+                        opacityEnd: 0,
+                        particleCount: 10000,
+                    });
+                    emitter.position = sheets.plane[i].position;
+                    fogParticles.addEmitter(emitter);
+
+                } else if (sheets.weatherGfx[i] === "thunderstorm") {
+                    var rainEmitter = new SPE.Emitter({
+                        position: new THREE.Vector3(0, 0, 0),
+                        positionSpread: new THREE.Vector3(40, 20, 30),
+                        acceleration: new THREE.Vector3(0, -200, 0),
+                        accelerationSpread: new THREE.Vector3(30, 30, 0),
+                        velocity: new THREE.Vector3(0, -500, 0),
+                        velocitySpread: new THREE.Vector3(20, 10, 0),
+                        colorStart: new THREE.Color('white'),
+                        colorEnd: new THREE.Color('white'),
+                        sizeStart: 0.5,
+                        sizeEnd: 0.5,
+                        particleCount: 30000,
+                        //alive: 1
+                    });
+                    var cloudEmitter = new SPE.Emitter({
+                        position: new THREE.Vector3(0, 10, 10),
+                        positionSpread: new THREE.Vector3(40, 0, 40),
+                        colorStart: new THREE.Color(0xFFFFFF),
+                        //colorStartSpread: new THREE.Vector3(1, 1, 1),
+                        colorEnd: new THREE.Color('black'),
+                        sizeStart: 100,
+                        sizeSpread: 20,
+                        opacityStart: 0,
+                        opacityMiddle: 1,
+                        opacityEnd: 0,
+                        particleCount: 500,
+                    });
+
+                    tCloudParticles.addEmitter(cloudEmitter);
+                    tRainParticles.addEmitter(rainEmitter);
+                    cloudEmitter.position = sheets.plane[i].position;
+                    rainEmitter.position = sheets.plane[i].position;
+
+
+                } else if (sheets.weatherGfx[i] === "rain") {
+                    // initRainParticles(sheets.plane[i]);
+
+                    var emitter = new SPE.Emitter({
+                        position: new THREE.Vector3(0, 0, 0),
+                        positionSpread: new THREE.Vector3(40, 20, 30),
+                        acceleration: new THREE.Vector3(0, -200, 0),
+                        accelerationSpread: new THREE.Vector3(30, 30, 0),
+                        velocity: new THREE.Vector3(0, -500, 0),
+                        velocitySpread: new THREE.Vector3(20, 10, 0),
+                        colorStart: new THREE.Color('white'),
+                        colorEnd: new THREE.Color('white'),
+                        sizeStart: 0.7,
+                        sizeEnd: 0.3,
+                        particleCount: 30000
+                            //alive: 1
+                    });
+                    emitter.position = sheets.plane[i].position;
+                    rainParticles.addEmitter(emitter);
+
+                }
+            }
+        }
+
     });
-
-    emitter.position = sheets.plane[i].position;
-    snowParticles.addEmitter( emitter );
-
-    } else if (sheets.weatherGfx[i] === "clear") {
-      var emitter = new SPE.Emitter({
-      position: (0,0,-5),
-          positionSpread: new THREE.Vector3(40, 20, 10),
-      colorStart: new THREE.Color('white'),
-      //colorStartSpread: new THREE.Vector3(1, 1, 1),
-      colorEnd: new THREE.Color('blue'),
-      sizeStart: 3,
-          sizeSpread: 4,
-          opacityStart: 0,
-          opacityMiddle: 0.6,
-          opacityEnd: 0,
-      particleCount: 10000,
-    });
-    emitter.position = sheets.plane[i].position;
-    clearParticles.addEmitter( emitter );
-
-    } else if (sheets.weatherGfx[i] === "cloudy") {
-      weatherSheet = "plane" + [i];
-          var emitter = new SPE.Emitter({
-      position: new THREE.Vector3(0,0,0),
-          positionSpread: new THREE.Vector3(40, 20, 30),
-      colorStart: new THREE.Color('white'),
-          //colorStartSpread: new THREE.Vector3(1, 1, 1),
-      colorEnd: new THREE.Color('black'),
-      sizeStart: 100,
-          sizeSpread: 100,
-          opacityStart: 0,
-          opacityMiddle: 0.5,
-          opacityEnd: 0,
-      particleCount: 400,
-    });
-    emitter.position = sheets.plane[i].position;
-    cloudParticles.addEmitter( emitter );
-
-    } else if (sheets.weatherGfx[i] === "fog") {
-      var emitter = new SPE.Emitter({
-      position: new THREE.Vector3(0,0,0),
-          positionSpread: new THREE.Vector3(40, 30, 30),
-      colorStart: new THREE.Color('grey'),
-          colorStartSpread: new THREE.Vector3(1, 1, 1),
-      colorEnd: new THREE.Color('grey'),
-      sizeStart: 4,
-          sizeSpread: 6,
-          opacityStart: 0,
-          opacityMiddle: 1,
-          opacityEnd: 0,
-      particleCount: 10000,
-    });
-    emitter.position = sheets.plane[i].position;
-    fogParticles.addEmitter( emitter );
-
-    } else if (sheets.weatherGfx[i] === "thunderstorm") {
-    var rainEmitter = new SPE.Emitter({
-            position: new THREE.Vector3(0,0,0),
-            positionSpread: new THREE.Vector3( 40, 20, 30 ),
-            acceleration: new THREE.Vector3(0, -200, 0),
-            accelerationSpread: new THREE.Vector3( 30, 30, 0 ),
-            velocity: new THREE.Vector3(0, -500, 0),
-            velocitySpread: new THREE.Vector3(20, 10, 0),
-            colorStart: new THREE.Color('white'),
-            colorEnd: new THREE.Color('white'),
-            sizeStart: 0.5,
-            sizeEnd: 0.5,
-            particleCount: 30000,
-            //alive: 1
-    });
-    var cloudEmitter = new SPE.Emitter({
-            position: new THREE.Vector3(0, 10,10),
-            positionSpread: new THREE.Vector3(40, 0, 40),
-            colorStart: new THREE.Color(0xFFFFFF),
-            //colorStartSpread: new THREE.Vector3(1, 1, 1),
-            colorEnd: new THREE.Color('black'),
-            sizeStart: 100,
-            sizeSpread: 20,
-            opacityStart: 0,
-            opacityMiddle: 1,
-            opacityEnd: 0,
-            particleCount: 500,
-    });
-
-      tCloudParticles.addEmitter( cloudEmitter );
-      tRainParticles.addEmitter( rainEmitter );
-      cloudEmitter.position = sheets.plane[i].position;
-      rainEmitter.position = sheets.plane[i].position;
-
-
-    } else if (sheets.weatherGfx[i] === "rain") {
-      // initRainParticles(sheets.plane[i]);
-
-     var emitter = new SPE.Emitter({
-                position: new THREE.Vector3(0,0,0),
-                positionSpread: new THREE.Vector3( 40, 20, 30 ),
-                acceleration: new THREE.Vector3(0, -200, 0),
-                accelerationSpread: new THREE.Vector3( 30, 30, 0 ),
-                velocity: new THREE.Vector3(0, -500, 0),
-                velocitySpread: new THREE.Vector3(20, 10, 0),
-                colorStart: new THREE.Color('white'),
-                colorEnd: new THREE.Color('white'),
-                sizeStart: 0.7,
-                sizeEnd: 0.3,
-                particleCount: 30000
-                //alive: 1
-    });
-    emitter.position = sheets.plane[i].position;
-    rainParticles.addEmitter( emitter );
-
-    }
-  }
-}
-
-});
-</script>
-
-<script src="libs/ShaderParticles.min.js"></script>
-<script src="libs/helvetiker_regular.typeface.js"></script>
-<script src="js/sheets.js"></script>
+    </script>
+    <script src="libs/ShaderParticles.min.js"></script>
+    <script src="libs/helvetiker_regular.typeface.js"></script>
+    <script src="js/sheets.js"></script>
 </body>
+
 </html>

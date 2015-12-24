@@ -1,11 +1,14 @@
+body {
+  font-size: 1.3em;
+}
 form {
     width: 100%;
 
-    position: absolute;
+    position: relative;
     bottom:500;
     left:0;
     right:0;
-    margin: auto;
+    margin: auto 0;
     color: blue;
     text-align: center;
     font-family: "courier new";
@@ -13,6 +16,9 @@ form {
     top: 300px;
 }
 
+div {
+  margin-top: 5%;
+}
 
 input, input:focus {
   border:none;
@@ -54,9 +60,9 @@ input, input:focus {
 
     width: 100%;
     height: 0px;
-    position: absolute;
+    position: relative;
     top: 90px;
-    margin: auto;
+    margin: auto 0;
     font-family: "courier new";
       font-size: 100%;
   font-weight: "bold";
@@ -80,10 +86,11 @@ input, input:focus {
 #credits {
 
     width: 100%;
-    height: 0px;
-    position: absolute;
-    bottom: 300px;
-    margin: auto;
+
+    position: fixed;
+    margin: auto 0;
+    margin-top: 400px;
+
     font-family: "courier new";
   font-weight: "bold";
   color: black;
@@ -96,7 +103,7 @@ input, input:focus {
 
     width: 100%;
     height: 0px;
-    position: absolute;
+    position: relative;
     bottom: 100px;
     margin: auto;
     font-family: "courier new";
