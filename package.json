@@ -1,5 +1,5 @@
 {
-  "name": "weatherviz",
+  "name": "Skysheets",
   "version": "1.0.0",
   "description": "A Node-based weather visualizer",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MichaelHazani/weatherviz.git"
+    "url": "git+https://github.com/MichaelHazani/skysheets.git"
   },
   "keywords": [
     "weather",
@@ -20,9 +20,9 @@
   "author": "Michael Hazani",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MichaelHazani/weatherviz/issues"
+    "url": "https://github.com/MichaelHazani/skysheets/issues"
   },
-  "homepage": "https://github.com/MichaelHazani/weatherviz#readme",
+  "homepage": "https://github.com/MichaelHazani/skysheets#readme",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.11.2",
