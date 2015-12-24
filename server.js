@@ -15,8 +15,9 @@ June 2015
 
 var express = require('express');
 var app = express();
+var compress = require('compression')
 var port = process.env.PORT || 3000;
-
+app.use(compress());
 //make "/app" available
 
 app.use(express.static('app'));

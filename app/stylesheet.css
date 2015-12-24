@@ -68,8 +68,8 @@ input, input:focus {
 
     width: 100%;
     height: 0px;
-    position: absolute;
-    top: 100px;
+    position: relative;
+
     margin: auto;
     font-family: "courier new";
   font-weight: "bold";
