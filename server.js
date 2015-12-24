@@ -1,8 +1,6 @@
 /*
 
-WeatherViz Server
-
-Codefellows F2: Javascript (Sea-39) final project
+Skysheets Server
 
 June 2015
 
